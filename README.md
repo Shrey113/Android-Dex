@@ -5,8 +5,9 @@ Wireless desktop mode for Android. 1080p extended display, no root, open source.
 ## Download + Website
 
 - Android‑Dex Releases: https://github.com/Shrey113/android_dex/releases
-- Website (open locally): ALL_website/index.html
-- Developer Docs (open locally): developer-docs/index.html
+- Live Website: https://shrey113.github.io/Android-Dex/
+- Local Website: ALL_website/index.html
+- Developer Docs (local): developer-docs/index.html
 
 ## Overview
 
