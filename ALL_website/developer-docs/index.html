@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../Data/favicon.ico">
+    <link rel="apple-touch-icon" href="../Data/app_png.png">
+    <title>Code Deep Dive | Android DEX by Shrey113</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">
+                    <img src="../Data/app_png.png" alt="Android DEX" loading="lazy">
+                </div>
+                <div class="logo-text">
+                    <span>Android DEX</span>
+                    <small>Code Deep Dive</small>
+                </div>
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <span class="nav-title">Getting Started</span>
+                <a href="#overview" class="nav-link active">Overview</a>
+                <a href="#architecture" class="nav-link">Architecture</a>
+                <a href="#quick-start" class="nav-link">Quick Start</a>
+            </div>
+            <div class="nav-section">
+                <span class="nav-title">Project Structure</span>
+                <a href="#file-structure" class="nav-link">File Structure</a>
+                <a href="#entry-point" class="nav-link">Entry Point</a>
+                <a href="#app-config" class="nav-link">App Configuration</a>
+            </div>
+            <div class="nav-section">
+                <span class="nav-title">Core Services</span>
+                <a href="#tcp-server" class="nav-link">TCP Server</a>
+                <a href="#scrcpy-service" class="nav-link">Scrcpy Service</a>
+                <a href="#mdns-service" class="nav-link">mDNS Discovery</a>
+                <a href="#audio-manager" class="nav-link">Audio Manager</a>
+            </div>
+            <div class="nav-section">
+                <span class="nav-title">UI Components</span>
+                <a href="#home-screen" class="nav-link">Home Screen</a>
+                <a href="#glass-card" class="nav-link">Glass Card Widget</a>
+                <a href="#device-list" class="nav-link">Device List</a>
+            </div>
+            <div class="nav-section">
+                <span class="nav-title">Data Flow</span>
+                <a href="#connection-flow" class="nav-link">Connection Flow</a>
+                <a href="#command-protocol" class="nav-link">Command Protocol</a>
+                <a href="#state-management" class="nav-link">State Management</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="https://github.com/Shrey113/android_dex" target="_blank" class="github-link">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                View on GitHub
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <button class="menu-toggle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <span>Developer Docs</span>
+            </div>
+            <a href="https://github.com/Shrey113/android_dex" target="_blank" class="top-github">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+            </a>
+        </header>
+
+        <div class="content-wrapper">
+            <section id="overview" class="doc-section">
+                <div class="section-badge">Introduction</div>
+                <h1>Android DEX Documentation</h1>
+                <p class="lead">A comprehensive guide to understanding the Android DEX codebase. This documentation covers the architecture, file structure, core services, and data flow that power the wireless desktop experience.</p>
+                
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-icon blue">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3>Flutter Desktop</h3>
+                        <p>Cross-platform app built with Flutter for Windows, macOS, and Linux</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon purple">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="2" width="20" height="8" rx="2"/>
+                                <rect x="2" y="14" width="20" height="8" rx="2"/>
+                                <line x1="6" y1="6" x2="6" y2="6"/>
+                                <line x1="6" y1="18" x2="6" y2="18"/>
+                            </svg>
+                        </div>
+                        <h3>TCP Server</h3>
+                        <p>Real-time communication with Android devices over local network</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon green">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3>scrcpy Integration</h3>
+                        <p>Display mirroring and virtual display creation via scrcpy</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="architecture" class="doc-section">
+                <h2>System Architecture</h2>
+                <p>The Android DEX system consists of three main layers that work together to provide the desktop experience.</p>
+                
+                <div class="architecture-visual">
+                    <div class="arch-layer">
+                        <div class="layer-header">
+                            <span class="layer-tag">Layer 1</span>
+                            <h4>Presentation Layer</h4>
+                        </div>
+                        <div class="layer-items">
+                            <div class="layer-item">HomeScreen</div>
+                            <div class="layer-item">GlassCard</div>
+                            <div class="layer-item">DeviceList</div>
+                        </div>
+                        <p>Flutter widgets handling user interface and interactions</p>
+                    </div>
+                    <div class="arch-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <polyline points="19 12 12 19 5 12"/>
+                        </svg>
+                    </div>
+                    <div class="arch-layer">
+                        <div class="layer-header">
+                            <span class="layer-tag">Layer 2</span>
+                            <h4>Service Layer</h4>
+                        </div>
+                        <div class="layer-items">
+                            <div class="layer-item">AdbTcpServer</div>
+                            <div class="layer-item">ScrcpyService</div>
+                            <div class="layer-item">AudioManager</div>
+                        </div>
+                        <p>Business logic handling connections and device control</p>
+                    </div>
+                    <div class="arch-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <polyline points="19 12 12 19 5 12"/>
+                        </svg>
+                    </div>
+                    <div class="arch-layer">
+                        <div class="layer-header">
+                            <span class="layer-tag">Layer 3</span>
+                            <h4>External Tools</h4>
+                        </div>
+                        <div class="layer-items">
+                            <div class="layer-item">ADB</div>
+                            <div class="layer-item">scrcpy</div>
+                            <div class="layer-item">mDNS</div>
+                        </div>
+                        <p>Command-line tools for Android communication</p>
+                    </div>
+                </div>
+
+                <div class="flow-diagram">
+                    <h3>Connection Flow</h3>
+                    <div class="flow-steps">
+                        <div class="flow-step">
+                            <div class="step-num">1</div>
+                            <div class="step-info">
+                                <strong>User Input</strong>
+                                <span>Enter device IP or select from discovered devices</span>
+                            </div>
+                        </div>
+                        <div class="flow-connector"></div>
+                        <div class="flow-step">
+                            <div class="step-num">2</div>
+                            <div class="step-info">
+                                <strong>ADB Connect</strong>
+                                <span>Establish wireless ADB connection on port 5555</span>
+                            </div>
+                        </div>
+                        <div class="flow-connector"></div>
+                        <div class="flow-step">
+                            <div class="step-num">3</div>
+                            <div class="step-info">
+                                <strong>scrcpy Launch</strong>
+                                <span>Create virtual 1920x1080 display with scrcpy</span>
+                            </div>
+                        </div>
+                        <div class="flow-connector"></div>
+                        <div class="flow-step">
+                            <div class="step-num">4</div>
+                            <div class="step-info">
+                                <strong>TCP Handshake</strong>
+                                <span>Android app connects to desktop TCP server</span>
+                            </div>
+                        </div>
+                        <div class="flow-connector"></div>
+                        <div class="flow-step">
+                            <div class="step-num">5</div>
+                            <div class="step-info">
+                                <strong>DEX Active</strong>
+                                <span>Full desktop mode ready with bidirectional control</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="quick-start" class="doc-section">
+                <h2>Quick Start for Developers</h2>
+                <p>Get the project running on your local machine in a few steps.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Terminal</span>
+                        <button class="copy-btn" data-code="clone">Copy</button>
+                    </div>
+                    <pre><code># Clone the repository
+git clone https://github.com/Shrey113/android_dex.git
+cd android_dex
+
+# Install Flutter dependencies
+flutter pub get
+
+# Run the desktop app
+flutter run -d windows</code></pre>
+                </div>
+
+                <div class="prereq-box">
+                    <h4>Prerequisites</h4>
+                    <ul>
+                        <li>Flutter SDK 3.7.0 or higher</li>
+                        <li>Dart SDK (included with Flutter)</li>
+                        <li>Windows/macOS/Linux development environment</li>
+                        <li>ADB and scrcpy binaries in <code>All helper/</code> folder</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="file-structure" class="doc-section">
+                <h2>Project File Structure</h2>
+                <p>Understanding the directory layout is key to navigating the codebase effectively.</p>
+                
+                <div class="file-tree">
+                    <div class="tree-item folder expanded">
+                        <span class="tree-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                        </span>
+                        <span class="tree-name">lib/</span>
+                        <span class="tree-desc">Main Flutter source code</span>
+                    </div>
+                    <div class="tree-children">
+                        <div class="tree-item file main">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/></svg>
+                            </span>
+                            <span class="tree-name">main.dart</span>
+                            <span class="tree-desc">Application entry point</span>
+                        </div>
+                        <div class="tree-item file">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/></svg>
+                            </span>
+                            <span class="tree-name">app.dart</span>
+                            <span class="tree-desc">MaterialApp and theme configuration</span>
+                        </div>
+                        <div class="tree-item folder">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                            </span>
+                            <span class="tree-name">screens/</span>
+                            <span class="tree-desc">UI screens</span>
+                        </div>
+                        <div class="tree-children nested">
+                            <div class="tree-item file">
+                                <span class="tree-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/></svg>
+                                </span>
+                                <span class="tree-name">home_screen.dart</span>
+                                <span class="tree-desc">Main UI with connection controls</span>
+                            </div>
+                        </div>
+                        <div class="tree-item folder">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                            </span>
+                            <span class="tree-name">services/</span>
+                            <span class="tree-desc">Core business logic</span>
+                        </div>
+                        <div class="tree-children nested">
+                            <div class="tree-item file important">
+                                <span class="tree-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/></svg>
+                                </span>
+                                <span class="tree-name">Socke_3_Android_Dex.dart</span>
+                                <span class="tree-desc">TCP server and ADB commands</span>
+                            </div>
+                            <div class="tree-item file">
+                                <span class="tree-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.89 2-2V8l-6-6z"/></svg>
+                                </span>
+                                <span class="tree-name">scrcpy_service.dart</span>
+                                <span class="tree-desc">scrcpy process management</span>
+                            </div>
+                        </div>
+                        <div class="tree-item folder">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                            </span>
+                            <span class="tree-name">widgets/</span>
+                            <span class="tree-desc">Reusable UI components</span>
+                        </div>
+                        <div class="tree-children nested">
+                            <div class="tree-item file">
+                                <span class="tree-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/></svg>
+                                </span>
+                                <span class="tree-name">glass_card.dart</span>
+                                <span class="tree-desc">Glassmorphism card widget</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tree-item folder">
+                        <span class="tree-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                        </span>
+                        <span class="tree-name">All helper/</span>
+                        <span class="tree-desc">External binaries</span>
+                    </div>
+                    <div class="tree-children">
+                        <div class="tree-item folder">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                            </span>
+                            <span class="tree-name">platform-tools/</span>
+                            <span class="tree-desc">ADB executable</span>
+                        </div>
+                        <div class="tree-item folder">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                            </span>
+                            <span class="tree-name">scrwin64/</span>
+                            <span class="tree-desc">scrcpy executable</span>
+                        </div>
+                        <div class="tree-item folder">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                            </span>
+                            <span class="tree-name">mdns_service/</span>
+                            <span class="tree-desc">mDNS discovery service</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="entry-point" class="doc-section">
+                <h2>Entry Point: main.dart</h2>
+                <p>The application starts here. This file initializes the window manager, loads environment variables, starts the TCP server, and launches the Flutter app.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-file">lib/main.dart</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre><code><span class="kw">void</span> <span class="fn">main</span>() <span class="kw">async</span> {
+  WidgetsFlutterBinding.ensureInitialized();
+  <span class="kw">await</span> dotenv.load(fileName: <span class="str">".env"</span>);
+
+  <span class="cm">// Desktop window configuration</span>
+  <span class="kw">if</span> (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    <span class="kw">await</span> windowManager.ensureInitialized();
+
+    <span class="kw">const</span> windowOptions = WindowOptions(
+      size: Size(<span class="num">480</span>, <span class="num">720</span>),
+      minimumSize: Size(<span class="num">400</span>, <span class="num">640</span>),
+      center: <span class="kw">true</span>,
+      backgroundColor: Color(<span class="num">0xFF0D0D12</span>),
+      titleBarStyle: TitleBarStyle.hidden,
+    );
+
+    <span class="kw">await</span> windowManager.waitUntilReadyToShow(windowOptions, () <span class="kw">async</span> {
+      <span class="kw">await</span> windowManager.show();
+      <span class="kw">await</span> windowManager.focus();
+    });
+  }
+
+  <span class="cm">// Initialize TCP server for Android communication</span>
+  <span class="kw">await</span> AdbTcpServer.instance.init();
+
+  runApp(<span class="kw">const</span> AndroidDexApp());
+}</code></pre>
+                </div>
+
+                <div class="callout info">
+                    <div class="callout-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12" y2="8"/>
+                        </svg>
+                    </div>
+                    <div class="callout-content">
+                        <strong>Key Responsibilities</strong>
+                        <ul>
+                            <li>Load environment variables from <code>.env</code> file</li>
+                            <li>Configure custom window frame (frameless with custom title bar)</li>
+                            <li>Start the singleton TCP server instance</li>
+                            <li>Launch the Flutter MaterialApp</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="app-config" class="doc-section">
+                <h2>App Configuration: app.dart</h2>
+                <p>This file defines the MaterialApp widget and the dark theme used throughout the application.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-file">lib/app.dart</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre><code><span class="kw">class</span> <span class="cl">AndroidDexApp</span> <span class="kw">extends</span> StatelessWidget {
+  <span class="kw">const</span> AndroidDexApp({<span class="kw">super</span>.key});
+
+  @override
+  Widget <span class="fn">build</span>(BuildContext context) {
+    <span class="kw">return</span> MaterialApp(
+      title: <span class="str">'Android DEX'</span>,
+      debugShowCheckedModeBanner: <span class="kw">false</span>,
+      theme: _buildTheme(),
+      home: <span class="kw">const</span> HomeScreen(),
+    );
+  }
+
+  ThemeData <span class="fn">_buildTheme</span>() {
+    <span class="kw">const</span> primaryColor = Color(<span class="num">0xFF7C4DFF</span>);  <span class="cm">// Purple accent</span>
+    <span class="kw">const</span> surfaceColor = Color(<span class="num">0xFF0D0D12</span>); <span class="cm">// Dark background</span>
+    <span class="kw">const</span> cardColor = Color(<span class="num">0xFF16161D</span>);    <span class="cm">// Card background</span>
+    <span class="cm">// ... theme configuration</span>
+  }
+}</code></pre>
+                </div>
+
+                <div class="color-palette">
+                    <h4>Color Palette</h4>
+                    <div class="colors">
+                        <div class="color-item">
+                            <div class="color-swatch" style="background:#7C4DFF"></div>
+                            <span class="color-name">Primary</span>
+                            <code>#7C4DFF</code>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background:#00E5FF"></div>
+                            <span class="color-name">Secondary</span>
+                            <code>#00E5FF</code>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background:#0D0D12"></div>
+                            <span class="color-name">Surface</span>
+                            <code>#0D0D12</code>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background:#16161D"></div>
+                            <span class="color-name">Card</span>
+                            <code>#16161D</code>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background:#1DB954"></div>
+                            <span class="color-name">Success</span>
+                            <code>#1DB954</code>
+                        </div>
+                        <div class="color-item">
+                            <div class="color-swatch" style="background:#E53935"></div>
+                            <span class="color-name">Error</span>
+                            <code>#E53935</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tcp-server" class="doc-section">
+                <h2>TCP Server: AdbTcpServer</h2>
+                <p>The heart of the communication system. This singleton class manages TCP connections with Android devices, processes commands, and controls device features.</p>
+                
+                <div class="file-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/>
+                    </svg>
+                    <span>lib/services/Socke_3_Android_Dex.dart</span>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>Singleton Pattern</h4>
+                        <p>Single instance accessible via <code>AdbTcpServer.instance</code></p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Port 8456</h4>
+                        <p>Listens for incoming Android app connections</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>JSON Protocol</h4>
+                        <p>Line-delimited JSON messages for commands</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Broadcast Support</h4>
+                        <p>Send messages to all connected clients</p>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-file">Socke_3_Android_Dex.dart - Server Initialization</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre><code><span class="kw">class</span> <span class="cl">AdbTcpServer</span> {
+  <span class="kw">static final</span> AdbTcpServer instance = AdbTcpServer._internal();
+  AdbTcpServer._internal();
+
+  <span class="kw">final int</span> tcpPort = <span class="num">8456</span>;
+  <span class="kw">final</span> Map&lt;String, Socket&gt; connectedClients = {};
+
+  Future&lt;<span class="kw">bool</span>&gt; <span class="fn">start</span>() <span class="kw">async</span> {
+    <span class="kw">if</span> (_isRunning) <span class="kw">return true</span>;
+    <span class="kw">try</span> {
+      _server = <span class="kw">await</span> ServerSocket.bind(InternetAddress.anyIPv4, tcpPort);
+      _isRunning = <span class="kw">true</span>;
+      _statusController.add(<span class="kw">true</span>);
+      _listenForConnections();
+      <span class="kw">await</span> _startMdnsService();
+      <span class="kw">return true</span>;
+    } <span class="kw">catch</span> (e) {
+      <span class="kw">return false</span>;
+    }
+  }
+}</code></pre>
+                </div>
+
+                <h3>Supported Commands</h3>
+                <div class="command-table">
+                    <div class="table-header">
+                        <span>Command</span>
+                        <span>Response Type</span>
+                        <span>Description</span>
+                    </div>
+                    <div class="table-row">
+                        <code>getBluetooth</code>
+                        <span>getBluetooth</span>
+                        <span>Get current Bluetooth status</span>
+                    </div>
+                    <div class="table-row">
+                        <code>toggleBluetooth</code>
+                        <span>toggleBluetooth</span>
+                        <span>Toggle Bluetooth on/off</span>
+                    </div>
+                    <div class="table-row">
+                        <code>getMobileData</code>
+                        <span>getMobileData</span>
+                        <span>Get mobile data status</span>
+                    </div>
+                    <div class="table-row">
+                        <code>toggleMobileData</code>
+                        <span>toggleMobileData</span>
+                        <span>Toggle mobile data on/off</span>
+                    </div>
+                    <div class="table-row">
+                        <code>req_app_audio=pkg</code>
+                        <span>set_app_audio</span>
+                        <span>Route specific app audio to PC</span>
+                    </div>
+                    <div class="table-row">
+                        <code>stop_all_audio</code>
+                        <span>stop_all_audio</span>
+                        <span>Stop all audio streaming</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="scrcpy-service" class="doc-section">
+                <h2>Scrcpy Service</h2>
+                <p>Manages the scrcpy process for display mirroring and virtual display creation.</p>
+                
+                <div class="file-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/>
+                    </svg>
+                    <span>lib/services/scrcpy_service.dart</span>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-file">scrcpy_service.dart - Launch Command</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre><code>Future&lt;(<span class="kw">bool</span>, String)&gt; <span class="fn">startScrcpy</span>(String ip) <span class="kw">async</span> {
+  _process = <span class="kw">await</span> Process.start(scrcpyFullPath, [
+    <span class="str">'-s'</span>, ip,                           <span class="cm">// Target device</span>
+    <span class="str">'--new-display=1920x1080/280'</span>,      <span class="cm">// Virtual display</span>
+    <span class="str">'--no-audio'</span>,                       <span class="cm">// Audio handled separately</span>
+    <span class="str">'--start-app=com.example.androiddex'</span>, <span class="cm">// Launch DEX app</span>
+    <span class="str">'--no-vd-system-decorations'</span>,       <span class="cm">// Clean desktop look</span>
+  ], workingDirectory: scrcpyDir);
+  
+  _isRunning = <span class="kw">true</span>;
+  _statusController.add(<span class="kw">true</span>);
+  <span class="kw">return</span> (<span class="kw">true</span>, <span class="str">'Display started'</span>);
+}</code></pre>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="callout-content">
+                        <strong>Important</strong>
+                        <p>The <code>--new-display</code> flag creates a virtual display on the Android device. This requires scrcpy version 2.4 or higher with virtual display support.</p>
+                    </div>
+                </div>
+
+                <h3>AdbDevice Class</h3>
+                <p>Data model representing a connected Android device:</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-file">scrcpy_service.dart - AdbDevice Model</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre><code><span class="kw">class</span> <span class="cl">AdbDevice</span> {
+  <span class="kw">final</span> String address;      <span class="cm">// e.g., "192.168.1.100:5555"</span>
+  <span class="kw">final</span> String? product;     <span class="cm">// e.g., "CPH2447"</span>
+  <span class="kw">final</span> String? model;       <span class="cm">// e.g., "CPH2447"</span>
+  <span class="kw">final</span> String? device;      <span class="cm">// e.g., "OP594DL1"</span>
+  <span class="kw">final</span> String? transportId; <span class="cm">// ADB transport ID</span>
+
+  String <span class="kw">get</span> displayName => model ?? device ?? address;
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="mdns-service" class="doc-section">
+                <h2>mDNS Discovery Service</h2>
+                <p>A Python-based service that broadcasts the desktop server's presence on the local network, allowing Android devices to auto-discover it.</p>
+                
+                <div class="file-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/>
+                    </svg>
+                    <span>ALL_PY/mdns_service.py</span>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre><code><span class="kw">from</span> zeroconf <span class="kw">import</span> Zeroconf, ServiceInfo
+
+SERVICE_TYPE = <span class="str">"_httpapp._tcp.local."</span>
+HTTP_PORT = <span class="num">5001</span>
+
+<span class="kw">def</span> <span class="fn">register_mdns_service</span>(zeroconf):
+    hostname, ip = get_network_info()
+    service_name = <span class="str">f"{ip.replace('.', '_')}_win_server._httpapp._tcp.local."</span>
+    
+    device_data = {
+        <span class="str">"status"</span>: <span class="str">"success"</span>,
+        <span class="str">"device_type"</span>: <span class="str">"windows"</span>,
+        <span class="str">"device_info"</span>: {
+            <span class="str">"hostname"</span>: hostname,
+            <span class="str">"ip"</span>: ip,
+        }
+    }
+    
+    info = ServiceInfo(
+        SERVICE_TYPE,
+        service_name,
+        addresses=[socket.inet_aton(ip)],
+        port=HTTP_PORT,
+        properties={
+            <span class="str">b"host"</span>: hostname.encode(),
+            <span class="str">b"device_type"</span>: <span class="str">b"windows"</span>,
+            <span class="str">b"ip"</span>: ip.encode(),
+        },
+    )
+    zeroconf.register_service(info)
+</code></pre>
+                </div>
+
+                <div class="callout info">
+                    <div class="callout-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12" y2="8"/>
+                        </svg>
+                    </div>
+                    <div class="callout-content">
+                        <strong>How It Works</strong>
+                        <p>The mDNS service runs as a separate process, started by the Flutter app. It uses Zeroconf to broadcast a service named <code>_httpapp._tcp.local.</code> containing the desktop's IP address. Android apps on the same network can discover this service automatically.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="audio-manager" class="doc-section">
+                <h2>Audio Process Manager</h2>
+                <p>Manages per-app audio streaming from Android to the desktop using scrcpy's audio forwarding feature.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-file">Socke_3_Android_Dex.dart - SimpleAudioProcessManager</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre><code><span class="kw">class</span> <span class="cl">SimpleAudioProcessManager</span> {
+  <span class="kw">static final</span> SimpleAudioProcessManager instance = SimpleAudioProcessManager._();
+  
+  Process? _proc;
+  String? _pkg;  <span class="cm">// Currently streaming package name</span>
+
+  Future&lt;<span class="kw">bool</span>&gt; <span class="fn">start</span>(String pkg, List&lt;String&gt; args) <span class="kw">async</span> {
+    <span class="kw">if</span> (_pkg == pkg) <span class="kw">return true</span>;  <span class="cm">// Already streaming this app</span>
+    
+    <span class="cm">// Stop existing audio stream</span>
+    <span class="kw">if</span> (_proc != <span class="kw">null</span>) {
+      _proc!.kill();
+      _proc = <span class="kw">null</span>;
+    }
+
+    <span class="cm">// Start new audio stream</span>
+    _proc = <span class="kw">await</span> Process.start(args[<span class="num">0</span>], args.sublist(<span class="num">1</span>));
+    _pkg = pkg;
+    <span class="kw">return true</span>;
+  }
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="home-screen" class="doc-section">
+                <h2>Home Screen UI</h2>
+                <p>The main user interface containing the connection form, device list, and status indicators.</p>
+                
+                <div class="file-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/>
+                    </svg>
+                    <span>lib/screens/home_screen.dart</span>
+                </div>
+
+                <div class="ui-breakdown">
+                    <h4>Component Structure</h4>
+                    <div class="component-tree">
+                        <div class="comp-item root">
+                            <span>HomeScreen</span>
+                            <span class="comp-type">StatefulWidget</span>
+                        </div>
+                        <div class="comp-children">
+                            <div class="comp-item">
+                                <span>_buildBackground()</span>
+                                <span class="comp-type">Gradient + Grid</span>
+                            </div>
+                            <div class="comp-item">
+                                <span>_buildTitleBar()</span>
+                                <span class="comp-type">Custom Window Bar</span>
+                            </div>
+                            <div class="comp-item">
+                                <span>_buildLogo()</span>
+                                <span class="comp-type">Animated Logo</span>
+                            </div>
+                            <div class="comp-item">
+                                <span>_buildConnectionPanel()</span>
+                                <span class="comp-type">GlassCard + TextField</span>
+                            </div>
+                            <div class="comp-item">
+                                <span>_buildDeviceList()</span>
+                                <span class="comp-type">GlassCard + Device Cards</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>State Management</h3>
+                <div class="state-vars">
+                    <div class="state-item">
+                        <code>_isLoading</code>
+                        <span>Connection in progress</span>
+                    </div>
+                    <div class="state-item">
+                        <code>_isConnected</code>
+                        <span>Active DEX session</span>
+                    </div>
+                    <div class="state-item">
+                        <code>_connectedIp</code>
+                        <span>Current device IP</span>
+                    </div>
+                    <div class="state-item">
+                        <code>_devices</code>
+                        <span>List of discovered AdbDevice</span>
+                    </div>
+                    <div class="state-item">
+                        <code>_isServerRunning</code>
+                        <span>TCP server status</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="glass-card" class="doc-section">
+                <h2>Glass Card Widget</h2>
+                <p>A reusable glassmorphism card component with blur effect and subtle borders.</p>
+                
+                <div class="file-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"/>
+                    </svg>
+                    <span>lib/widgets/glass_card.dart</span>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-file">glass_card.dart</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre><code><span class="kw">class</span> <span class="cl">GlassCard</span> <span class="kw">extends</span> StatelessWidget {
+  <span class="kw">final</span> Widget child;
+  <span class="kw">final</span> EdgeInsets padding;
+
+  @override
+  Widget <span class="fn">build</span>(BuildContext context) {
+    <span class="kw">return</span> ClipRRect(
+      borderRadius: BorderRadius.circular(<span class="num">16</span>),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: <span class="num">10</span>, sigmaY: <span class="num">10</span>),
+        child: Container(
+          padding: padding,
+          decoration: BoxDecoration(
+            color: <span class="kw">const</span> Color(<span class="num">0xFF16161D</span>).withValues(alpha: <span class="num">0.8</span>),
+            borderRadius: BorderRadius.circular(<span class="num">16</span>),
+            border: Border.all(color: <span class="kw">const</span> Color(<span class="num">0xFF2A2A35</span>)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: <span class="num">0.2</span>),
+                blurRadius: <span class="num">16</span>,
+                offset: <span class="kw">const</span> Offset(<span class="num">0</span>, <span class="num">8</span>),
+              ),
+            ],
+          ),
+          child: child,
+        ),
+      ),
+    );
+  }
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="connection-flow" class="doc-section">
+                <h2>Connection Flow Diagram</h2>
+                <p>Visual representation of the complete connection process from user action to active DEX session.</p>
+                
+                <div class="sequence-diagram">
+                    <div class="seq-participants">
+                        <div class="participant">User</div>
+                        <div class="participant">HomeScreen</div>
+                        <div class="participant">ScrcpyService</div>
+                        <div class="participant">AdbTcpServer</div>
+                        <div class="participant">Android</div>
+                    </div>
+                    <div class="seq-messages">
+                        <div class="seq-msg">
+                            <div class="msg-line" style="--from:0;--to:1"></div>
+                            <span class="msg-label">Enter IP / Select Device</span>
+                        </div>
+                        <div class="seq-msg">
+                            <div class="msg-line" style="--from:1;--to:2"></div>
+                            <span class="msg-label">connectAdb(ip)</span>
+                        </div>
+                        <div class="seq-msg">
+                            <div class="msg-line" style="--from:2;--to:4"></div>
+                            <span class="msg-label">adb connect ip:5555</span>
+                        </div>
+                        <div class="seq-msg return">
+                            <div class="msg-line" style="--from:4;--to:2"></div>
+                            <span class="msg-label">connected</span>
+                        </div>
+                        <div class="seq-msg">
+                            <div class="msg-line" style="--from:1;--to:2"></div>
+                            <span class="msg-label">startScrcpy(ip)</span>
+                        </div>
+                        <div class="seq-msg">
+                            <div class="msg-line" style="--from:2;--to:4"></div>
+                            <span class="msg-label">scrcpy --new-display</span>
+                        </div>
+                        <div class="seq-msg">
+                            <div class="msg-line" style="--from:4;--to:3"></div>
+                            <span class="msg-label">TCP connect :8456</span>
+                        </div>
+                        <div class="seq-msg return">
+                            <div class="msg-line" style="--from:3;--to:1"></div>
+                            <span class="msg-label">statusStream(true)</span>
+                        </div>
+                        <div class="seq-msg">
+                            <div class="msg-line" style="--from:1;--to:0"></div>
+                            <span class="msg-label">Update UI: Connected</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="command-protocol" class="doc-section">
+                <h2>Command Protocol</h2>
+                <p>The TCP communication uses a simple line-delimited JSON protocol.</p>
+                
+                <div class="protocol-example">
+                    <h4>Request Format</h4>
+                    <div class="code-block small">
+                        <pre><code><span class="cm">// Simple command (string)</span>
+getBluetooth\n
+
+<span class="cm">// Command with parameter</span>
+req_app_audio=com.spotify.music\n
+
+<span class="cm">// JSON command</span>
+{"type":"add_new_recent_app","package":"com.example.app"}\n</code></pre>
+                    </div>
+                    
+                    <h4>Response Format</h4>
+                    <div class="code-block small">
+                        <pre><code><span class="cm">// All responses are JSON</span>
+{"type":"getBluetooth","status":true}\n
+{"type":"set_app_audio","app":"com.spotify.music","status":true}\n
+{"type":"toggleMobileData","status":false}\n</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="state-management" class="doc-section">
+                <h2>State Management</h2>
+                <p>The app uses Dart's built-in StreamController for reactive state updates.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-file">Stream-based State Pattern</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre><code><span class="cm">// In Service class</span>
+<span class="kw">final</span> _statusController = StreamController&lt;<span class="kw">bool</span>&gt;.broadcast();
+Stream&lt;<span class="kw">bool</span>&gt; <span class="kw">get</span> statusStream => _statusController.stream;
+
+<span class="cm">// Update state</span>
+_statusController.add(<span class="kw">true</span>);
+
+<span class="cm">// In UI (initState)</span>
+_serverStatusSubscription = AdbTcpServer.instance.statusStream.listen((isRunning) {
+  <span class="kw">if</span> (mounted) {
+    setState(() => _isServerRunning = isRunning);
+  }
+});</code></pre>
+                </div>
+
+                <div class="callout success">
+                    <div class="callout-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div class="callout-content">
+                        <strong>Benefits</strong>
+                        <ul>
+                            <li>Services remain decoupled from UI</li>
+                            <li>Multiple listeners can subscribe</li>
+                            <li>Automatic cleanup with subscription disposal</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="doc-footer">
+                <div class="footer-nav">
+                    <a href="../index.html" class="footer-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"/>
+                            <polyline points="12 19 5 12 12 5"/>
+                        </svg>
+                        Back to Home
+                    </a>
+                    <a href="https://github.com/Shrey113/android_dex" target="_blank" class="footer-link">
+                        View Source Code
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                </div>
+                <p class="footer-copy">Android DEX Code Deep Dive - Crafted by Shrey113</p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

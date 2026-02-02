@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="Data/favicon.ico">
+    <link rel="apple-touch-icon" href="Data/app_png.png">
+    <title>Android DEX | Wireless Desktop Experience</title>
+    <meta name="description" content="Android DEX enables wireless desktop mode for Android devices with 1080p extended display, scrcpy integration, and no root required. Connect via wireless ADB to enjoy a full desktop experience.">
+    <meta name="keywords" content="Android desktop mode, wireless ADB, scrcpy, extended display, Android DEX, no root, 1080p, desktop environment, Android PC, Flutter app">
+    <meta name="author" content="Shrey113">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="color-scheme" content="light dark">
+    <link rel="canonical" href="./">
+    <meta property="og:title" content="Android DEX | Wireless Desktop Experience">
+    <meta property="og:description" content="Wireless Android desktop mode with 1080p extended display. No root required. Connect via wireless ADB and enjoy a full desktop environment.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Android DEX">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="Data/app_png.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Android DEX | Wireless Desktop Experience">
+    <meta name="twitter:description" content="Enable desktop mode on any Android device wirelessly. 1080p extended display, scrcpy integration, no root.">
+    <meta name="twitter:image" content="Data/app_png.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Android DEX",
+      "description": "Wireless Android desktop mode with 1080p extended display. No root required. Connect via wireless ADB.",
+      "applicationCategory": "DesktopApplication",
+      "operatingSystem": "Windows, macOS, Linux",
+      "author": { "@type": "Person", "name": "Shrey113" },
+      "publisher": { "@type": "Organization", "name": "Android DEX" },
+      "url": "https://github.com/Shrey113/android_dex",
+      "downloadUrl": "https://github.com/Shrey113/android_dex/releases",
+      "image": "Data/app_png.png",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "keywords": "Android desktop mode, wireless ADB, scrcpy, extended display, Android DEX, no root, 1080p"
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">
+                    <img src="Data/app_png.png" alt="Android DEX" loading="lazy">
+                </div>
+                <span>Android DEX</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#setup">Setup</a>
+                <a href="#developer">Developer</a>
+            </div>
+            <a href="https://github.com/Shrey113/android_dex" target="_blank" rel="noopener noreferrer" class="nav-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                View Source
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="grid-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">Open Source Project</div>
+            <h1>Transform Your Phone<br>Into a Desktop</h1>
+            <p class="hero-subtitle">Experience the full desktop mode on any Android device wirelessly. No root required, just connect and extend your display with a single click.</p>
+            <div class="hero-actions">
+                <a href="#setup" class="btn btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                    Get Started
+                </a>
+                <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-value">1080p</span>
+                    <span class="stat-label">Display Output</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">Wireless</span>
+                    <span class="stat-label">Connection</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">No Root</span>
+                    <span class="stat-label">Required</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="device-mockup">
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="screen-ui">
+                            <div class="taskbar">
+                                <div class="taskbar-start"></div>
+                                <div class="taskbar-apps">
+                                    <div class="app-icon"></div>
+                                    <div class="app-icon active"></div>
+                                    <div class="app-icon"></div>
+                                </div>
+                                <div class="taskbar-tray"></div>
+                            </div>
+                            <div class="desktop-windows">
+                                <div class="window window-1">
+                                    <div class="window-header">
+                                        <div class="window-dots">
+                                            <span></span><span></span><span></span>
+                                        </div>
+                                    </div>
+                                    <div class="window-content"></div>
+                                </div>
+                                <div class="window window-2">
+                                    <div class="window-header">
+                                        <div class="window-dots">
+                                            <span></span><span></span><span></span>
+                                        </div>
+                                    </div>
+                                    <div class="window-content"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="connection-beam"></div>
+                <div class="monitor-frame">
+                    <div class="monitor-screen">
+                        <div class="screen-ui large">
+                            <div class="taskbar">
+                                <div class="taskbar-start"></div>
+                                <div class="taskbar-apps">
+                                    <div class="app-icon"></div>
+                                    <div class="app-icon active"></div>
+                                    <div class="app-icon"></div>
+                                    <div class="app-icon"></div>
+                                </div>
+                                <div class="taskbar-tray"></div>
+                            </div>
+                            <div class="desktop-windows">
+                                <div class="window window-main">
+                                    <div class="window-header">
+                                        <div class="window-dots">
+                                            <span></span><span></span><span></span>
+                                        </div>
+                                    </div>
+                                    <div class="window-content">
+                                        <div class="content-lines">
+                                            <div class="line"></div>
+                                            <div class="line short"></div>
+                                            <div class="line"></div>
+                                            <div class="line medium"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="monitor-stand"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Capabilities</span>
+                <h2>Everything You Need</h2>
+                <p>A complete desktop experience powered by open-source tools</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <h3>Instant Connection</h3>
+                    <p>Connect to your device in seconds using wireless ADB. No cables, no complicated setup procedures.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>Full HD Display</h3>
+                    <p>Create a virtual 1920x1080 display on your monitor while keeping your phone screen independent.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 18V5l12-2v13"/>
+                            <circle cx="6" cy="18" r="3"/>
+                            <circle cx="18" cy="16" r="3"/>
+                        </svg>
+                    </div>
+                    <h3>App Audio Routing</h3>
+                    <p>Stream audio from specific apps directly to your PC speakers with per-app audio control.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3>No Root Required</h3>
+                    <p>Works on any Android device without needing root access. Just enable wireless debugging.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                        </svg>
+                    </div>
+                    <h3>System Controls</h3>
+                    <p>Toggle Bluetooth, mobile data, and other settings directly from your desktop interface.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </div>
+                    <h3>Open Source</h3>
+                    <p>Fully open source and built with Flutter. Contribute, modify, and make it your own.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">The Process</span>
+                <h2>How It Works</h2>
+                <p>Simple architecture, powerful results</p>
+            </div>
+            <div class="architecture-diagram">
+                <div class="arch-node phone-node">
+                    <div class="node-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="5" y="2" width="14" height="20" rx="2"/>
+                            <line x1="12" y1="18" x2="12" y2="18"/>
+                        </svg>
+                    </div>
+                    <div class="node-label">Android Device</div>
+                    <div class="node-desc">Running companion app with ADB enabled</div>
+                </div>
+                <div class="arch-connector">
+                    <div class="connector-line">
+                        <div class="data-packet"></div>
+                    </div>
+                    <span>WiFi / TCP</span>
+                </div>
+                <div class="arch-node server-node">
+                    <div class="node-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="2" width="20" height="8" rx="2"/>
+                            <rect x="2" y="14" width="20" height="8" rx="2"/>
+                            <line x1="6" y1="6" x2="6" y2="6"/>
+                            <line x1="6" y1="18" x2="6" y2="18"/>
+                        </svg>
+                    </div>
+                    <div class="node-label">Desktop App</div>
+                    <div class="node-desc">Flutter app managing connections</div>
+                </div>
+                <div class="arch-connector">
+                    <div class="connector-line">
+                        <div class="data-packet"></div>
+                    </div>
+                    <span>scrcpy</span>
+                </div>
+                <div class="arch-node display-node">
+                    <div class="node-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <div class="node-label">Extended Display</div>
+                    <div class="node-desc">Full 1080p desktop environment</div>
+                </div>
+            </div>
+            <div class="tech-stack">
+                <h3>Built With</h3>
+                <div class="tech-items">
+                    <div class="tech-item">
+                        <span class="tech-name">Flutter</span>
+                        <span class="tech-desc">Cross-platform UI</span>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">scrcpy</span>
+                        <span class="tech-desc">Display mirroring</span>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">ADB</span>
+                        <span class="tech-desc">Device bridge</span>
+                    </div>
+                    <div class="tech-item">
+                        <span class="tech-name">mDNS</span>
+                        <span class="tech-desc">Auto discovery</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="setup" class="setup">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Getting Started</span>
+                <h2>Quick Setup</h2>
+                <p>Up and running in under 5 minutes</p>
+            </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Enable Wireless Debugging</h3>
+                        <p>Go to Developer Options on your Android device and enable "Wireless debugging". Note down the IP address and port shown.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Launch the Desktop App</h3>
+                        <p>Download and run Android DEX on your Windows, macOS, or Linux computer. The app will start the local server automatically.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Connect Your Device</h3>
+                        <p>Enter your phone's IP address in the app or select it from the discovered devices list. Click "Start DEX" to begin.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3>Enjoy Desktop Mode</h3>
+                        <p>A new window will open with your extended display. Use your mouse and keyboard to control the desktop environment.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="requirements">
+                <h3>Requirements</h3>
+                <div class="req-grid">
+                    <div class="req-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="5" y="2" width="14" height="20" rx="2"/>
+                        </svg>
+                        <span>Android 11+</span>
+                    </div>
+                    <div class="req-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12.55a11 11 0 0114.08 0"/>
+                            <path d="M1.42 9a16 16 0 0121.16 0"/>
+                            <path d="M8.53 16.11a6 6 0 016.95 0"/>
+                            <circle cx="12" cy="20" r="1"/>
+                        </svg>
+                        <span>Same WiFi Network</span>
+                    </div>
+                    <div class="req-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                        <span>Windows/Mac/Linux</span>
+                    </div>
+                    <div class="req-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                        <span>Developer Options Enabled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="developer" class="developer">
+        <div class="container">
+            <div class="dev-card">
+                <div class="dev-avatar">
+                    <img src="https://github.com/Shrey113.png" alt="Shrey113" loading="lazy">
+                    <div class="avatar-ring"></div>
+                </div>
+                <div class="dev-info">
+                    <span class="dev-tag">Developer</span>
+                    <h2>Shrey113</h2>
+                    <p>Building tools that bridge the gap between mobile and desktop computing. Passionate about creating seamless user experiences through open-source software.</p>
+                    <div class="dev-links">
+                        <a href="https://github.com/Shrey113" target="_blank" rel="noopener noreferrer" class="dev-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                            GitHub Profile
+                        </a>
+                        <a href="https://github.com/Shrey113/android_dex" target="_blank" rel="noopener noreferrer" class="dev-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                            Project Repository
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Try It?</h2>
+                <p>Download Android DEX and experience wireless desktop mode today</p>
+                <div class="cta-actions">
+                    <a href="https://github.com/Shrey113/android_dex/releases" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Download Latest Release
+                    </a>
+                    <a href="https://github.com/Shrey113/android_dex" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Star on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo-icon small">
+                        <img src="Data/app_png.png" alt="Android DEX" loading="lazy">
+                    </div>
+                    <span>Android DEX</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/Shrey113" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://github.com/Shrey113/android_dex/issues" target="_blank" rel="noopener noreferrer">Report Issue</a>
+                    <a href="https://github.com/Shrey113/android_dex/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a>
+                </div>
+                <div class="footer-copy">
+                    <span>Made with dedication by Shrey113</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="developer-docs/index.html" class="docs-float">
+        <div class="docs-float-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+            </svg>
+        </div>
+        <div class="docs-float-content">
+            <span class="docs-float-title">For Developers</span>
+            <span class="docs-float-sub">Full Documentation by Shrey113</span>
+        </div>
+        <div class="docs-float-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+            </svg>
+        </div>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
