@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Help - Android Dex Manager</title>
+    <link rel="stylesheet" href="Video_help.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1>Help Center</h1>
+        </div>
+        <div class="video-list" id="videoList">
+            <!-- Videos will be populated here -->
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="player-container">
+            <video id="mainVideo" controls autoplay>
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video-info">
+            <h2 id="videoTitle">Select a video</h2>
+            <p id="videoDesc">Choose a topic from the sidebar to start learning how to use Android Dex Manager.</p>
+        </div>
+    </main>
+
+    <script>
+        const videoData = [
+            {
+                id: 1,
+                title: "How to setup Dex Controller?",
+                path: "how to setup Dex Controller.mp4",
+                description: "This guide covers the initial setup process for the Dex Controller, ensuring your Android device is properly connected and ready for management."
+            }
+            // Add more videos here in the future
+        ];
+
+        const videoList = document.getElementById('videoList');
+        const mainVideo = document.getElementById('mainVideo');
+        const videoTitle = document.getElementById('videoTitle');
+        const videoDesc = document.getElementById('videoDesc');
+
+        function init() {
+            renderVideoList();
+            if (videoData.length > 0) {
+                loadVideo(videoData[0].id);
+            }
+        }
+
+        function renderVideoList() {
+            videoList.innerHTML = videoData.map(video => `
+                <div class="video-item" onclick="loadVideo(${video.id})" id="item-${video.id}">
+                    <span class="index">${video.id}.</span>
+                    <span class="title">${video.title}</span>
+                </div>
+            `).join('');
+        }
+
+        function loadVideo(id) {
+            const video = videoData.find(v => v.id === id);
+            if (!video) return;
+
+            // Update UI
+            document.querySelectorAll('.video-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`item-${id}`).classList.add('active');
+
+            // Update Player
+            mainVideo.src = video.path;
+            mainVideo.load();
+            mainVideo.play();
+
+            // Update Text
+            videoTitle.innerText = video.title;
+            videoDesc.innerText = video.description;
+        }
+
+        init();
+    </script>
+</body>
+
+</html>

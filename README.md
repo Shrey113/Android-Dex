@@ -3,7 +3,7 @@
 Wireless desktop mode for Android — 1080p extended display, no root, open source.
 
 ## Download + Website
-- Releases: https://github.com/Shrey113/android_dex/releases
+- Releases: https://github.com/Shrey113/Android-Dex/releases
 - Live Site: https://shrey113.github.io/Android-Dex/
 - Local Site: `ALL_website/index.html`
 - Developer Docs (local): `developer-docs/index.html`
@@ -15,7 +15,7 @@ Android DEX creates an extended 1080p display on your desktop using scrcpy and c
 - Wireless ADB connection
 - 1080p extended display via scrcpy
 - No root required
-- Desktop app for Windows/macOS/Linux
+- Desktop app for Windows
 - Built‑in prerequisites check and APK installer
 - Configurable scrcpy options (FPS, codec, flags) with preview + copy
 
@@ -23,7 +23,7 @@ Android DEX creates an extended 1080p display on your desktop using scrcpy and c
 - Android 11+
 - Phone and PC on the same Wi‑Fi network
 - Developer Options → Wireless Debugging enabled
-- Desktop OS: Windows/macOS/Linux
+- Desktop OS: Windows
 - Helper binaries and APKs present:
   - `All helper/platform-tools/adb.exe`
   - `All helper/scrwin64/scrcpy.exe`
