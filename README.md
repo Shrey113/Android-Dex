@@ -1,6 +1,6 @@
 # 📱 Android DEX
 
-**Wireless desktop mode for Android** — 1080p extended display, no root, open-source.
+**Wireless desktop mode for Android** — 1080p extended display, no root .
 
 Android DEX turns your Android phone into a **true desktop-style extended display** on Windows using **wireless ADB + scrcpy**.  
 It is **not Samsung DeX** — it works on supported Android devices and provides a clean, customizable desktop experience.
@@ -26,7 +26,6 @@ Android DEX creates an **extended 1080p virtual display** on your PC and streams
 - Uses **scrcpy virtual display**
 - Works over **wireless ADB**
 - Desktop-style Android UI
-- Lightweight and open-source
 - No root required
 
 ---
@@ -56,6 +55,9 @@ Android DEX creates an **extended 1080p virtual display** on your PC and streams
 ---
 
 ## 🖼️ On-Device UI Previews
+
+**Android Dex Control**  
+![Android Dex Control](<developer-docs/Android Dex Control.gif>)
 
 **Context Menu**  
 ![Context Menu](Data/README%20-%20Data/AndroidDex%20-%20App%20Context%20menu.png)
