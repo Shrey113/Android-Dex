@@ -121,6 +121,24 @@ class ScrcpyService {
     }
   }
 
+  Future<int?> getAndroidVersion(String ip) async {
+    try {
+      final result = await Process.run(adbFullPath, [
+        '-s',
+        ip,
+        'shell',
+        'getprop',
+        'ro.build.version.release',
+      ]);
+      final output = result.stdout.toString().trim();
+      // Handle cases like "11.0" or just "11"
+      final versionPart = output.split('.').first;
+      return int.tryParse(versionPart);
+    } catch (_) {
+      return null;
+    }
+  }
+
   Future<(bool, String)> startScrcpy(String ip) async {
     try {
       final scrcpyDir = File(scrcpyFullPath).parent.path;

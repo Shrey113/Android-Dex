@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen>
   final _scrcpyService = ScrcpyService();
 
   bool _isLoading = false;
+  String _loadingMessage = 'Connecting...';
   bool _isConnected = false;
   String _connectedIp = '';
   late AnimationController _pulseController;
@@ -103,61 +104,83 @@ class _HomeScreenState extends State<HomeScreen>
       return;
     }
 
-    setState(() => _isLoading = true);
+    setState(() {
+      _isLoading = true;
+      _loadingMessage = 'Connecting to ADB...';
+    });
 
-    if (!await _scrcpyService.checkToolsExist()) {
-      _showSnackBar('Tools not found in helper folder', false);
-      setState(() => _isLoading = false);
-      return;
-    }
-
-    final (adbOk, adbMsg) = await _scrcpyService.connectAdb(ip);
-    if (!adbOk) {
-      _showSnackBar(adbMsg, false);
-      setState(() => _isLoading = false);
-      return;
-    }
-
-    final (dexInstalled, controllerInstalled) = await _scrcpyService
-        .checkPrerequisites(ip);
-    if (!dexInstalled || !controllerInstalled) {
-      final started = await _showInstallDialog(
-        ip,
-        dexInstalled,
-        controllerInstalled,
-      );
-      if (!started) {
-        setState(() => _isLoading = false);
+    try {
+      if (!await _scrcpyService.checkToolsExist()) {
+        _showSnackBar('Tools not found in helper folder', false);
         return;
       }
-    } else {
+
+      final (adbOk, adbMsg) = await _scrcpyService.connectAdb(ip);
+      if (!adbOk) {
+        _showSnackBar(adbMsg, false);
+        return;
+      }
+
+      setState(() => _loadingMessage = 'Checking Android version...');
+      final androidVersion = await _scrcpyService.getAndroidVersion(ip);
+      if (androidVersion != null && androidVersion < 11) {
+        _showSnackBar(
+          'Minimum Android 11 required (Found: $androidVersion)',
+          false,
+        );
+        return;
+      }
+
+      setState(() => _loadingMessage = 'Checking prerequisites...');
+      final (dexInstalled, controllerInstalled) = await _scrcpyService
+          .checkPrerequisites(ip);
+
+      if (!dexInstalled || !controllerInstalled) {
+        setState(() => _isLoading = false); // Hide loader for dialog
+        final started = await _showInstallDialog(
+          ip,
+          dexInstalled,
+          controllerInstalled,
+        );
+        if (started) {
+          setState(() {
+            _isConnected = true;
+            _connectedIp = ip;
+          });
+          _showSnackBar('Connected successfully', true);
+        }
+        return;
+      }
+
+      setState(() => _loadingMessage = 'Enabling accessibility...');
       final enabled = await _scrcpyService.enableAccessibilityService(ip);
       if (!enabled) {
         _showSnackBar('Failed to enable accessibility', false);
-        setState(() => _isLoading = false);
         return;
       }
+
+      setState(() => _loadingMessage = 'Starting display...');
       final (scrcpyOk, _) = await _scrcpyService.startScrcpy(ip);
       if (!scrcpyOk) {
         _showSnackBar('Failed to start display', false);
-        setState(() => _isLoading = false);
         return;
       }
-    }
 
-    final (scrcpyOk, _) = await _scrcpyService.startScrcpy(ip);
-    if (!scrcpyOk) {
-      _showSnackBar('Failed to start display', false);
-      setState(() => _isLoading = false);
-      return;
+      setState(() {
+        _isConnected = true;
+        _connectedIp = ip;
+      });
+      _showSnackBar('Connected successfully', true);
+    } catch (e) {
+      _showSnackBar('Connection error: $e', false);
+    } finally {
+      if (mounted) {
+        Future.delayed(const Duration(seconds: 2), () {
+          // small delay to show loading For scrcpy start
+          setState(() => _isLoading = false);
+        });
+      }
     }
-
-    setState(() {
-      _isLoading = false;
-      _isConnected = true;
-      _connectedIp = ip;
-    });
-    _showSnackBar('Connected successfully', true);
   }
 
   Future<bool> _showInstallDialog(
@@ -474,6 +497,46 @@ class _HomeScreenState extends State<HomeScreen>
               children: [_buildTitleBar(), Expanded(child: _buildContent())],
             ),
           ),
+          if (_isLoading)
+            Positioned.fill(
+              child: Container(
+                color: Colors.black.withValues(alpha: 0.75),
+                child: Center(
+                  child: GlassCard(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 24,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const CircularProgressIndicator(
+                          strokeWidth: 3,
+                          color: Color(0xFF7C4DFF),
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          _loadingMessage,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0.2,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          'Please wait...',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white.withValues(alpha: 0.4),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
@@ -573,16 +636,23 @@ class _HomeScreenState extends State<HomeScreen>
                 icon: Icons.remove,
                 onTap: () => windowManager.minimize(),
               ),
-              _WindowBtn(
-                icon: Icons.close,
-                onTap: () => windowManager.close(),
-                isClose: true,
-              ),
+              _WindowBtn(icon: Icons.close, onTap: close_app, isClose: true),
             ],
           ],
         ),
       ),
     );
+  }
+
+  void close_app() {
+    AdbTcpServer.instance.stop_port();
+    AdbTcpServer.instance.stopExistingMdnsService();
+    // Just hide window for user feel
+    windowManager.hide();
+    Future.delayed(const Duration(seconds: 1), () {
+      // tack time to close other all items
+      windowManager.close();
+    });
   }
 
   void _openSettings() {

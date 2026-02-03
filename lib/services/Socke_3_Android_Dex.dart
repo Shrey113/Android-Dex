@@ -32,15 +32,43 @@ class AdbTcpServer {
     await start();
   }
 
-  Future<bool> start() async {
-    if (_isRunning) return true;
+  Future<void> stop_port() async {
     try {
-      _server = await ServerSocket.bind(InternetAddress.anyIPv4, tcpPort);
+      if (_server != null) {
+        await _server!.close();
+        _server = null;
+      }
+
+      _isRunning = false;
+      _statusController.add(false);
+
+      dev.log("TCP Server stopped");
+    } catch (e) {
+      dev.log("Failed to stop TCP Server: $e");
+    }
+  }
+
+  Future<bool> start() async {
+    dev.log("TCP Server already running, stopping first...");
+    await stop_port();
+
+    try {
+      _server = await ServerSocket.bind(
+        InternetAddress.anyIPv4,
+        tcpPort,
+        shared: false, // important on Windows
+      );
+
       _isRunning = true;
       _statusController.add(true);
+
       dev.log("TCP Server started on port $tcpPort");
+
       _listenForConnections();
+
+      // Start mDNS only AFTER TCP is confirmed
       await _startMdnsService();
+
       return true;
     } catch (e) {
       dev.log("Failed to start TCP Server: $e");
@@ -48,7 +76,7 @@ class AdbTcpServer {
     }
   }
 
-  Future<void> _stopExistingMdnsService() async {
+  Future<void> stopExistingMdnsService() async {
     try {
       // Windows-only
       final result = await Process.run('taskkill', [
@@ -70,7 +98,7 @@ class AdbTcpServer {
   Future<void> _startMdnsService() async {
     try {
       // Stop any old instance first
-      await _stopExistingMdnsService();
+      await stopExistingMdnsService();
 
       if (_mdnsProcess != null) return;
 
