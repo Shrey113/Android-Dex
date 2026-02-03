@@ -48,26 +48,54 @@ class AdbTcpServer {
     }
   }
 
+  Future<void> _stopExistingMdnsService() async {
+    try {
+      // Windows-only
+      final result = await Process.run('taskkill', [
+        '/IM',
+        'mdns_service.exe',
+        '/F',
+      ], runInShell: true);
+
+      if (result.exitCode == 0) {
+        dev.log('Existing mDNS service stopped');
+      } else {
+        dev.log('No existing mDNS service found');
+      }
+    } catch (e) {
+      dev.log('Failed to stop existing mDNS service: $e');
+    }
+  }
+
   Future<void> _startMdnsService() async {
     try {
+      // Stop any old instance first
+      await _stopExistingMdnsService();
+
       if (_mdnsProcess != null) return;
+
       final mdnsDir = File(mdnsFullPath).parent.path;
+
       _mdnsProcess = await Process.start(
         mdnsFullPath,
         [],
         workingDirectory: mdnsDir,
       );
+
       dev.log("mDNS service started: $mdnsFullPath");
+
       _mdnsProcess!.stdout.transform(const SystemEncoding().decoder).listen((
         data,
       ) {
         dev.log("[mDNS] $data");
       });
+
       _mdnsProcess!.stderr.transform(const SystemEncoding().decoder).listen((
         data,
       ) {
         dev.log("[mDNS ERROR] $data");
       });
+
       _mdnsProcess!.exitCode.then((code) {
         dev.log("mDNS service exited with code: $code");
         _mdnsProcess = null;
