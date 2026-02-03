@@ -127,7 +127,9 @@ HiddenPort_Shrey11_=????
 
 ## 🌟 Credits
 
-- [scrcpy]()
-- [Android Debug Bridge (ADB)]()
-- [Flutter]()
+- [Shrey113](https://github.com/Shrey113)
+- [scrcpy](https://github.com/Genymobile/scrcpy)
+- [Android Debug Bridge (ADB)](https://developer.android.com/tools/adb)
+- [Flutter](https://flutter.dev/)
+
 
