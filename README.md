@@ -81,6 +81,16 @@ Code: [scrcpy_config.dart](file:///a:/All%20Android/android_dex/lib/screens/scrc
   - Command Preview with copy
   Code: [scrcpy_config.dart](file:///a:/All%20Android/android_dex/lib/screens/scrcpy_config.dart)
 
+### On‑Device UI Previews
+Context Menu:
+![AndroidDex App Context Menu](Data/README%20-%20Data/AndroidDex%20-%20App%20Context%20menu.png)
+
+Notifications Panel:
+![AndroidDex Notifications](Data/README%20-%20Data/AndroidDex%20-%20Notification.png)
+
+Quick Settings:
+![AndroidDex Settings Tile](Data/README%20-%20Data/AndroidDex%20-%20Setting.png)
+
 ## CLI Equivalent
 The app ultimately launches a command similar to:
 ```
