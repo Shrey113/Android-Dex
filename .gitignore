@@ -100,7 +100,7 @@ web/build/
 # =========================
 # ALL Platforms
 # =========================
-
+android_dex.exe
 linux/
 macos/
 android/

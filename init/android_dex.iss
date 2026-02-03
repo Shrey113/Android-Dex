@@ -54,7 +54,6 @@ Source: "A:\All Android\android_dex\build\windows\x64\runner\Release\url_launche
 Source: "A:\All Android\android_dex\build\windows\x64\runner\Release\window_manager_plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "A:\All Android\android_dex\build\windows\x64\runner\Release\data\*"; DestDir: "{app}\data"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "A:\All Android\android_dex\build\windows\x64\runner\Release\All helper\*"; DestDir: "{app}\All helper"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "A:\All Android\android_dex\build\windows\x64\runner\Release\ALL_PY\*"; DestDir: "{app}\ALL_PY"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
