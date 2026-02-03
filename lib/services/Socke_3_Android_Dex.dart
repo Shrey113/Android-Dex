@@ -1,3 +1,29 @@
+//
+//
+//
+//
+//
+// This code file is part of the ADB Device Manager.
+// This code file is part of the ADB Device Manager.
+// This code file is part of the ADB Device Manager.
+//
+// It handles TCP socket communication between the app
+// and connected Android devices using ADB.
+// All data is received, processed, and sent through sockets.
+//
+// It also manages ADB commands, device input events,
+// audio streaming (via scrcpy), and mDNS services by Windows.
+//
+// Link to project repository:
+// https://github.com/Shrey113/Adb-Device-Manager-2
+// https://github.com/Shrey113/Adb-Device-Manager-2
+// https://github.com/Shrey113/Adb-Device-Manager-2
+//
+//
+//
+//
+//
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer' as dev;
