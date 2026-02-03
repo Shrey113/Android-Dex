@@ -1,0 +1,26 @@
+add device 1: /dev/input/event12
+  name:     "uinput_nav"
+add device 2: /dev/input/event11
+  name:     "kalama-mtp-snd-card Button Jack"
+add device 3: /dev/input/event10
+  name:     "kalama-mtp-snd-card Headset Jack"
+add device 4: /dev/input/event9
+  name:     "touchpanel_kpd"
+add device 5: /dev/input/event8
+  name:     "touchpanel"
+add device 6: /dev/input/event7
+  name:     "oplus,hall_tri_state_key"
+add device 7: /dev/input/event6
+  name:     "hall_m1120_down"
+add device 8: /dev/input/event5
+  name:     "hall_m1120_up"
+add device 9: /dev/input/event4
+  name:     "qcom-hv-haptics"
+add device 10: /dev/input/event3
+  name:     "pmic_resin"
+add device 11: /dev/input/event2
+  name:     "pmic_pwrkey"
+add device 12: /dev/input/event1
+  name:     "oplus_fp_input"
+add device 13: /dev/input/event0
+  name:     "gpio-keys"

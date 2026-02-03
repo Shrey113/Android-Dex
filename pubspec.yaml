@@ -33,6 +33,9 @@ dependencies:
   window_manager: ^0.4.3
   cupertino_icons: ^1.0.8
   flutter_dotenv: ^6.0.0
+  font_awesome_flutter: ^10.9.1
+  url_launcher: ^6.3.2
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

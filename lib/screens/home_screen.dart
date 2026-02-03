@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:android_dex/widgets/glass_card.dart';
+import 'package:android_dex/widgets/Github_Log_Button.dart';
 import 'package:android_dex/services/scrcpy_service.dart';
 import 'package:android_dex/services/Socke_3_Android_Dex.dart';
+import 'package:android_dex/screens/scrcpy_config.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -116,6 +118,33 @@ class _HomeScreenState extends State<HomeScreen>
       return;
     }
 
+    final (dexInstalled, controllerInstalled) = await _scrcpyService
+        .checkPrerequisites(ip);
+    if (!dexInstalled || !controllerInstalled) {
+      final started = await _showInstallDialog(
+        ip,
+        dexInstalled,
+        controllerInstalled,
+      );
+      if (!started) {
+        setState(() => _isLoading = false);
+        return;
+      }
+    } else {
+      final enabled = await _scrcpyService.enableAccessibilityService(ip);
+      if (!enabled) {
+        _showSnackBar('Failed to enable accessibility', false);
+        setState(() => _isLoading = false);
+        return;
+      }
+      final (scrcpyOk, _) = await _scrcpyService.startScrcpy(ip);
+      if (!scrcpyOk) {
+        _showSnackBar('Failed to start display', false);
+        setState(() => _isLoading = false);
+        return;
+      }
+    }
+
     final (scrcpyOk, _) = await _scrcpyService.startScrcpy(ip);
     if (!scrcpyOk) {
       _showSnackBar('Failed to start display', false);
@@ -129,6 +158,210 @@ class _HomeScreenState extends State<HomeScreen>
       _connectedIp = ip;
     });
     _showSnackBar('Connected successfully', true);
+  }
+
+  Future<bool> _showInstallDialog(
+    String ip,
+    bool dexInstalled,
+    bool controllerInstalled,
+  ) async {
+    bool dexOk = dexInstalled;
+    bool controllerOk = controllerInstalled;
+    bool installingDex = false;
+    bool installingController = false;
+    bool starting = false;
+    final result = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              backgroundColor: const Color(0xFF1E1E28),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              title: const Row(
+                children: [
+                  Icon(
+                    Icons.warning_amber_rounded,
+                    color: Color(0xFFFFB74D),
+                    size: 24,
+                  ),
+                  SizedBox(width: 10),
+                  Text('Install Required Apps', style: TextStyle(fontSize: 18)),
+                ],
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'AndroidDex and DexController must be installed to continue.',
+                    style: TextStyle(color: Color(0xFF8888A0), fontSize: 14),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'AndroidDex',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color:
+                                dexOk
+                                    ? const Color(0xFF1DB954)
+                                    : const Color(0xFFE8E8E8),
+                            fontWeight:
+                                dexOk ? FontWeight.w600 : FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      if (dexOk)
+                        const Icon(
+                          Icons.check_circle,
+                          color: Color(0xFF1DB954),
+                          size: 18,
+                        )
+                      else
+                        FilledButton(
+                          onPressed:
+                              installingDex
+                                  ? null
+                                  : () async {
+                                    setState(() => installingDex = true);
+                                    final (ok, msg) = await _scrcpyService
+                                        .installAndroidDex(ip);
+                                    setState(() {
+                                      installingDex = false;
+                                      dexOk = ok;
+                                    });
+                                    _showSnackBar(msg, ok);
+                                  },
+                          style: FilledButton.styleFrom(
+                            backgroundColor: const Color(0xFF7C4DFF),
+                          ),
+                          child:
+                              installingDex
+                                  ? const SizedBox(
+                                    width: 16,
+                                    height: 16,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
+                                  )
+                                  : const Text('Install'),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'DexController',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color:
+                                controllerOk
+                                    ? const Color(0xFF1DB954)
+                                    : const Color(0xFFE8E8E8),
+                            fontWeight:
+                                controllerOk
+                                    ? FontWeight.w600
+                                    : FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      if (controllerOk)
+                        const Icon(
+                          Icons.check_circle,
+                          color: Color(0xFF1DB954),
+                          size: 18,
+                        )
+                      else
+                        FilledButton(
+                          onPressed:
+                              installingController
+                                  ? null
+                                  : () async {
+                                    setState(() => installingController = true);
+                                    final (ok, msg) = await _scrcpyService
+                                        .installDexController(ip);
+                                    setState(() {
+                                      installingController = false;
+                                      controllerOk = ok;
+                                    });
+                                    _showSnackBar(msg, ok);
+                                  },
+                          style: FilledButton.styleFrom(
+                            backgroundColor: const Color(0xFF7C4DFF),
+                          ),
+                          child:
+                              installingController
+                                  ? const SizedBox(
+                                    width: 16,
+                                    height: 16,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
+                                  )
+                                  : const Text('Install'),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed:
+                      starting ? null : () => Navigator.of(context).pop(false),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(color: Color(0xFF8888A0)),
+                  ),
+                ),
+                FilledButton(
+                  onPressed:
+                      (!dexOk || !controllerOk || starting)
+                          ? null
+                          : () async {
+                            setState(() => starting = true);
+                            final enabled = await _scrcpyService
+                                .enableAccessibilityService(ip);
+                            if (!enabled) {
+                              _showSnackBar(
+                                'Failed to enable accessibility',
+                                false,
+                              );
+                              setState(() => starting = false);
+                              return;
+                            }
+                            final (scrcpyOk, _) = await _scrcpyService
+                                .startScrcpy(ip);
+                            if (!scrcpyOk) {
+                              _showSnackBar('Failed to start display', false);
+                              setState(() => starting = false);
+                              return;
+                            }
+                            Navigator.of(context).pop(true);
+                          },
+                  child:
+                      starting
+                          ? const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                          : const Text('Start'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+    return result == true;
   }
 
   void _disconnect() {
@@ -330,6 +563,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
             if (isDesktop) ...[
+              _WindowBtn(icon: Icons.settings, onTap: _openSettings),
               _ServerToggleBtn(
                 isRunning: _isServerRunning,
                 onTap: _toggleServer,
@@ -351,6 +585,34 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
+  void _openSettings() {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        pageBuilder:
+            (context, animation, secondaryAnimation) =>
+                const ScrcpyConfigScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          final fade = CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeOut,
+          );
+          final slide = Tween<Offset>(
+            begin: const Offset(0.06, 0),
+            end: Offset.zero,
+          ).animate(
+            CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
+          );
+          return FadeTransition(
+            opacity: fade,
+            child: SlideTransition(position: slide, child: child),
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 220),
+        reverseTransitionDuration: const Duration(milliseconds: 200),
+      ),
+    );
+  }
+
   Widget _buildContent() {
     return Center(
       child: SingleChildScrollView(
@@ -365,6 +627,18 @@ class _HomeScreenState extends State<HomeScreen>
               _buildConnectionPanel(),
               const SizedBox(height: 16),
               _buildDeviceList(),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Made with ❤️ by',
+                    style: TextStyle(fontSize: 14, color: Colors.white),
+                  ),
+                  const SizedBox(width: 10),
+                  const GithubLogButton(is_small: true),
+                ],
+              ),
             ],
           ),
         ),
@@ -878,7 +1152,9 @@ class _ServerToggleBtnState extends State<_ServerToggleBtn> {
         onExit: (_) => setState(() => _hover = false),
         child: GestureDetector(
           onTap: widget.onTap,
-          child: Container(
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOut,
             width: 32,
             height: 32,
             decoration: BoxDecoration(
@@ -888,20 +1164,26 @@ class _ServerToggleBtnState extends State<_ServerToggleBtn> {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Icon(
-                  widget.isRunning ? Icons.dns : Icons.dns_outlined,
-                  size: 16,
-                  color:
-                      widget.isRunning
-                          ? const Color(0xFF1DB954)
-                          : Colors.white.withValues(alpha: 0.5),
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 180),
+                  child: Icon(
+                    widget.isRunning ? Icons.dns : Icons.dns_outlined,
+                    key: ValueKey<bool>(widget.isRunning),
+                    size: 16,
+                    color:
+                        widget.isRunning
+                            ? const Color(0xFF1DB954)
+                            : Colors.white.withValues(alpha: 0.5),
+                  ),
                 ),
                 Positioned(
                   right: 6,
                   bottom: 6,
-                  child: Container(
-                    width: 6,
-                    height: 6,
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 180),
+                    curve: Curves.easeOut,
+                    width: widget.isRunning ? 7 : 6,
+                    height: widget.isRunning ? 7 : 6,
                     decoration: BoxDecoration(
                       color:
                           widget.isRunning

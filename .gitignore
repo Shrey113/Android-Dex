@@ -74,8 +74,6 @@ android/local.properties
 android/**/build/
 android/**/captures/
 android/.idea/
-*.apk
-*.aab
 
 # =========================
 # iOS / macOS

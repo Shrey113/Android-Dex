@@ -276,6 +276,35 @@ class AdbTcpServer {
     dev.log("App Data Updates - Button: ${jsonData["package"]}");
   }
 
+  Future<void> _handleInputCommand(String ip, Map<String, dynamic> json) async {
+    final type = json["type"];
+
+    switch (type) {
+      case "tap":
+        final x = json["x"];
+        final y = json["y"];
+        await adbRun(ip, ["shell", "input", "tap", "$x", "$y"]);
+        break;
+
+      case "swipe":
+        await adbRun(ip, [
+          "shell",
+          "input",
+          "swipe",
+          "${json["x1"]}",
+          "${json["y1"]}",
+          "${json["x2"]}",
+          "${json["y2"]}",
+          "${json["duration"] ?? 50}",
+        ]);
+        break;
+
+      case "keyevent":
+        await adbRun(ip, ["shell", "input", "keyevent", json["code"]]);
+        break;
+    }
+  }
+
   Future<void> _handleCommand(String ip, Socket socket, String cmd) async {
     try {
       final jsonData = jsonDecode(cmd);
@@ -288,6 +317,13 @@ class AdbTcpServer {
 
         if (jsonData["type"] == "sync_all_favorites") {
           _app_data_updates(ip, socket, jsonData);
+          return;
+        }
+
+        if (jsonData["type"] == "tap" ||
+            jsonData["type"] == "swipe" ||
+            jsonData["type"] == "keyevent") {
+          await _handleInputCommand(ip, jsonData);
           return;
         }
       }

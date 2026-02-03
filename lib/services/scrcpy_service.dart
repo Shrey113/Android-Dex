@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Represents a connected ADB device
 class AdbDevice {
@@ -30,9 +31,13 @@ class AdbDevice {
 class ScrcpyService {
   static const String _adbPath = "All helper/platform-tools/adb.exe";
   static const String _scrcpyPath = "All helper/scrwin64/scrcpy.exe";
+  static const String _dexApkPath = "All helper/AndroidDex.apk";
+  static const String _controllerApkPath = "All helper/DexController.apk";
 
   late final String adbFullPath;
   late final String scrcpyFullPath;
+  late final String dexApkFullPath;
+  late final String controllerApkFullPath;
 
   Process? _process;
   bool _isRunning = false;
@@ -44,6 +49,8 @@ class ScrcpyService {
   ScrcpyService() {
     adbFullPath = File(_adbPath).absolute.path;
     scrcpyFullPath = File(_scrcpyPath).absolute.path;
+    dexApkFullPath = File(_dexApkPath).absolute.path;
+    controllerApkFullPath = File(_controllerApkPath).absolute.path;
   }
 
   Future<bool> checkToolsExist() async {
@@ -117,6 +124,10 @@ class ScrcpyService {
   Future<(bool, String)> startScrcpy(String ip) async {
     try {
       final scrcpyDir = File(scrcpyFullPath).parent.path;
+      final prefs = await SharedPreferences.getInstance();
+      final fps = prefs.getInt('scrcpy.fps');
+      final codec = prefs.getString('scrcpy.codec');
+      final noDestroy = prefs.getBool('scrcpy.no_vd_destroy_content') ?? false;
 
       _process = await Process.start(scrcpyFullPath, [
         '-s',
@@ -125,6 +136,11 @@ class ScrcpyService {
         '--no-audio',
         '--start-app=com.example.androiddex',
         '--no-vd-system-decorations',
+        '-f',
+        '--shortcut-mod=lctrl',
+        if (fps != null && fps > 0) '--max-fps=$fps',
+        if (codec != null && codec.isNotEmpty) '--video-codec=$codec',
+        if (noDestroy) '--no-vd-destroy-content',
       ], workingDirectory: scrcpyDir);
 
       _isRunning = true;
@@ -155,5 +171,91 @@ class ScrcpyService {
   void dispose() {
     stopScrcpy();
     _statusController.close();
+  }
+
+  Future<bool> _isPackageInstalled(String ip, String packageName) async {
+    try {
+      final result = await Process.run(adbFullPath, [
+        '-s',
+        ip,
+        'shell',
+        'pm',
+        'list',
+        'packages',
+        packageName,
+      ]);
+      final output = '${result.stdout}${result.stderr}'.toLowerCase();
+      return output.contains('package:$packageName'.toLowerCase());
+    } catch (_) {
+      return false;
+    }
+  }
+
+  Future<bool> enableAccessibilityService(String ip) async {
+    try {
+      final putResult = await Process.run(adbFullPath, [
+        '-s',
+        ip,
+        'shell',
+        'settings',
+        'put',
+        'secure',
+        'enabled_accessibility_services',
+        'com.example.androiddex/.services.DexAccessibilityService',
+      ]);
+      return putResult.exitCode == 0;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<(bool, String)> installAndroidDex(String ip) async {
+    try {
+      final result = await Process.run(adbFullPath, [
+        '-s',
+        ip,
+        'install',
+        '-r',
+        dexApkFullPath,
+      ]);
+      final output = '${result.stdout}${result.stderr}'.trim().toLowerCase();
+      final ok = result.exitCode == 0 || output.contains('success');
+      return (ok, ok ? 'AndroidDex installed' : output);
+    } catch (e) {
+      return (false, 'Install failed: $e');
+    }
+  }
+
+  Future<(bool, String)> installDexController(String ip) async {
+    try {
+      final result = await Process.run(adbFullPath, [
+        '-s',
+        ip,
+        'install',
+        '-r',
+        controllerApkFullPath,
+      ]);
+      final output = '${result.stdout}${result.stderr}'.trim().toLowerCase();
+      final ok = result.exitCode == 0 || output.contains('success');
+      return (ok, ok ? 'DexController installed' : output);
+    } catch (e) {
+      return (false, 'Install failed: $e');
+    }
+  }
+
+  Future<(bool, bool)> checkPrerequisites(String ip) async {
+    final dexInstalled = await _isPackageInstalled(
+      ip,
+      'com.example.androiddex',
+    );
+    final controllerInstalled = await _isPackageInstalled(
+      ip,
+      'com.example.dexcontroller',
+    );
+    return (dexInstalled, controllerInstalled);
+  }
+
+  Future<(bool, bool)> chke_vlistoant(String ip) async {
+    return checkPrerequisites(ip);
   }
 }
