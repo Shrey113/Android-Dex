@@ -57,16 +57,16 @@ Android DEX creates an **extended 1080p virtual display** on your PC and streams
 ## 🖼️ On-Device UI Previews
 
 **Android Dex Control**  
-![Android Dex Control](<developer-docs/Android Dex Control.gif>)
+<img src="developer-docs/Android Dex Control.gif" alt="Android Dex Control" width="550" />
 
 **Context Menu**  
-![Context Menu](Data/README%20-%20Data/AndroidDex%20-%20App%20Context%20menu.png)
+<img src="Data/README%20-%20Data/AndroidDex%20-%20App%20Context%20menu.png" alt="Context Menu" width="550" />
 
 **Notifications Panel**  
-![Notifications](Data/README%20-%20Data/AndroidDex%20-%20Notification.png)
+<img src="Data/README%20-%20Data/AndroidDex%20-%20Notification.png" alt="Notifications Panel" width="550" />
 
 **Quick Settings Tile**  
-![Quick Settings](Data/README%20-%20Data/AndroidDex%20-%20Setting.png)
+<img src="Data/README%20-%20Data/AndroidDex%20-%20Setting.png" alt="Quick Settings Tile" width="550" />
 
 ---
 
