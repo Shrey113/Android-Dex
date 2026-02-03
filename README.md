@@ -12,6 +12,7 @@ It is **not Samsung DeX** — it works on supported Android devices and provides
 | Name | Link |
 | --- | --- |
 | Android DEX (Windows App) | [Download](https://github.com/Shrey113/Android-Dex/releases/download/Android-Dex-v.0.1/android_dex.exe) |
+| For All OS  |  Coming soon ⌛ |
 | Official Website | [Website](https://shrey113.github.io/Android-Dex/) |
 | Developer Docs | [Docs](https://shrey113.github.io/Android-Dex/developer-docs/) |
 | Introduction | [Watch](https://shrey113.github.io/Android-Dex/developer-docs/Video_help.html#1) |
@@ -33,7 +34,7 @@ Android DEX creates an **extended 1080p virtual display** on your PC and streams
 ## ✨ Feature Highlights
 
 - Wireless ADB connection  
-- 1080p extended display via scrcpy  
+- virtual display via scrcpy  
 - Windows desktop controller app  
 - Separate Android helper apps  
 - Low-latency desktop interaction  
