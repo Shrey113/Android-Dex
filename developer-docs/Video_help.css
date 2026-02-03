@@ -42,6 +42,7 @@ body {
     font-size: 1.2rem;
     font-weight: 700;
     background: linear-gradient(45deg, #fff, #b0aec5);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
