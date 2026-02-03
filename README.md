@@ -1,4 +1,4 @@
-# Android DEX
+# 📱 Android DEX
 
 **Wireless desktop mode for Android** — 1080p extended display, no root, open-source.
 
@@ -7,7 +7,7 @@ It is **not Samsung DeX** — it works on supported Android devices and provides
 
 ---
 
-## Download & Website
+## 📥 Download & Website
 
 | Name | Link |
 | --- | --- |
@@ -19,7 +19,7 @@ It is **not Samsung DeX** — it works on supported Android devices and provides
 
 ---
 
-## What It Does
+## 🛠️ What It Does
 
 Android DEX creates an **extended 1080p virtual display** on your PC and streams it wirelessly to your Android device.
 
@@ -31,7 +31,7 @@ Android DEX creates an **extended 1080p virtual display** on your PC and streams
 
 ---
 
-## Feature Highlights
+## ✨ Feature Highlights
 
 - Wireless ADB connection  
 - 1080p extended display via scrcpy  
@@ -41,7 +41,7 @@ Android DEX creates an **extended 1080p virtual display** on your PC and streams
 
 ---
 
-## Prerequisites
+## 📋 Prerequisites
 
 - Android **11+**
 - Phone and PC on the **same Wi-Fi network**
@@ -55,7 +55,7 @@ Android DEX creates an **extended 1080p virtual display** on your PC and streams
 
 ---
 
-## On-Device UI Previews
+## 🖼️ On-Device UI Previews
 
 **Context Menu**  
 ![Context Menu](Data/README%20-%20Data/AndroidDex%20-%20App%20Context%20menu.png)
@@ -68,7 +68,7 @@ Android DEX creates an **extended 1080p virtual display** on your PC and streams
 
 ---
 
-## End-to-End Flow (How It Works)
+## 🔄 End-to-End Flow (How It Works)
 
 1. **Tool check**  
    Verifies `adb` and `scrcpy` binaries exist in the helper folder.  
@@ -97,7 +97,7 @@ Android DEX creates an **extended 1080p virtual display** on your PC and streams
 
 ---
 
-## scrcpy Settings (Desktop App)
+## ⚙️ scrcpy Settings (Desktop App)
 
 Open **Settings** from the title bar:
 
@@ -113,7 +113,7 @@ Source: [scrcpy_config.dart](https://github.com/Shrey113/Android-Dex/blob/main/l
 ---
 
 
-## CLI / Environment Variables
+## 💻 CLI / Environment Variables
 
 > Environment variables are currently hidden and will be documented after permission approval.
 ```
@@ -123,7 +123,7 @@ HiddenPort_Shrey11_=????
 ```
 ---
 
-## Credits
+## 🌟 Credits
 
 - [scrcpy]()
 - [Android Debug Bridge (ADB)]()
