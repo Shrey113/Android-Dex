@@ -1,6 +1,6 @@
 # Android DEX
 
-**Wireless desktop mode for Android** — 1080p extended display, no root .
+**Wireless desktop mode for Android** — scrcpy virtual display, no root .
 
 Android DEX turns your Android phone into a **true desktop-style extended display** on Windows using **wireless ADB + scrcpy**.  
 It is **not Samsung DeX** — it works on supported Android devices and provides a clean, customizable desktop experience.
@@ -22,7 +22,7 @@ It is **not Samsung DeX** — it works on supported Android devices and provides
 
 ## 🛠️ What It Does
 
-Android DEX creates an **extended 1080p virtual display** on your PC and streams it wirelessly to your Android device.
+Android DEX creates an **scrcpy virtual display** on your PC and streams it wirelessly to your Android device.
 
 - Uses **scrcpy virtual display**
 - Works over **wireless ADB**
@@ -92,7 +92,7 @@ Android DEX creates an **extended 1080p virtual display** on your PC and streams
    Source: [scrcpy_service.dart](https://github.com/Shrey113/Android-Dex/blob/main/lib/services/scrcpy_service.dart)
 
 5. **Start scrcpy session**  
-   - Creates 1080p / 280 DPI virtual display
+   - scrcpy virtual display
    - Fullscreen mode
    - Auto-launches Android DEX app
    - Applies user-configured flags  
