@@ -34,64 +34,80 @@
         </div>
     </main>
 
-    <script>
-        const videoData = [
-            {
-                id: 1,
-                title: "intro to Dex Controller",
-                path: "intro video.mp4",
-                description: "This guide covers the initial setup process for the Android Dex Manager, ensuring your Android device is properly connected and ready for management."
-            },
-             {
-                id: 2,
-                title: "How to setup Dex Controller?",
-                path: "how to setup Dex Controller.mp4",
-                description: "This guide covers the initial setup process for the Dex Controller, ensuring your Android device is properly connected and ready for management."
-            }
-            // Add more videos here in the future
-        ];
-
-        const videoList = document.getElementById('videoList');
-        const mainVideo = document.getElementById('mainVideo');
-        const videoTitle = document.getElementById('videoTitle');
-        const videoDesc = document.getElementById('videoDesc');
-
-        function init() {
-            renderVideoList();
-            if (videoData.length > 0) {
-                loadVideo(videoData[0].id);
-            }
+ <script>
+    const videoData = [
+        {
+            id: 1,
+            title: "intro to Android Dex",
+            path: "intro video.mp4",
+            description: "This guide covers the initial setup process for the Android Dex Manager, ensuring your Android device is properly connected and ready for management."
+        },
+        {
+            id: 2,
+            title: "How to setup Dex Controller?",
+            path: "how to setup Dex Controller.mp4",
+            description: "This guide covers the initial setup process for the Dex Controller, ensuring your Android device is properly connected and ready for management."
         }
+    ];
 
-        function renderVideoList() {
-            videoList.innerHTML = videoData.map(video => `
-                <div class="video-item" onclick="loadVideo(${video.id})" id="item-${video.id}">
-                    <span class="index">${video.id}.</span>
-                    <span class="title">${video.title}</span>
-                </div>
-            `).join('');
+    const videoList = document.getElementById('videoList');
+    const mainVideo = document.getElementById('mainVideo');
+    const videoTitle = document.getElementById('videoTitle');
+    const videoDesc = document.getElementById('videoDesc');
+
+    function init() {
+        renderVideoList();
+
+        // ✅ Load video from hash if exists
+        const hashId = Number(window.location.hash.substring(1));
+        if (hashId && videoData.some(v => v.id === hashId)) {
+            loadVideo(hashId);
+        } else if (videoData.length > 0) {
+            loadVideo(videoData[0].id); // default
         }
+    }
 
-        function loadVideo(id) {
-            const video = videoData.find(v => v.id === id);
-            if (!video) return;
+    function renderVideoList() {
+        videoList.innerHTML = videoData.map(video => `
+            <div class="video-item" onclick="loadVideo(${video.id})" id="item-${video.id}">
+                <span class="index">${video.id}.</span>
+                <span class="title">${video.title}</span>
+            </div>
+        `).join('');
+    }
 
-            // Update UI
-            document.querySelectorAll('.video-item').forEach(el => el.classList.remove('active'));
-            document.getElementById(`item-${id}`).classList.add('active');
+    function loadVideo(id) {
+        const video = videoData.find(v => v.id === id);
+        if (!video) return;
 
-            // Update Player
-            mainVideo.src = video.path;
-            mainVideo.load();
-            mainVideo.play();
+        // ✅ Update URL hash
+        window.location.hash = id;
 
-            // Update Text
-            videoTitle.innerText = video.title;
-            videoDesc.innerText = video.description;
-        }
+        // Update UI
+        document.querySelectorAll('.video-item').forEach(el =>
+            el.classList.remove('active')
+        );
+        document.getElementById(`item-${id}`).classList.add('active');
 
-        init();
-    </script>
+        // Update Player
+        mainVideo.src = video.path;
+        mainVideo.load();
+        mainVideo.play();
+
+        // Update Text
+        videoTitle.innerText = video.title;
+        videoDesc.innerText = video.description;
+    }
+
+    // ✅ Handle browser back/forward
+    window.addEventListener("hashchange", () => {
+        const hashId = Number(window.location.hash.substring(1));
+        if (hashId) loadVideo(hashId);
+    });
+
+    init();
+</script>
+
 </body>
 
 </html>
