@@ -1,4 +1,4 @@
-# 📱 Android DEX
+# Android DEX
 
 **Wireless desktop mode for Android** — 1080p extended display, no root .
 
