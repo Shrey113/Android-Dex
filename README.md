@@ -9,40 +9,9 @@
 [![Android](https://img.shields.io/badge/Android-ADB%20%7C%20No%20Root-3DDC84?style=flat-square&logo=android)](https://developer.android.com)
 [![License](https://img.shields.io/badge/License-Private-red?style=flat-square)](LICENSE)
 
-> A high-performance Windows desktop application that transforms any Android device into a full-featured desktop environment — multi-window multitasking, live system telemetry, app streaming, and hardware integration — all without root access.
 
 </div>
 
----
-
-## 📖 Deep-Dive Documentation
-
-Check out these detailed guides to understand exactly how Android DEX works under the hood:
-
-1. **[Architectural Design](doc/ARCHITECTURE.md)** — Three-layer system design, responsibilities, and data flow.
-2. **[Boot & Initialization](doc/BOOT_FLOW.md)** — Step-by-step connection flow with progress stages.
-3. **[Reconnection System](doc/RECONNECTION.md)** — Smart auto-healing, recovery phases, and UI overlay.
-4. **[Real-Time Data Model](doc/DATA_MODEL.md)** — State store, JSON telemetry protocols, and message handling.
-5. **[Error Handling](doc/ERROR_HANDLING.md)** — User-facing messaging pipelines and full fallback reference.
-6. **[System Modules](doc/MODULES.md)** — Internal component roles, public APIs, and singletons.
-7. **[Device Manager](doc/DEVICE_MANAGER.md)** — ADB device selection, UI dialogs, and IP connections.
-
----
-
-## ✨ Key Features
-
-| Feature | Description |
-|---|---|
-| **Multi-Window Apps** | Each Android app runs in its own resizable, movable Windows window |
-| **Live System Telemetry** | Real-time Battery, Volume, Wi-Fi, Bluetooth, Mobile Data & more |
-| **Notification Streaming** | Android notifications pushed instantly to your Windows desktop |
-| **Media Control** | Artwork, metadata & playback controls from the Windows side |
-| **Near-Zero Latency Commands** | Shell-level command execution bypasses Android UI overhead entirely |
-| **Auto-Reconnection** | Multi-stage smart recovery — restores connection without app restarts |
-| **No Root Required** | All features operate through standard ADB and Android permissions |
-| **USB & Wi-Fi** | Works seamlessly over both cable and wireless connections |
-
----
 
 ## 🚀 Quick Start
 
@@ -72,6 +41,22 @@ android_dex_win.exe 192.168.1.100:5555
 > **Smart Auto-Detection:** With no arguments, the app scans for available devices. One device found → connects automatically. Zero or multiple → the **ADB Manager** dialog opens to let you choose — no restart needed.
 
 ---
+
+## 📖 Deep-Dive Documentation
+
+Check out these detailed guides to understand exactly how Android DEX works under the hood:
+
+1. **[Architectural Design](doc/ARCHITECTURE.md)** — Three-layer system design, responsibilities, and data flow.
+2. **[Boot & Initialization](doc/BOOT_FLOW.md)** — Step-by-step connection flow with progress stages.
+3. **[Reconnection System](doc/RECONNECTION.md)** — Smart auto-healing, recovery phases, and UI overlay.
+4. **[Real-Time Data Model](doc/DATA_MODEL.md)** — State store, JSON telemetry protocols, and message handling.
+5. **[Error Handling](doc/ERROR_HANDLING.md)** — User-facing messaging pipelines and full fallback reference.
+6. **[System Modules](doc/MODULES.md)** — Internal component roles, public APIs, and singletons.
+7. **[Device Manager](doc/DEVICE_MANAGER.md)** — ADB device selection, UI dialogs, and IP connections.
+
+---
+
+
 
 ## 🛠️ How It Works — The Handshake Protocol
 
@@ -103,6 +88,21 @@ sequenceDiagram
     PC->>APK: 3. Start Extended Notification & Media Services
     Note over PC,APK: System Synchronized: Desktop UI Unlocked
 ```
+
+---
+
+## ✨ Key Features
+
+| Feature | Description |
+|---|---|
+| **Multi-Window Apps** | Each Android app runs in its own resizable, movable Windows window |
+| **Live System Telemetry** | Real-time Battery, Volume, Wi-Fi, Bluetooth, Mobile Data & more |
+| **Notification Streaming** | Android notifications pushed instantly to your Windows desktop |
+| **Media Control** | Artwork, metadata & playback controls from the Windows side |
+| **Near-Zero Latency Commands** | Shell-level command execution bypasses Android UI overhead entirely |
+| **Auto-Reconnection** | Multi-stage smart recovery — restores connection without app restarts |
+| **No Root Required** | All features operate through standard ADB and Android permissions |
+| **USB & Wi-Fi** | Works seamlessly over both cable and wireless connections |
 
 ---
 
@@ -145,14 +145,6 @@ Android DEX distributes responsibilities across three specialized layers:
 5. **The desktop unlocks** — your Android is now a full Windows desktop experience
 
 > If connection fails, a **"Select Device"** button appears in the boot screen — click it to open the ADB Manager and pick your device without restarting.
-
----
-
-## 🤝 If Connection Fails
-
-- The boot screen shows a clear, plain-English error message
-- A **"Open ADB Manager — Select Device"** button appears automatically
-- Click it → pick your device or type an IP address → the system retries on its own
 
 ---
 
