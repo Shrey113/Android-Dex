@@ -88,18 +88,28 @@ sequenceDiagram
 
 ---
 
-## ✨ Key Features
+## 📱 App Preview
 
-| Feature | Description |
-|---|---|
-| **Multi-Window Apps** | Each Android app runs in its own resizable, movable Windows window |
-| **Live System Telemetry** | Real-time Battery, Volume, Wi-Fi, Bluetooth, Mobile Data & more |
-| **Notification Streaming** | Android notifications pushed instantly to your Windows desktop |
-| **Media Control** | Artwork, metadata & playback controls from the Windows side |
-| **Near-Zero Latency Commands** | Shell-level command execution bypasses Android UI overhead entirely |
-| **Auto-Reconnection** | Multi-stage smart recovery — restores connection without app restarts |
-| **No Root Required** | All features operate through standard ADB and Android permissions |
-| **USB & Wi-Fi** | Works seamlessly over both cable and wireless connections |
+<div align="center">
+
+**Desktop Home Interface**
+![Home Screen](Data/home_screen.png)
+
+---
+
+| ![App List](Data/App_list.png) | ![Multiple Apps](Data/multiple_apps_running.png) |
+|:---:|:---:|
+| **App Dashboard** | **Multi-App View** |
+
+| ![Media Control](Data/media_control.png) | ![Controller 1](Data/controller_1.png) |
+|:---:|:---:|
+| **Media Center** | **Android Control** |
+
+| ![Controller 2](Data/controller_2.png) | ![Controller 3](Data/controller_3.png) |
+|:---:|:---:|
+| **Audio Overlay** | **Media Preferences** |
+
+</div>
 
 ---
 
