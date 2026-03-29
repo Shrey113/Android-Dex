@@ -63,6 +63,7 @@ Check out these detailed guides to understand exactly how Android DEX works unde
 The system uses a three-layer architecture with a cryptographic-style handshake before the desktop UI unlocks. Every component must confirm readiness before the session begins.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#0078D4', 'primaryTextColor': '#fff', 'primaryBorderColor': '#0078D4', 'lineColor': '#888', 'secondaryColor': '#0061af', 'tertiaryColor': '#222', 'noteBkgColor': '#333', 'noteTextColor': '#fff', 'noteBorderColor': '#555' }}}%%
 sequenceDiagram
     participant PC as Windows Side (Flutter/ADB)
     participant JAR as Android Logic Engine (Java JAR)
@@ -71,19 +72,15 @@ sequenceDiagram
     Note over PC: 1. ADB Initialization (startAdbBlocking)
     PC->>PC: 2. Local Server Setup (JarServer & ApkServer .start)
     
-    rect rgb(240, 240, 240)
-    Note right of PC: Phase 1: Engine Deployment (Bridge)
+    Note over PC,JAR: Phase 1: Engine Deployment (Bridge)
     PC->>JAR: Push JAR to Device (via ADB Pipe)
     PC->>JAR: Launch JAR Runtime (adb.startJarRuntime)
     JAR-->>PC: Handshake Response: "jar.hello" (Logic Engine Ready)
-    end
 
-    rect rgb(230, 230, 230)
-    Note right of PC: Phase 2: Feature Manager Startup (Hub)
+    Note over PC,APK: Phase 2: Feature Manager Startup (Hub)
     PC->>APK: Check Install & Install if Missing
     PC->>APK: Trigger Service startup (ServerStartService)
     APK-->>PC: WebSocket Handshake: "apk.hello" (App Hub Ready)
-    end
 
     PC->>APK: 3. Start Extended Notification & Media Services
     Note over PC,APK: System Synchronized: Desktop UI Unlocked
