@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture — Android DEX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon">🏗️</div>
+            <span class="logo-text">Android<span>DEX</span></span>
+        </div>
+        
+        <nav class="nav-menu">
+            <div class="nav-group">
+                <div class="nav-group-title">Getting Started</div>
+                <div class="nav-item">
+                    <a href="../index.html" class="nav-link">Introduction</a>
+                </div>
+            </div>
+            
+            <div class="nav-group">
+                <div class="nav-group-title">Deep Dive</div>
+                <div class="nav-item">
+                    <a href="architecture.html" class="nav-link active">Architectural Design</a>
+                </div>
+                <div class="nav-item">
+                    <a href="boot-flow.html" class="nav-link">Boot & Initialization</a>
+                </div>
+                <div class="nav-item">
+                    <a href="reconnection.html" class="nav-link">Reconnection System</a>
+                </div>
+                <div class="nav-item">
+                    <a href="data-model.html" class="nav-link">Real-Time Data Model</a>
+                </div>
+                <div class="nav-item">
+                    <a href="error-handling.html" class="nav-link">Error Handling</a>
+                </div>
+                <div class="nav-item">
+                    <a href="modules.html" class="nav-link">System Modules</a>
+                </div>
+                <div class="nav-item">
+                    <a href="device-manager.html" class="nav-link">Device Manager</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <span class="version-badge">DEX-STABLE-104-SINGLE</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div class="breadcrumb">Documentation / Deep Dive / Architecture</div>
+            <h1>Three-Layer System Design</h1>
+            <p class="description">How Android DEX distributes responsibilities across execution contexts to enable near-zero latency commands and deep system control.</p>
+        </header>
+
+        <section class="doc-section">
+            <h2>System Overview</h2>
+            <div class="mermaid">
+graph TD
+    PC[Windows Side: Flutter/ADB] -->|TCP| JAR[⚡ Logic Engine: Java JAR]
+    PC -->|WebSocket| Hub[📱 Feature Hub: Kotlin APK]
+    PC -->|Pipe| ADB[ADB Shell Context]
+    ADB --> JAR
+    Hub --> System[Android System Context]
+            </div>
+            <p>Both Android-side components <strong>connect back to the Windows side</strong> — the Windows app runs the servers; Android clients connect to them.</p>
+        </section>
+
+        <section class="doc-section">
+            <h2>Layer 1 — Windows Side</h2>
+            <p><strong>Role:</strong> Orchestrator, UI host, server infrastructure, and rendering engine.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Domain</th>
+                        <th>What It Does</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>ADB Lifecycle</strong></td><td>Starts ADB server, connects device, sets up reverse port forwarding</td></tr>
+                    <tr><td><strong>Servers</strong></td><td>Runs 4 TCP/WebSocket servers that Android components connect to</td></tr>
+                    <tr><td><strong>JAR Deployment</strong></td><td>Locates, pushes, and launches the Logic Engine on the device</td></tr>
+                    <tr><td><strong>APK Management</strong></td><td>Detects, installs, and starts the companion APK service</td></tr>
+                    <tr><td><strong>Rendering</strong></td><td>Embeds scrcpy windows as native Win32 child windows inside Flutter</td></tr>
+                    <tr><td><strong>Reconnection</strong></td><td>Monitors connection state; auto-heals without user restart</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="doc-section">
+            <h2>Layer 2 — Logic Engine (Java JAR)</h2>
+            <p><strong>Role:</strong> Shell-level command executor running with elevated ADB daemon privileges.</p>
+            <p>The JAR, launched via <code>adb shell app_process</code>, executes at the <strong>ADB shell user level</strong> — allowing volume manipulation via <code>AudioService</code> and control over the <code>ActivityManager</code> without launcher process restrictions.</p>
+            
+            <h3>Core Responsibilities</h3>
+            <ul>
+                <li><strong>Volume Control:</strong> Direct <code>AudioManager</code> stream access at shell level.</li>
+                <li><strong>App Launch:</strong> <code>ActivityManager.startActivity()</code> with foreground flags.</li>
+                <li><strong>App Kill:</strong> <code>ActivityManager.forceStopPackage()</code>.</li>
+                <li><strong>Screen State:</strong> PowerManager + WakeManager invocation.</li>
+            </ul>
+        </section>
+
+        <section class="doc-section">
+            <h2>Layer 3 — Feature Hub (Kotlin APK)</h2>
+            <p><strong>Role:</strong> Permission-holding daemon for all telemetry and high-level Android APIs.</p>
+            <p>Includes access to listener APIs that require app registration, such as <code>NotificationListenerService</code> and <code>MediaSessionManager</code>.</p>
+        </section>
+
+        <footer class="page-footer">
+            <a href="../index.html" class="footer-link">
+                <span>Previous Section</span>
+                <strong>← Introduction</strong>
+            </a>
+            <a href="boot-flow.html" class="footer-link">
+                <span>Next Section</span>
+                <strong>Boot & Initialization →</strong>
+            </a>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
+</body>
+</html>

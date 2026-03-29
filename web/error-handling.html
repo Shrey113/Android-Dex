@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling — Android DEX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon">🛡️</div>
+            <span class="logo-text">Android<span>DEX</span></span>
+        </div>
+        
+        <nav class="nav-menu">
+            <div class="nav-group">
+                <div class="nav-group-title">Getting Started</div>
+                <div class="nav-item">
+                    <a href="../index.html" class="nav-link">Introduction</a>
+                </div>
+            </div>
+            
+            <div class="nav-group">
+                <div class="nav-group-title">Deep Dive</div>
+                <div class="nav-item">
+                    <a href="architecture.html" class="nav-link">Architectural Design</a>
+                </div>
+                <div class="nav-item">
+                    <a href="boot-flow.html" class="nav-link">Boot & Initialization</a>
+                </div>
+                <div class="nav-item">
+                    <a href="reconnection.html" class="nav-link">Reconnection System</a>
+                </div>
+                <div class="nav-item">
+                    <a href="data-model.html" class="nav-link">Real-Time Data Model</a>
+                </div>
+                <div class="nav-item">
+                    <a href="error-handling.html" class="nav-link active">Error Handling</a>
+                </div>
+                <div class="nav-item">
+                    <a href="modules.html" class="nav-link">System Modules</a>
+                </div>
+                <div class="nav-item">
+                    <a href="device-manager.html" class="nav-link">Device Manager</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <span class="version-badge">DEX-STABLE-104-SINGLE</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div class="breadcrumb">Documentation / Deep Dive / Errors</div>
+            <h1>System Error Handling</h1>
+            <p class="description">How technical information is differentiated from user-facing messaging to ensure clarity and actionable feedback.</p>
+        </header>
+
+        <section class="doc-section">
+            <h2>The Pipeline Philosophy</h2>
+            <blockquote>
+                <p>Technical information stays in dev logs. Plain English reaches the user.</p>
+            </blockquote>
+            <div id="mermaid-errors" class="mermaid">
+graph LR
+    Exception[Exception Caught] -->|Map & Filter| Log[Dev Log: Raw Details]
+    Log -->|Replace Technical Terms| UserMsg[User Message: Plain English]
+    UserMsg -->|Reactive Stream| UI[Display in Error Box]
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <h2>Common Scenarios</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Situation</th>
+                        <th>User-Facing Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>ADB not found</td><td>ADB runtime not found. Please reinstall the application.</td></tr>
+                    <tr><td>Push unsuccessful</td><td>Could not transfer service to device. Check connection.</td></tr>
+                    <tr><td>Handshake timeout</td><td>Background service timed out. Device may be unreachable.</td></tr>
+                    <tr><td>APK install fail</td><td>Check device storage and USB permissions.</td></tr>
+                    <tr><td>Device disconnected</td><td>Check your USB cable or Wi-Fi connection.</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="doc-section">
+            <h2>Connection Failure Heuristics</h2>
+            <p>The system distinguishes between environment errors (like missing files) and connection errors. For connection errors, a specialized recovery button appears to trigger the device selection interface.</p>
+            <pre><code>bool _isConnectionError(String msg) {
+  final l = msg.toLowerCase();
+  return l.contains('connect') || l.contains('device') ||
+         l.contains('adb') || l.contains('network') ||
+         l.contains('refused') || l.contains('timeout');
+}</code></pre>
+        </section>
+
+        <footer class="page-footer">
+            <a href="data-model.html" class="footer-link">
+                <span>Previous Section</span>
+                <strong>← Real-Time Data Model</strong>
+            </a>
+            <a href="modules.html" class="footer-link">
+                <span>Next Section</span>
+                <strong>System Modules →</strong>
+            </a>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</body>
+</html>

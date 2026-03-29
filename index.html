@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android DEX | Integrated Technical Documentation</title>
+    <!-- Combined Typography & System Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="web/style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon">📱</div>
+            <span class="logo-text">Android<span>DEX</span></span>
+        </div>
+        
+        <nav class="nav-menu">
+            <div class="nav-group">
+                <div class="nav-group-title">Getting Started</div>
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link active">Introduction</a>
+                </div>
+            </div>
+            
+            <div class="nav-group">
+                <div class="nav-group-title">Deep Dive</div>
+                <div class="nav-item">
+                    <a href="web/architecture.html" class="nav-link">Architectural Design</a>
+                </div>
+                <div class="nav-item">
+                    <a href="web/boot-flow.html" class="nav-link">Boot & Initialization</a>
+                </div>
+                <div class="nav-item">
+                    <a href="web/reconnection.html" class="nav-link">Reconnection System</a>
+                </div>
+                <div class="nav-item">
+                    <a href="web/data-model.html" class="nav-link">Real-Time Data Model</a>
+                </div>
+                <div class="nav-item">
+                    <a href="web/error-handling.html" class="nav-link">Error Handling</a>
+                </div>
+                <div class="nav-item">
+                    <a href="web/modules.html" class="nav-link">System Modules</a>
+                </div>
+                <div class="nav-item">
+                    <a href="web/device-manager.html" class="nav-link">Device Manager</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <span class="version-badge">DEX-STABLE-104-SINGLE</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div class="breadcrumb">Documentation / Overview</div>
+            <h1>Your Phone, Reimagined as a Desktop</h1>
+            <p class="description">Architectural deep-dive into the synchronization between Windows NT and Android Linux environments. Reimagining Android as a high-performance desktop experience.</p>
+        </header>
+
+        <section class="doc-section">
+            <h2>Quick Start</h2>
+            <p>Connect your device via USB or Wi-Fi to begin. The system auto-detects your device and initiates the secure handshake protocol.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mode</th>
+                        <th>Setup</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>USB</strong></td>
+                        <td>Plug in your phone · Enable **USB Debugging**</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Wi-Fi</strong></td>
+                        <td>Same network · Enable **Wireless Debugging**</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Launch Options</h3>
+            <pre><code># Auto-detect — recommended for first use
+android_dex_win.exe
+
+# Force USB connection
+android_dex_win.exe --usb
+
+# Connect to a specific IP address
+android_dex_win.exe 192.168.1.100
+
+# Connect with explicit port
+android_dex_win.exe 192.168.1.100:5555</code></pre>
+            <blockquote>
+                <p><strong>Smart Auto-Detection:</strong> With no arguments, the app scans for available devices. One device found → connects automatically. Zero or multiple → the ADB Manager dialog opens to let you choose — no restart needed.</p>
+            </blockquote>
+        </section>
+
+        <section class="doc-section">
+            <h2>The Handshake Protocol</h2>
+            <p>A three-layer cryptographic-style handshake ensures all components are ready before the desktop UI unlocks.</p>
+            
+            <div id="mermaid-protocol" class="mermaid">
+sequenceDiagram
+    participant PC as Windows Side (Flutter/ADB)
+    participant JAR as Android Logic Engine (Java JAR)
+    participant APK as Android App Hub (Kotlin APK)
+
+    Note over PC: 1. ADB Initialization (startAdbBlocking)
+    PC->>PC: 2. Local Server Setup (JarServer & ApkServer .start)
+    
+    Note over PC,JAR: Phase 1: Engine Deployment (Bridge)
+    PC->>JAR: Push JAR to Device (via ADB Pipe)
+    PC->>JAR: Launch JAR Runtime (adb.startJarRuntime)
+    JAR-->>PC: Handshake Response: "jar.hello" (Logic Engine Ready)
+
+    Note over PC,APK: Phase 2: Feature Manager Startup (Hub)
+    PC->>APK: Check Install & Install if Missing
+    PC->>APK: Trigger Service startup (ServerStartService)
+    APK-->>PC: WebSocket Handshake: "apk.hello" (App Hub Ready)
+
+    PC->>APK: 3. Start Extended Notification & Media Services
+    Note over PC,APK: System Synchronized: Desktop UI Unlocked
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <h2>Key Features</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Multi-Window Apps</strong></td><td>Each Android app runs in its own resizable, movable Windows window</td></tr>
+                    <tr><td><strong>Live Telemetry</strong></td><td>Real-time Battery, Volume, Wi-Fi, BT, Data & more</td></tr>
+                    <tr><td><strong>Notifications</strong></td><td>Android notifications pushed instantly to Windows desktop</td></tr>
+                    <tr><td><strong>Media Control</strong></td><td>Artwork, metadata & playback controls</td></tr>
+                    <tr><td><strong>Low Latency</strong></td><td>Shell-level commands bypass UI overhead</td></tr>
+                    <tr><td><strong>Auto-Healing</strong></td><td>Multi-stage recovery restores connection seamlessly</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <footer class="page-footer">
+            <div></div> <!-- Spacer -->
+            <a href="web/architecture.html" class="footer-link">
+                <span>Next Section</span>
+                <strong>Architectural Design →</strong>
+            </a>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</body>
+</html>

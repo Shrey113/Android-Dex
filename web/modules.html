@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Modules — Android DEX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon">🧩</div>
+            <span class="logo-text">Android<span>DEX</span></span>
+        </div>
+        
+        <nav class="nav-menu">
+            <div class="nav-group">
+                <div class="nav-group-title">Getting Started</div>
+                <div class="nav-item">
+                    <a href="../index.html" class="nav-link">Introduction</a>
+                </div>
+            </div>
+            
+            <div class="nav-group">
+                <div class="nav-group-title">Deep Dive</div>
+                <div class="nav-item">
+                    <a href="architecture.html" class="nav-link">Architectural Design</a>
+                </div>
+                <div class="nav-item">
+                    <a href="boot-flow.html" class="nav-link">Boot & Initialization</a>
+                </div>
+                <div class="nav-item">
+                    <a href="reconnection.html" class="nav-link">Reconnection System</a>
+                </div>
+                <div class="nav-item">
+                    <a href="data-model.html" class="nav-link">Real-Time Data Model</a>
+                </div>
+                <div class="nav-item">
+                    <a href="error-handling.html" class="nav-link">Error Handling</a>
+                </div>
+                <div class="nav-item">
+                    <a href="modules.html" class="nav-link active">System Modules</a>
+                </div>
+                <div class="nav-item">
+                    <a href="device-manager.html" class="nav-link">Device Manager</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <span class="version-badge">DEX-STABLE-104-SINGLE</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div class="breadcrumb">Documentation / Deep Dive / Modules</div>
+            <h1>Internal System Modules</h1>
+            <p class="description">Complete reference for all Windows-side components and their specific roles in the ecosystem.</p>
+        </header>
+
+        <section class="doc-section">
+            <h2>Module Map</h2>
+            <div id="mermaid-modules" class="mermaid">
+graph TD
+    AM[AppManager] --> ADB[AdbProvider]
+    AM --> JM[JarManager]
+    JM --> JS[JarServer]
+    AM --> AS[ApkServer]
+    AM --> RM[ReconnectionManager]
+    RM --> AC[AndroidCore]
+    AM --> MDM[MediaDataManager]
+    AM --> NDM[NotificationDataManager]
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <h2>AdbProvider</h2>
+            <p><strong>Role:</strong> Single source of truth for all command execution via ADB.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>startAdb()</code></td><td>Resumes/Starts local ADB daemon</td></tr>
+                    <tr><td><code>connect()</code></td><td>Establishes device link + reverse tunnels</td></tr>
+                    <tr><td><code>pushJar()</code></td><td>Transfers Logic Engine to device</td></tr>
+                    <tr><td><code>installApk()</code></td><td>Installs Feature Hub APK if missing</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="doc-section">
+            <h2>AppManager</h2>
+            <p><strong>Role:</strong> Master orchestrator overseeing the 11-step boot sequence and triggering sub-modules at correct timestamps. Owns the primary application event stream.</p>
+        </section>
+
+        <section class="doc-section">
+            <h2>JarManager</h2>
+            <p><strong>Role:</strong> Full lifecycle manager for the Logic Engine (Java JAR). Handles deployment, process monitoring, and exit-code recovery.</p>
+        </section>
+
+        <section class="doc-section">
+            <h2>WindowManager</h2>
+            <p><strong>Role:</strong> Win32 window lifecycle manager. Directs the creation, destruction, and resizing of embedded Android app windows within the Flutter UI context.</p>
+        </section>
+
+        <footer class="page-footer">
+            <a href="error-handling.html" class="footer-link">
+                <span>Previous Section</span>
+                <strong>← Error Handling</strong>
+            </a>
+            <a href="device-manager.html" class="footer-link">
+                <span>Next Section</span>
+                <strong>Device Manager →</strong>
+            </a>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</body>
+</html>

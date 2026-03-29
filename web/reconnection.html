@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reconnection System — Android DEX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon">🔄</div>
+            <span class="logo-text">Android<span>DEX</span></span>
+        </div>
+        
+        <nav class="nav-menu">
+            <div class="nav-group">
+                <div class="nav-group-title">Getting Started</div>
+                <div class="nav-item">
+                    <a href="../index.html" class="nav-link">Introduction</a>
+                </div>
+            </div>
+            
+            <div class="nav-group">
+                <div class="nav-group-title">Deep Dive</div>
+                <div class="nav-item">
+                    <a href="architecture.html" class="nav-link">Architectural Design</a>
+                </div>
+                <div class="nav-item">
+                    <a href="boot-flow.html" class="nav-link">Boot & Initialization</a>
+                </div>
+                <div class="nav-item">
+                    <a href="reconnection.html" class="nav-link active">Reconnection System</a>
+                </div>
+                <div class="nav-item">
+                    <a href="data-model.html" class="nav-link">Real-Time Data Model</a>
+                </div>
+                <div class="nav-item">
+                    <a href="error-handling.html" class="nav-link">Error Handling</a>
+                </div>
+                <div class="nav-item">
+                    <a href="modules.html" class="nav-link">System Modules</a>
+                </div>
+                <div class="nav-item">
+                    <a href="device-manager.html" class="nav-link">Device Manager</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <span class="version-badge">DEX-STABLE-104-SINGLE</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div class="breadcrumb">Documentation / Deep Dive / Reconnection</div>
+            <h1>Smart Reconnection System</h1>
+            <p class="description">How Android DEX detects and handles connection loss through a two-phase recovery strategy without affecting active applications.</p>
+        </header>
+
+        <section class="doc-section">
+            <h2>Overview</h2>
+            <div id="mermaid-reconnect" class="mermaid">
+graph TD
+    Monitor[Connection Watchdog] -->|Disconnection Detected| Quick[Phase 1: Quick Reconnect]
+    Quick -->|Failure| Full[Phase 2: Full Restart]
+    Full -->|Success| Idle[Return to Normal Operation]
+    Quick -->|Success| Idle
+    Full -->|All Attempts Failed| Error[Permanent Error State]
+            </div>
+            <p>Once the boot sequence completes, <code>ReconnectionManager</code> monitors both Logic Engine (JAR) and Feature Hub (APK) connections independently.</p>
+        </section>
+
+        <section class="doc-section">
+            <h2>Phase 1 — Quick Reconnect</h2>
+            <p><strong>Triggered:</strong> Immediately on first disconnection detected.</p>
+            <ul>
+                <li><strong>Re-establish ADB Bridge:</strong> <code>adb connect</code> followed by port reverse forwarding.</li>
+                <li><strong>Wait for Handshakes:</strong> Attempts to restore existing sessions.</li>
+            </ul>
+        </section>
+
+        <section class="doc-section">
+            <h2>Phase 2 — Full Restart</h2>
+            <p><strong>Triggered:</strong> Quick reconnect failed after a 5s attempt.</p>
+            <ul>
+                <li><strong>Kill Stale Processes:</strong> Terminates existing processes on both sides.</li>
+                <li><strong>Full Redeployment:</strong> Re-upload service modules and re-launch services.</li>
+                <li><strong>Session Resumption:</strong> Re-establishes all communication channels.</li>
+            </ul>
+        </section>
+
+        <section class="doc-section">
+            <h2>Reconnecting Overlay</h2>
+            <p>A full-screen widget appears during recovery, showing the status of each component (JAR, APK) and a human-readable progress message. While visible, user interaction with the desktop is temporarily disabled.</p>
+        </section>
+
+        <footer class="page-footer">
+            <a href="boot-flow.html" class="footer-link">
+                <span>Previous Section</span>
+                <strong>← Boot & Initialization</strong>
+            </a>
+            <a href="data-model.html" class="footer-link">
+                <span>Next Section</span>
+                <strong>Real-Time Data Model →</strong>
+            </a>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</body>
+</html>

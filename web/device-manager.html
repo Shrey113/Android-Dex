@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Manager — Android DEX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon">📡</div>
+            <span class="logo-text">Android<span>DEX</span></span>
+        </div>
+        
+        <nav class="nav-menu">
+            <div class="nav-group">
+                <div class="nav-group-title">Getting Started</div>
+                <div class="nav-item">
+                    <a href="../index.html" class="nav-link">Introduction</a>
+                </div>
+            </div>
+            
+            <div class="nav-group">
+                <div class="nav-group-title">Deep Dive</div>
+                <div class="nav-item">
+                    <a href="architecture.html" class="nav-link">Architectural Design</a>
+                </div>
+                <div class="nav-item">
+                    <a href="boot-flow.html" class="nav-link">Boot & Initialization</a>
+                </div>
+                <div class="nav-item">
+                    <a href="reconnection.html" class="nav-link">Reconnection System</a>
+                </div>
+                <div class="nav-item">
+                    <a href="data-model.html" class="nav-link">Real-Time Data Model</a>
+                </div>
+                <div class="nav-item">
+                    <a href="error-handling.html" class="nav-link">Error Handling</a>
+                </div>
+                <div class="nav-item">
+                    <a href="modules.html" class="nav-link">System Modules</a>
+                </div>
+                <div class="nav-item">
+                    <a href="device-manager.html" class="nav-link active">Device Manager</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <span class="version-badge">DEX-STABLE-104-SINGLE</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div class="breadcrumb">Documentation / Deep Dive / Devices</div>
+            <h1>Adb Device Manager</h1>
+            <p class="description">Complete reference for device selection, auto-detection, and manual connection via IP address.</p>
+        </header>
+
+        <section class="doc-section">
+            <h2>DeviceManager Singleton</h2>
+            <p>The single source of truth for <em>which</em> device to target. All ADB commands in the system build their argument list using <code>DeviceManager.instance.adbArgs</code>.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>deviceId</code></td><td>String?</td><td>Resolved target: Serial, "ip:port", or "-d"</td></tr>
+                    <tr><td><code>isUsb</code></td><td>bool</td><td>Indicates if a USB device is currently targeted</td></tr>
+                    <tr><td><code>isWifi</code></td><td>bool</td><td>Indicates if a Wi-Fi device is connected</td></tr>
+                    <tr><td><code>adbArgs</code></td><td>List&lt;String&gt;</td><td>Argument list prepended to commands</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="doc-section">
+            <h2>Auto-Detection Logic</h2>
+            <div id="mermaid-detect" class="mermaid">
+graph TD
+    AppLaunch[Application Launched] --> Detect[Auto-Detect Devices]
+    Detect --> Zero[0 Found]
+    Detect --> One[1 Found]
+    Detect --> Many[2+ Found]
+    Zero --> Picker[Open ADB Manager Dialog]
+    One --> Start[Target Device Automatically]
+    Many --> Picker
+            </div>
+        </section>
+
+        <section class="doc-section">
+            <h2>ADB Manager Dialog</h2>
+            <p>The dialog appears during pre-boot or after a connection error. It provides an immediate list of devices found via <code>adb devices</code> and allows for custom IP entry.</p>
+            <ul>
+                <li><strong>USB Devices:</strong> Shown with specialized icon and serial number.</li>
+                <li><strong>Wi-Fi Devices:</strong> Identified by port 5555 and IP address.</li>
+                <li><strong>Connect via IP:</strong> Allows manual port targeting for non-standard configurations.</li>
+            </ul>
+        </section>
+
+        <section class="doc-section">
+            <h2>IP Connection Flow</h2>
+            <p>When typing an IP, the system auto-appends <code>:5555</code> if no port is specified. Success triggers an immediate <code>Navigator.pop(deviceId)</code> to the boot sequence.</p>
+        </section>
+
+        <footer class="page-footer">
+            <a href="modules.html" class="footer-link">
+                <span>Previous Section</span>
+                <strong>← System Modules</strong>
+            </a>
+            <div></div> <!-- Spacer -->
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</body>
+</html>

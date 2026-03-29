@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boot & Initialization — Android DEX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon">⚙️</div>
+            <span class="logo-text">Android<span>DEX</span></span>
+        </div>
+        
+        <nav class="nav-menu">
+            <div class="nav-group">
+                <div class="nav-group-title">Getting Started</div>
+                <div class="nav-item">
+                    <a href="../index.html" class="nav-link">Introduction</a>
+                </div>
+            </div>
+            
+            <div class="nav-group">
+                <div class="nav-group-title">Deep Dive</div>
+                <div class="nav-item">
+                    <a href="architecture.html" class="nav-link">Architectural Design</a>
+                </div>
+                <div class="nav-item">
+                    <a href="boot-flow.html" class="nav-link active">Boot & Initialization</a>
+                </div>
+                <div class="nav-item">
+                    <a href="reconnection.html" class="nav-link">Reconnection System</a>
+                </div>
+                <div class="nav-item">
+                    <a href="data-model.html" class="nav-link">Real-Time Data Model</a>
+                </div>
+                <div class="nav-item">
+                    <a href="error-handling.html" class="nav-link">Error Handling</a>
+                </div>
+                <div class="nav-item">
+                    <a href="modules.html" class="nav-link">System Modules</a>
+                </div>
+                <div class="nav-item">
+                    <a href="device-manager.html" class="nav-link">Device Manager</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <span class="version-badge">DEX-STABLE-104-SINGLE</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div class="breadcrumb">Documentation / Deep Dive / Boot Flow</div>
+            <h1>Sequential Boot Protocol</h1>
+            <p class="description">Executing precise, sequenced initialization protocols and environmental handshakes to ensure a stable desktop environment.</p>
+        </header>
+
+        <section class="doc-section">
+            <h2>Initialization Sequence</h2>
+            <div id="mermaid-boot" class="mermaid">
+sequenceDiagram
+    participant PC as Windows side
+    participant JAR as Logic Engine (JAR)
+    participant APK as Feature Hub (APK)
+
+    PC->>PC: Start ADB Server
+    PC->>PC: Connect Device
+    PC->>PC: Setup Reverse Port Forwarding
+    PC->>JAR: Push and Launch Logic Engine
+    JAR-->>PC: TCP Handshake Confirmed
+    PC->>APK: Check Install & Launch
+    APK-->>PC: WebSocket Handshake Confirmed
+    PC->>PC: Unlock Desktop UI
+            </div>
+            <p>During the entire boot sequence, <strong>two independent progress bars</strong> provide real-time feedback on deployment and system initialization status.</p>
+        </section>
+
+        <section class="doc-section">
+            <h2>Progress Mapping</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Progress</th>
+                        <th>Status Label</th>
+                        <th>Internal Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>0.10</td><td>Connecting to Android device...</td><td><code>adb connect</code> + device link</td></tr>
+                    <tr><td>0.20</td><td>Device connected — bridge configured</td><td><code>adb reverse</code> on required ports</td></tr>
+                    <tr><td>0.38</td><td>Deploying service module...</td><td><code>adb push</code> JAR to /data/local/tmp/</td></tr>
+                    <tr><td>0.55</td><td>Verifying companion app...</td><td><code>pm list packages</code> check</td></tr>
+                    <tr><td>0.72</td><td>Launching services...</td><td><code>am start ServerStartService</code></td></tr>
+                    <tr><td>0.93</td><td>Waiting for connection...</td><td>Handshake wait (15s timeout)</td></tr>
+                    <tr><td>1.00</td><td><strong>System ready</strong></td><td>UI Unlocked</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="doc-section">
+            <h2>Error Handling During Boot</h2>
+            <p>If any step fails, the affected bar stops and an error panel appears. For connection errors, a glowing <strong>"Open ADB Manager"</strong> button allows for manual device targeting without restarting the application.</p>
+        </section>
+
+        <footer class="page-footer">
+            <a href="architecture.html" class="footer-link">
+                <span>Previous Section</span>
+                <strong>← Architectural Design</strong>
+            </a>
+            <a href="reconnection.html" class="footer-link">
+                <span>Next Section</span>
+                <strong>Reconnection System →</strong>
+            </a>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</body>
+</html>

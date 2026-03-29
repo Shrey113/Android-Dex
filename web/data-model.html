@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Data Model — Android DEX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon">📊</div>
+            <span class="logo-text">Android<span>DEX</span></span>
+        </div>
+        
+        <nav class="nav-menu">
+            <div class="nav-group">
+                <div class="nav-group-title">Getting Started</div>
+                <div class="nav-item">
+                    <a href="../index.html" class="nav-link">Introduction</a>
+                </div>
+            </div>
+            
+            <div class="nav-group">
+                <div class="nav-group-title">Deep Dive</div>
+                <div class="nav-item">
+                    <a href="architecture.html" class="nav-link">Architectural Design</a>
+                </div>
+                <div class="nav-item">
+                    <a href="boot-flow.html" class="nav-link">Boot & Initialization</a>
+                </div>
+                <div class="nav-item">
+                    <a href="reconnection.html" class="nav-link">Reconnection System</a>
+                </div>
+                <div class="nav-item">
+                    <a href="data-model.html" class="nav-link active">Real-Time Data Model</a>
+                </div>
+                <div class="nav-item">
+                    <a href="error-handling.html" class="nav-link">Error Handling</a>
+                </div>
+                <div class="nav-item">
+                    <a href="modules.html" class="nav-link">System Modules</a>
+                </div>
+                <div class="nav-item">
+                    <a href="device-manager.html" class="nav-link">Device Manager</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <span class="version-badge">DEX-STABLE-104-SINGLE</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div class="breadcrumb">Documentation / Deep Dive / Data Model</div>
+            <h1>AndroidCore State Store</h1>
+            <p class="description">Centralized, static state store holding a live mirror of the Android device's system status via JSON telemetry.</p>
+        </header>
+
+        <section class="doc-section">
+            <h2>Real-Time State Mapping</h2>
+            <p><code>AndroidCore</code> consists of reactive <code>ValueNotifier</code> fields that direct UI updates when telemetry changes.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Domain</th>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Battery</td><td><code>batteryPercentage</code></td><td>Current level (0–100)</td></tr>
+                    <tr><td>Volume</td><td><code>volumeMusic</code></td><td>Current music/media volume</td></tr>
+                    <tr><td>Wi-Fi</td><td><code>wifiName</code></td><td>Connected SSID</td></tr>
+                    <tr><td>Bluetooth</td><td><code>bluetoothName</code></td><td>Connected device name</td></tr>
+                    <tr><td>System</td><td><code>torch</code></td><td>Flashlight state</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="doc-section">
+            <h2>JSON Telemetry Protocol</h2>
+            <p>All data is sent over encrypted TCP or WebSocket channels from the Android components back to the Windows PC. <code>updateFromMessage()</code> routes each packet to the correct handler.</p>
+            
+            <h3>Example: Battery Update</h3>
+            <pre><code>{
+  "type": "battery_update",
+  "battery": {
+    "percentage": 87,
+    "charging": true,
+    "voltage": 4.2,
+    "temperature": 29.5,
+    "health": "Good",
+    "plug_type": "USB"
+  }
+}</code></pre>
+
+            <h3>Example: Device Flags</h3>
+            <pre><code>{
+  "type": "battery_small",
+  "states": {
+    "wifi": true,
+    "bluetooth": false,
+    "airplane_mode": false,
+    "wifi_name": "HomeNetwork",
+    "rotation_lock": false
+  }
+}</code></pre>
+        </section>
+
+        <section class="doc-section">
+            <h2>Permissions Context</h2>
+            <p>The system tracks permission states such as <code>NotificationlistenerAccess</code> and <code>AccessibilityServicePermission</code>. The UI shows a warning banner if core permissions are revoked during a session.</p>
+        </section>
+
+        <footer class="page-footer">
+            <a href="reconnection.html" class="footer-link">
+                <span>Previous Section</span>
+                <strong>← Reconnection System</strong>
+            </a>
+            <a href="error-handling.html" class="footer-link">
+                <span>Next Section</span>
+                <strong>Error Handling →</strong>
+            </a>
+        </footer>
+    </main>
+</body>
+</html>
