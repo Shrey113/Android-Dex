@@ -5,6 +5,7 @@
 ### *Your Phone, Reimagined as a Desktop*
 
 [![Platform](https://img.shields.io/badge/Platform-Windows-0078D4?style=flat-square&logo=windows)](https://microsoft.com/windows)
+[![Platform](https://img.shields.io/badge/Platform-Linux-FCC624?style=flat-square&logo=linux)](https://kernel.org)
 [![Framework](https://img.shields.io/badge/Framework-Flutter-02569B?style=flat-square&logo=flutter)](https://flutter.dev)
 [![Android](https://img.shields.io/badge/Android-ADB%20%7C%20No%20Root-3DDC84?style=flat-square&logo=android)](https://developer.android.com)
 [![License](https://img.shields.io/badge/License-Private-red?style=flat-square)](LICENSE)
@@ -24,21 +25,41 @@
 
 ### Launch Options
 
+#### 🪟 Windows
+
+**Auto-detect (Recommended)**
 ```bash
-# Auto-detect — recommended for first use
 android_dex_win.exe
+```
 
-# Force USB connection
+**Force USB Connection**
+```bash
 android_dex_win.exe --usb
+```
 
-# Connect to a specific IP address
+**Connect via IP Address**
+```bash
 android_dex_win.exe 192.168.1.100
+```
 
-# Connect with explicit port
+**Connect via IP & Port**
+```bash
 android_dex_win.exe 192.168.1.100:5555
 ```
 
-> **Smart Auto-Detection:** With no arguments, the app scans for available devices. One device found → connects automatically. Zero or multiple → the **ADB Manager** dialog opens to let you choose — no restart needed.
+#### 🐧 Linux
+
+1. **Prepare**: Extract `android_dex_linux.tar.gz` and open terminal in the folder.
+2. **Setup**: Make the script executable:
+   ```bash
+   chmod +x run_android_dex.sh
+   ```
+3. **Launch**:
+   ```bash
+   ./run_android_dex.sh
+   ```
+
+> **Note:** The `run_android_dex.sh` script automatically checks if your Linux environment is compatible (drivers, graphics, and dependencies) and ready to launch the session.
 
 ---
 
@@ -133,9 +154,9 @@ Android DEX distributes responsibilities across three specialized layers:
 
 ### Prerequisites
 
-- Windows 10 or later
-- Android device running Android 8.0+
-- ADB is bundled — no separate installation needed
+- **OS**: Windows 10+ or Modern Linux (Ubuntu, Fedora, etc.)
+- **Device**: Android device running Android 8.0+
+- **Drivers**: ADB is bundled — no separate installation needed
 
 ### Step-by-Step
 
