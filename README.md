@@ -1,65 +1,20 @@
 <div align="center">
 
-# 📱 Android DEX
 
-### *Your Phone, Reimagined as a Desktop*
+<img src="Data/app_png.png" width="150" alt="app_png">
 
-[![Platform](https://img.shields.io/badge/Platform-Windows-0078D4?style=flat-square&logo=windows)](https://microsoft.com/windows)
-[![Platform](https://img.shields.io/badge/Platform-Linux-FCC624?style=flat-square&logo=linux)](https://kernel.org)
-[![Framework](https://img.shields.io/badge/Framework-Flutter-02569B?style=flat-square&logo=flutter)](https://flutter.dev)
-[![Android](https://img.shields.io/badge/Android-ADB%20%7C%20No%20Root-3DDC84?style=flat-square&logo=android)](https://developer.android.com)
-[![License](https://img.shields.io/badge/License-Private-red?style=flat-square)](LICENSE)
-
+# Android DEX
 
 </div>
 
+---
 
-## 🚀 Quick Start
+### 🚀 Quick  Download
 
-### Connect Your Device
-
-| Mode | Setup |
+| Platform | Download Link |
 | :--- | :--- |
-| **USB** | Plug in your phone · Enable **USB Debugging** |
-| **Wi-Fi** | Same network · Enable **Wireless Debugging** |
-
-### Launch Options
-
-#### 🪟 Windows
-
-**Auto-detect (Recommended)**
-```bash
-android_dex_win.exe
-```
-
-**Force USB Connection**
-```bash
-android_dex_win.exe --usb
-```
-
-**Connect via IP Address**
-```bash
-android_dex_win.exe 192.168.1.100
-```
-
-**Connect via IP & Port**
-```bash
-android_dex_win.exe 192.168.1.100:5555
-```
-
-#### 🐧 Linux
-
-1. **Prepare**: Extract `android_dex_linux.tar.gz` and open terminal in the folder.
-2. **Setup**: Make the script executable:
-   ```bash
-   chmod +x run_android_dex.sh
-   ```
-3. **Launch**:
-   ```bash
-   ./run_android_dex.sh
-   ```
-
-> **Note:** The `run_android_dex.sh` script automatically checks if your Linux environment is compatible (drivers, graphics, and dependencies) and ready to launch the session.
+| **Windows** | [android_dex_win.zip](https://github.com/Shrey113/Android-Dex/releases/latest/download/android_dex_win.zip) |
+| **Linux** | [android_dex_linux.tar.gz](https://github.com/Shrey113/Android-Dex/releases/latest/download/android_dex_linux.tar.gz) |
 
 ---
 
@@ -67,45 +22,13 @@ android_dex_win.exe 192.168.1.100:5555
 
 Check out these detailed guides to understand exactly how Android DEX works under the hood:
 
-1. **[Architectural Design](doc/ARCHITECTURE.md)** — Three-layer system design, responsibilities, and data flow.
-2. **[Boot & Initialization](doc/BOOT_FLOW.md)** — Step-by-step connection flow with progress stages.
-3. **[Reconnection System](doc/RECONNECTION.md)** — Smart auto-healing, recovery phases, and UI overlay.
-4. **[Real-Time Data Model](doc/DATA_MODEL.md)** — State store, JSON telemetry protocols, and message handling.
-5. **[Error Handling](doc/ERROR_HANDLING.md)** — User-facing messaging pipelines and full fallback reference.
-6. **[System Modules](doc/MODULES.md)** — Internal component roles, public APIs, and singletons.
-7. **[Device Manager](doc/DEVICE_MANAGER.md)** — ADB device selection, UI dialogs, and IP connections.
-
----
-
-
-
-## 🛠️ How It Works — The Handshake Protocol
-
-The system uses a three-layer architecture with a cryptographic-style handshake before the desktop UI unlocks. Every component must confirm readiness before the session begins.
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#0078D4', 'primaryTextColor': '#fff', 'primaryBorderColor': '#0078D4', 'lineColor': '#888', 'secondaryColor': '#0061af', 'tertiaryColor': '#222', 'noteBkgColor': '#333', 'noteTextColor': '#fff', 'noteBorderColor': '#555' }}}%%
-sequenceDiagram
-    participant PC as Windows Side (Flutter/ADB)
-    participant JAR as Android Logic Engine (Java JAR)
-    participant APK as Android App Hub (Kotlin APK)
-
-    Note over PC: 1. ADB Initialization (startAdbBlocking)
-    PC->>PC: 2. Local Server Setup (JarServer & ApkServer .start)
-    
-    Note over PC,JAR: Phase 1: Engine Deployment (Bridge)
-    PC->>JAR: Push JAR to Device (via ADB Pipe)
-    PC->>JAR: Launch JAR Runtime (adb.startJarRuntime)
-    JAR-->>PC: Handshake Response: "jar.hello" (Logic Engine Ready)
-
-    Note over PC,APK: Phase 2: Feature Manager Startup (Hub)
-    PC->>APK: Check Install & Install if Missing
-    PC->>APK: Trigger Service startup (ServerStartService)
-    APK-->>PC: WebSocket Handshake: "apk.hello" (App Hub Ready)
-
-    PC->>APK: 3. Start Extended Notification & Media Services
-    Note over PC,APK: System Synchronized: Desktop UI Unlocked
-```
+1. **[Architectural Design](doc/ARCHITECTURE.md)** : Three-layer system design, responsibilities, and data flow.
+2. **[Boot & Initialization](doc/BOOT_FLOW.md)** : Step-by-step connection flow with progress stages.
+3. **[Reconnection System](doc/RECONNECTION.md)** : Smart auto-healing, recovery phases, and UI overlay.
+4. **[Real-Time Data Model](doc/DATA_MODEL.md)** : State store, JSON telemetry protocols, and message handling.
+5. **[Error Handling](doc/ERROR_HANDLING.md)** : User-facing messaging pipelines and full fallback reference.
+6. **[System Modules](doc/MODULES.md)** : Internal component roles, public APIs, and singletons.
+7. **[Device Manager](doc/DEVICE_MANAGER.md)** : ADB device selection, UI dialogs, and IP connections.
 
 ---
 
@@ -134,19 +57,56 @@ sequenceDiagram
 
 ---
 
-## 🏗️ Three-Layer Architecture
+## 🚀 Launch Options
 
-Android DEX distributes responsibilities across three specialized layers:
+### 🪟 Windows
 
-| Layer | Role | Technology |
-| :--- | :--- | :--- |
-| **Windows Side** | Orchestration, UI, Streaming | Flutter · ADB · Native C++ · scrcpy |
-| **Logic Engine** | Low-level device commands | Java · ADB Shell |
-| **Feature Hub** | Telemetry, Notifications, Media | Kotlin · Android SDK |
+| Command | Description |
+| :--- | :--- |
+| `android_dex_win.exe` | **Auto-detect** — recommended for most users |
+| `android_dex_win.exe --usb` | Force **USB** connection only |
+| `android_dex_win.exe 192.168.1.100` | Connect via **IP address** |
+| `android_dex_win.exe 192.168.1.100:5555` | Connect via **IP & custom port** |
 
-→ **[Deep-dive: Architecture »](doc/ARCHITECTURE.md)**
+### 🐧 Linux
 
+| Step | Command | Description |
+| :---: | :--- | :--- |
+| 1 | `cd android_dex_linux/` | Enter the extracted folder |
+| 2 | `chmod +x run_android_dex.sh` | Make the script executable |
+| 3 | `./run_android_dex.sh` | Launch Android DEX |
 
+> The script auto-checks Linux compatibility — drivers, graphics, and dependencies — before starting.
+
+---
+
+## 🛠️ How It Works — The Handshake Protocol
+
+The system uses a three-layer architecture with a cryptographic-style handshake before the desktop UI unlocks. Every component must confirm readiness before the session begins.
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#0078D4', 'primaryTextColor': '#fff', 'primaryBorderColor': '#0078D4', 'lineColor': '#888', 'secondaryColor': '#0061af', 'tertiaryColor': '#222', 'noteBkgColor': '#333', 'noteTextColor': '#fff', 'noteBorderColor': '#555' }}}%%
+sequenceDiagram
+    participant PC as Windows Side (Flutter/ADB)
+    participant JAR as Android Logic Engine (Java JAR)
+    participant APK as Android App Hub (Kotlin APK)
+
+    Note over PC: 1. ADB Initialization (startAdbBlocking)
+    PC->>PC: 2. Local Server Setup (JarServer & ApkServer .start)
+    
+    Note over PC,JAR: Phase 1: Engine Deployment (Bridge)
+    PC->>JAR: Push JAR to Device (via ADB Pipe)
+    PC->>JAR: Launch JAR Runtime (adb.startJarRuntime)
+    JAR-->>PC: Handshake Response: "jar.hello" (Logic Engine Ready)
+
+    Note over PC,APK: Phase 2: Feature Manager Startup (Hub)
+    PC->>APK: Check Install & Install if Missing
+    PC->>APK: Trigger Service startup (ServerStartService)
+    APK-->>PC: WebSocket Handshake: "apk.hello" (App Hub Ready)
+
+    PC->>APK: 3. Start Extended Notification & Media Services
+    Note over PC,APK: System Synchronized: Desktop UI Unlocked
+```
 
 ---
 
