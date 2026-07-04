@@ -1,9 +1,12 @@
 <div align="center">
 
-
-<img src="Data/app_png.png" width="150" alt="app_png">
+<img src="Data/app_png.png" width="130" alt="Android DEX">
 
 # Android DEX
+
+**Transform your Android device into a desktop experience.**
+Mirror apps, control your phone, stream audio, manage media, launch multiple Android apps, and connect over USB or Wi-Fi — all from Windows or Linux.
+
 
 </div>
 
