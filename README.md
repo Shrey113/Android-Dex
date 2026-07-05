@@ -21,20 +21,6 @@ Mirror apps, control your phone, stream audio, manage media, launch multiple And
 
 ---
 
-## 📖 Deep-Dive Documentation
-
-Check out these detailed guides to understand exactly how Android DEX works under the hood:
-
-1. **[Architectural Design](doc/ARCHITECTURE.md)** : Three-layer system design, responsibilities, and data flow.
-2. **[Boot & Initialization](doc/BOOT_FLOW.md)** : Step-by-step connection flow with progress stages.
-3. **[Reconnection System](doc/RECONNECTION.md)** : Smart auto-healing, recovery phases, and UI overlay.
-4. **[Real-Time Data Model](doc/DATA_MODEL.md)** : State store, JSON telemetry protocols, and message handling.
-5. **[Error Handling](doc/ERROR_HANDLING.md)** : User-facing messaging pipelines and full fallback reference.
-6. **[System Modules](doc/MODULES.md)** : Internal component roles, public APIs, and singletons.
-7. **[Device Manager](doc/DEVICE_MANAGER.md)** : ADB device selection, UI dialogs, and IP connections.
-
----
-
 ## 📱 App Preview
 
 <div align="center">
@@ -59,6 +45,22 @@ Check out these detailed guides to understand exactly how Android DEX works unde
 </div>
 
 ---
+
+## 📖 Deep-Dive Documentation
+
+Check out these detailed guides to understand exactly how Android DEX works under the hood:
+
+1. **[Architectural Design](doc/ARCHITECTURE.md)** : Three-layer system design, responsibilities, and data flow.
+2. **[Boot & Initialization](doc/BOOT_FLOW.md)** : Step-by-step connection flow with progress stages.
+3. **[Reconnection System](doc/RECONNECTION.md)** : Smart auto-healing, recovery phases, and UI overlay.
+4. **[Real-Time Data Model](doc/DATA_MODEL.md)** : State store, JSON telemetry protocols, and message handling.
+5. **[Error Handling](doc/ERROR_HANDLING.md)** : User-facing messaging pipelines and full fallback reference.
+6. **[System Modules](doc/MODULES.md)** : Internal component roles, public APIs, and singletons.
+7. **[Device Manager](doc/DEVICE_MANAGER.md)** : ADB device selection, UI dialogs, and IP connections.
+
+
+---
+
 
 ## 🚀 Launch Options
 
