@@ -4,16 +4,17 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
   pages: write
   id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
 
 jobs:
   build:
@@ -22,18 +23,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: .
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
 
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
 
     steps:
       - id: deployment
