@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,19 @@
     <!-- Combined Typography & System Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=JetBrains+Mono&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="web/style.css">
 </head>
+
 <body>
     <aside class="sidebar">
         <div class="logo-container">
             <div class="logo-icon">📱</div>
             <span class="logo-text">Android<span>DEX</span></span>
         </div>
-        
+
         <nav class="nav-menu">
             <div class="nav-group">
                 <div class="nav-group-title">Getting Started</div>
@@ -24,7 +28,7 @@
                     <a href="index.html" class="nav-link active">Introduction</a>
                 </div>
             </div>
-            
+
             <div class="nav-group">
                 <div class="nav-group-title">Deep Dive</div>
                 <div class="nav-item">
@@ -50,7 +54,7 @@
                 </div>
             </div>
         </nav>
-        
+
         <div class="sidebar-footer">
             <span class="version-badge">DEX-STABLE-104-SINGLE</span>
         </div>
@@ -60,12 +64,14 @@
         <header class="page-header">
             <div class="breadcrumb">Documentation / Overview</div>
             <h1>Your Phone, Reimagined as a Desktop</h1>
-            <p class="description">Architectural deep-dive into the synchronization between Windows NT and Android Linux environments. Reimagining Android as a high-performance desktop experience.</p>
+            <p class="description">Architectural deep-dive into the synchronization between Windows NT and Android Linux
+                environments. Reimagining Android as a high-performance desktop experience.</p>
         </header>
 
         <section class="doc-section">
             <h2>Quick Start</h2>
-            <p>Connect your device via USB or Wi-Fi to begin. The system auto-detects your device and initiates the secure handshake protocol.</p>
+            <p>Connect your device via USB or Wi-Fi to begin. The system auto-detects your device and initiates the
+                secure handshake protocol.</p>
             <table>
                 <thead>
                     <tr>
@@ -98,35 +104,38 @@ android_dex_win.exe 192.168.1.100
 # Connect with explicit port
 android_dex_win.exe 192.168.1.100:5555</code></pre>
             <blockquote>
-                <p><strong>Smart Auto-Detection:</strong> With no arguments, the app scans for available devices. One device found → connects automatically. Zero or multiple → the ADB Manager dialog opens to let you choose — no restart needed.</p>
+                <p><strong>Smart Auto-Detection:</strong> With no arguments, the app scans for available devices. One
+                    device found → connects automatically. Zero or multiple → the ADB Manager dialog opens to let you
+                    choose — no restart needed.</p>
             </blockquote>
         </section>
 
         <section class="doc-section">
             <h2>The Handshake Protocol</h2>
-            <p>A three-layer cryptographic-style handshake ensures all components are ready before the desktop UI unlocks.</p>
-            
+            <p>A three-layer cryptographic-style handshake ensures all components are ready before the desktop UI
+                unlocks.</p>
+
             <div id="mermaid-protocol" class="mermaid">
-sequenceDiagram
-    participant PC as Windows Side (Flutter/ADB)
-    participant JAR as Android Logic Engine (Java JAR)
-    participant APK as Android App Hub (Kotlin APK)
+                sequenceDiagram
+                participant PC as Windows Side (Flutter/ADB)
+                participant JAR as Android Logic Engine (Java JAR)
+                participant APK as Android App Hub (Kotlin APK)
 
-    Note over PC: 1. ADB Initialization (startAdbBlocking)
-    PC->>PC: 2. Local Server Setup (JarServer & ApkServer .start)
-    
-    Note over PC,JAR: Phase 1: Engine Deployment (Bridge)
-    PC->>JAR: Push JAR to Device (via ADB Pipe)
-    PC->>JAR: Launch JAR Runtime (adb.startJarRuntime)
-    JAR-->>PC: Handshake Response: "jar.hello" (Logic Engine Ready)
+                Note over PC: 1. ADB Initialization (startAdbBlocking)
+                PC->>PC: 2. Local Server Setup (JarServer & ApkServer .start)
 
-    Note over PC,APK: Phase 2: Feature Manager Startup (Hub)
-    PC->>APK: Check Install & Install if Missing
-    PC->>APK: Trigger Service startup (ServerStartService)
-    APK-->>PC: WebSocket Handshake: "apk.hello" (App Hub Ready)
+                Note over PC,JAR: Phase 1: Engine Deployment (Bridge)
+                PC->>JAR: Push JAR to Device (via ADB Pipe)
+                PC->>JAR: Launch JAR Runtime (adb.startJarRuntime)
+                JAR-->>PC: Handshake Response: "jar.hello" (Logic Engine Ready)
 
-    PC->>APK: 3. Start Extended Notification & Media Services
-    Note over PC,APK: System Synchronized: Desktop UI Unlocked
+                Note over PC,APK: Phase 2: Feature Manager Startup (Hub)
+                PC->>APK: Check Install & Install if Missing
+                PC->>APK: Trigger Service startup (ServerStartService)
+                APK-->>PC: WebSocket Handshake: "apk.hello" (App Hub Ready)
+
+                PC->>APK: 3. Start Extended Notification & Media Services
+                Note over PC,APK: System Synchronized: Desktop UI Unlocked
             </div>
         </section>
 
@@ -140,12 +149,30 @@ sequenceDiagram
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td><strong>Multi-Window Apps</strong></td><td>Each Android app runs in its own resizable, movable Windows window</td></tr>
-                    <tr><td><strong>Live Telemetry</strong></td><td>Real-time Battery, Volume, Wi-Fi, BT, Data & more</td></tr>
-                    <tr><td><strong>Notifications</strong></td><td>Android notifications pushed instantly to Windows desktop</td></tr>
-                    <tr><td><strong>Media Control</strong></td><td>Artwork, metadata & playback controls</td></tr>
-                    <tr><td><strong>Low Latency</strong></td><td>Shell-level commands bypass UI overhead</td></tr>
-                    <tr><td><strong>Auto-Healing</strong></td><td>Multi-stage recovery restores connection seamlessly</td></tr>
+                    <tr>
+                        <td><strong>Multi-Window Apps</strong></td>
+                        <td>Each Android app runs in its own resizable, movable Windows window</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Live Telemetry</strong></td>
+                        <td>Real-time Battery, Volume, Wi-Fi, BT, Data & more</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notifications</strong></td>
+                        <td>Android notifications pushed instantly to Windows desktop</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Media Control</strong></td>
+                        <td>Artwork, metadata & playback controls</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Low Latency</strong></td>
+                        <td>Shell-level commands bypass UI overhead</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Auto-Healing</strong></td>
+                        <td>Multi-stage recovery restores connection seamlessly</td>
+                    </tr>
                 </tbody>
             </table>
         </section>
@@ -164,4 +191,5 @@ sequenceDiagram
         mermaid.initialize({ startOnLoad: true, theme: 'dark' });
     </script>
 </body>
+
 </html>
