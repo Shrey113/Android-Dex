@@ -26,13 +26,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Upload Pages Artifact
+        id: upload
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
 
   deploy:
     needs: build
-
     runs-on: ubuntu-latest
 
     environment:
@@ -46,9 +46,7 @@ jobs:
 
   cleanup:
     needs: deploy
-
     runs-on: ubuntu-latest
-
     permissions:
       actions: write
 
@@ -66,18 +64,25 @@ jobs:
               }
             );
 
-            let deleted = 0;
+            // Sort by creation date (newest first)
+            const pagesArtifacts = artifacts
+              .filter(artifact => artifact.name === "github-pages")
+              .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-            for (const artifact of artifacts) {
-              if (artifact.name === "github-pages") {
-                console.log(`Deleting artifact ${artifact.id}`);
+            // Keep the latest one, delete the rest
+            const toDelete = pagesArtifacts.slice(1);
+
+            for (const artifact of toDelete) {
+              console.log(`Deleting artifact ${artifact.id} (created: ${artifact.created_at})`);
+              try {
                 await github.rest.actions.deleteArtifact({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   artifact_id: artifact.id
                 });
-                deleted++;
+              } catch (error) {
+                console.error(`Failed to delete artifact ${artifact.id}:`, error.message);
               }
             }
 
-            console.log(`Deleted ${deleted} artifact(s).`);
+            console.log(`Deleted ${toDelete.length} old artifact(s). Kept 1 latest artifact.`);
