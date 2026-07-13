@@ -16,6 +16,7 @@ Mirror apps, control your phone, stream audio, manage media, launch multiple And
 
 | Platform | Download Link |
 | :--- | :--- |
+| **ADB Device Manager** | [Main System Project](https://github.com/Shrey113/Adb-Device-Manager-2) |
 | **Windows** | [android_dex_win.zip](https://github.com/Shrey113/Android-Dex/releases/latest/download/android_dex_win.zip) |
 | **Linux** | [android_dex_linux.tar.gz](https://github.com/Shrey113/Android-Dex/releases/latest/download/android_dex_linux.tar.gz) |
 
