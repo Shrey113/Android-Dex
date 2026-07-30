@@ -83,6 +83,8 @@ Check out these detailed guides to understand exactly how Android DEX works unde
 | 3 | `./run_android_dex.sh` | Launch Android DEX |
 
 > The script auto-checks Linux compatibility — drivers, graphics, and dependencies — before starting.
+>
+> Source launcher script used for Linux packaging: `android_dex_linux/run_android_dex.sh`
 
 ---
 
