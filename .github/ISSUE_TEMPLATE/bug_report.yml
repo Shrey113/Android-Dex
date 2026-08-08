@@ -10,6 +10,12 @@ body:
       label: Problem Description
       description: Describe the issue and steps to reproduce.
       value: |
+        - **OS Type:** [ Windows / Linux / macOS ]
+        - **Android Version:** [ e.g. Android 14 ]
+        - **Connecting Way:** [ USB / Wireless / Wireless USB Debugging ]
+
+        ---
+
         Describe what went wrong:
 
         ### 1. Screenshots
