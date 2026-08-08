@@ -1,10 +1,6 @@
 name: Deploy GitHub Pages
 
 on:
-  push:
-    branches:
-      - main
-
   workflow_dispatch:
 
 concurrency:
@@ -51,10 +47,11 @@ jobs:
       actions: write
 
     steps:
-      - name: Delete Old GitHub Pages Artifacts
+      - name: Delete Old GitHub Pages Artifacts & Workflow Runs
         uses: actions/github-script@v7
         with:
           script: |
+            // Delete old artifacts
             const artifacts = await github.paginate(
               github.rest.actions.listArtifactsForRepo,
               {
@@ -64,16 +61,13 @@ jobs:
               }
             );
 
-            // Sort by creation date (newest first)
             const pagesArtifacts = artifacts
               .filter(artifact => artifact.name === "github-pages")
               .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-            // Keep the latest one, delete the rest
             const toDelete = pagesArtifacts.slice(1);
-
             for (const artifact of toDelete) {
-              console.log(`Deleting artifact ${artifact.id} (created: ${artifact.created_at})`);
+              console.log(`Deleting artifact ${artifact.id}`);
               try {
                 await github.rest.actions.deleteArtifact({
                   owner: context.repo.owner,
@@ -85,4 +79,4 @@ jobs:
               }
             }
 
-            console.log(`Deleted ${toDelete.length} old artifact(s). Kept 1 latest artifact.`);
+            console.log(`Cleanup completed. Kept latest artifact, removed ${toDelete.length} old artifacts.`);

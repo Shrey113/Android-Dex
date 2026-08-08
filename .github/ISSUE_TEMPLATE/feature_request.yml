@@ -1,15 +1,15 @@
-name: Feature Request
-description: Suggest a new feature or capability for Android DEX
-title: "[Feature]: "
+name: Feature Request / Improvement
+description: Propose a new feature, enhancement, or improvement
+title: "[Feature/Improvement]: "
 labels:
   - enhancement
 body:
   - type: textarea
-    id: why_needed
+    id: feature_description
     attributes:
-      label: 1. Why is this feature needed?
-      description: Explain why this feature should be added and what problem it solves.
-      placeholder: Explain the reasoning or problem...
+      label: 1. Feature / Improvement Description
+      description: Explain why this feature/improvement is needed and what problem it solves.
+      placeholder: Describe the feature or improvement in detail...
     validations:
       required: true
 
