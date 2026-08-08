@@ -7,22 +7,16 @@ body:
   - type: textarea
     id: feature_description
     attributes:
-      label: 1. Feature / Improvement Description
-      description: Explain why this feature/improvement is needed and what problem it solves.
-      placeholder: Describe the feature or improvement in detail...
+      label: Feature / Improvement Description
+      description: Describe the requested feature or improvement.
+      value: |
+        ### 1. Why is this feature needed?
+        
+
+        ### 2. Does any other software provide this? (Optional)
+        
+
+        ### 3. Requires Android security/root bypass? (Optional)
+        
     validations:
       required: true
-
-  - type: textarea
-    id: similar_software
-    attributes:
-      label: 2. Does any other software provide the same feature? (Optional)
-      description: Mention existing tools or software that have a similar feature.
-      placeholder: Name other software or tools if applicable...
-
-  - type: textarea
-    id: android_security_privileges
-    attributes:
-      label: 3. Does it require bypassing Android security, special permissions, or root? (Optional)
-      description: Indicate if special Android permissions, root access, or security bypass is needed.
-      placeholder: Mention any security/permission requirements if applicable...
