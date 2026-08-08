@@ -1,0 +1,60 @@
+name: Issue Manager
+
+on:
+  workflow_dispatch:
+    inputs:
+      days_inactive:
+        description: 'Lock closed issues inactive for more than N days'
+        required: false
+        default: '14'
+
+permissions:
+  issues: write
+
+jobs:
+  lock-inactive-issues:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Lock Closed Inactive Issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const days = parseInt("${{ github.event.inputs.days_inactive }}" || "14", 10);
+            const cutoffDate = new Date();
+            cutoffDate.setDate(cutoffDate.getDate() - days);
+
+            console.log(`Searching for closed issues inactive prior to ${cutoffDate.toISOString()}...`);
+
+            const closedIssues = await github.paginate(
+              github.rest.issues.listForRepo,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'closed',
+                per_page: 100
+              }
+            );
+
+            let lockedCount = 0;
+            for (const issue of closedIssues) {
+              if (issue.pull_request) continue; // Skip PRs
+
+              const updatedAt = new Date(issue.updated_at);
+              if (updatedAt < cutoffDate && !issue.locked) {
+                console.log(`Locking issue #${issue.number}: "${issue.title}"`);
+                try {
+                  await github.rest.issues.lock({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    lock_reason: 'resolved'
+                  });
+                  lockedCount++;
+                } catch (err) {
+                  console.error(`Failed to lock issue #${issue.number}:`, err.message);
+                }
+              }
+            }
+
+            console.log(`Successfully locked ${lockedCount} inactive closed issue(s).`);
