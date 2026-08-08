@@ -1,0 +1,14 @@
+name: Improvement
+description: Propose an optimization or improvement to existing functionality
+title: "[Improvement]: "
+labels:
+  - improvement
+body:
+  - type: textarea
+    id: proposed_improvement
+    attributes:
+      label: Description
+      description: Describe the proposed improvement or optimization.
+      placeholder: Describe what should be improved...
+    validations:
+      required: true

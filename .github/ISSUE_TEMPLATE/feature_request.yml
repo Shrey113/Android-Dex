@@ -1,0 +1,28 @@
+name: Feature Request
+description: Suggest a new feature or capability for Android DEX
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: why_needed
+    attributes:
+      label: 1. Why is this feature needed?
+      description: Explain why this feature should be added and what problem it solves.
+      placeholder: Explain the reasoning or problem...
+    validations:
+      required: true
+
+  - type: textarea
+    id: similar_software
+    attributes:
+      label: 2. Does any other software provide the same feature? (Optional)
+      description: Mention existing tools or software that have a similar feature.
+      placeholder: Name other software or tools if applicable...
+
+  - type: textarea
+    id: android_security_privileges
+    attributes:
+      label: 3. Does it require bypassing Android security, special permissions, or root? (Optional)
+      description: Indicate if special Android permissions, root access, or security bypass is needed.
+      placeholder: Mention any security/permission requirements if applicable...

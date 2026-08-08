@@ -1,0 +1,27 @@
+name: Device Problem
+description: Report device-specific connectivity or ADB pairing issues
+title: "[Device]: "
+labels:
+  - device-compatibility
+body:
+  - type: input
+    id: device_model
+    attributes:
+      label: Device Model & OS
+      placeholder: "e.g. Samsung Galaxy S23 (Android 14)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem_details
+    attributes:
+      label: Issue Description
+      description: Describe the issue experienced on this device.
+    validations:
+      required: true
+
+  - type: textarea
+    id: adb_logs
+    attributes:
+      label: ADB Logs / android_dex_log
+      description: Attach logs or output from ADB.

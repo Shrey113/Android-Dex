@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/Shrey113/Android-Dex#readme
+    about: Check the official README and documentation before submitting an issue.
+  - name: Discussions
+    url: https://github.com/Shrey113/Android-Dex/discussions
+    about: Ask questions, share ideas, and discuss with the community.

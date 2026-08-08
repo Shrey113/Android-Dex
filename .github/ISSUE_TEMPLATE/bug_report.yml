@@ -1,0 +1,30 @@
+name: Bug Report
+description: Report a problem or unexpected behavior
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem Description
+      description: Describe the issue and steps to reproduce.
+      placeholder: Describe what went wrong...
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: 1. Screenshots
+      description: Provide screenshots demonstrating the issue.
+      placeholder: Drag and drop screenshot(s) here...
+
+  - type: textarea
+    id: log_file
+    attributes:
+      label: 2. Log File
+      description: Attach the full android_dex_log file.
+      placeholder: Drag and drop or paste the full android_dex_log here...
+    validations:
+      required: true
