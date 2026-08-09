@@ -60,39 +60,6 @@ Check out these detailed guides to understand exactly how Android DEX works unde
 6. **[System Modules](doc/MODULES.md)** : Internal component roles, public APIs, and singletons.
 7. **[Device Manager](doc/DEVICE_MANAGER.md)** : ADB device selection, UI dialogs, and IP connections.
 
-
----
-
-
-## 🚀 Launch Options
-
-### 🪟 Windows
-
-| Command | Description |
-| :--- | :--- |
-| `android_dex_win.exe` | **Auto-detect** — recommended for most users |
-| `android_dex_win.exe --usb` | Force **USB** connection only |
-| `android_dex_win.exe 192.168.1.100` | Connect via **IP address** |
-| `android_dex_win.exe 192.168.1.100:5555` | Connect via **IP & custom port** |
-
-### 🍎 macOS
-
-| Step | Command | Description |
-| :---: | :--- | :--- |
-| 1 | `cd android_dex_macos/` | Enter the extracted folder |
-| 2 | `chmod +x run_android_dex.sh` | Make the script executable |
-| 3 | `./run_android_dex.sh` | Launch Android DEX |
-
-### 🐧 Linux
-
-| Step | Command | Description |
-| :---: | :--- | :--- |
-| 1 | `cd android_dex_linux/` | Enter the extracted folder |
-| 2 | `chmod +x run_android_dex.sh` | Make the script executable |
-| 3 | `./run_android_dex.sh` | Launch Android DEX |
-
-> The scripts auto-check OS compatibility — drivers, graphics, and dependencies — before starting.
-
 ---
 
 ## 🛠️ How It Works — The Handshake Protocol
