@@ -257,6 +257,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: heroLaptopEnter 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.15s;
+}
+
+@keyframes heroLaptopEnter {
+    0%   { opacity: 0; transform: translateY(40px) scale(0.97); }
+    100% { opacity: 1; transform: translateY(0px)  scale(1);    }
 }
 
 /* Anodized Metallic Screen Lid */
@@ -355,7 +362,13 @@
     bottom: 0;
     left: 6.5%;
     z-index: 10;
-    transform: rotate(-5deg);
+    animation: heroPhoneEnter 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.35s;
+}
+
+@keyframes heroPhoneEnter {
+    0%   { opacity: 0; transform: rotate(-5deg) translateY(60px); }
+    100% { opacity: 1; transform: rotate(-5deg) translateY(0px);  }
 }
 
 .hero-phone-front .phone-frame {
