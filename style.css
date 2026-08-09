@@ -2,21 +2,20 @@
            DESIGN TOKENS  — Warm Monochrome
         ────────────────────────────────────────── */
 :root {
-    /* Core palette extracted from sample.png */
-    --bg: #0d0d0d;
-    --bg-raised: #161616;
-    --bg-card: #1a1a1a;
-    --bg-card-hi: #202020;
-    --border: rgba(255, 255, 255, 0.07);
-    --border-hi: rgba(255, 255, 255, 0.14);
+    /* Core dark palette extracted from sample.png (Aerium dark mode) */
+    --bg: #090a0c;
+    --bg-raised: #121316;
+    --bg-card: #16171b;
+    --bg-card-hi: #1d1e24;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hi: rgba(255, 255, 255, 0.18);
 
-    --text: #f2f0ea;
-    --text-soft: #888580;
-    --text-muted: #555350;
+    --text: #ffffff;
+    --text-soft: #9499a3;
+    --text-muted: #5a606c;
 
-    --accent: #d4d0c8;
-    /* warm off-white accent — no harsh blues */
-    --accent-dim: rgba(212, 208, 200, 0.08);
+    --accent: #ffffff;
+    --accent-dim: rgba(255, 255, 255, 0.06);
 
     --radius-xl: 18px;
     --radius-lg: 12px;
@@ -24,9 +23,9 @@
     --radius-sm: 5px;
     --radius-pill: 100px;
 
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-    --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.6);
-    --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.7);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6);
+    --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.7);
+    --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.85);
 
     --f-sans: 'Inter', system-ui, sans-serif;
     --f-serif: 'Playfair Display', Georgia, serif;
@@ -58,21 +57,21 @@ body {
     font-family: var(--f-sans);
     line-height: 1.65;
     overflow-x: hidden;
-    position: relative; /* Spans 100% full height of document from top to end */
+    position: relative;
 }
 
-/* Grain texture overlay — key detail in sample.png */
+/* Subtle grain texture overlay — key detail in sample.png */
 body::after {
     content: '';
     position: fixed;
     inset: 0;
     z-index: 1000;
     pointer-events: none;
-    opacity: 0.028;
+    opacity: 0.035;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
 }
 
-/* ── Global Seamless Page Ambient Grid & Lighting System ── */
+/* ── Global Seamless Page Ambient Grid & White Spotlight Lighting System ── */
 .page-bg-overlay {
     position: absolute;
     top: 0;
@@ -85,30 +84,45 @@ body::after {
     overflow: hidden;
 }
 
-/* Precise 56px Square Grid Lines — Scrollable top to end of full page */
+/* Precise Square Grid Lines with organic light spotlight masking */
 .bg-grid-lines {
     position: absolute;
     inset: 0;
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.10) 1px, transparent 1px);
     background-size: 56px 56px;
     background-position: center top;
+
+    mask-image:
+        radial-gradient(circle 950px at 50% 320px, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.40) 60%, transparent 90%),
+        radial-gradient(circle 750px at 15% 750px, rgba(0, 0, 0, 0.90) 0%, rgba(0, 0, 0, 0.30) 55%, transparent 85%),
+        radial-gradient(circle 950px at 50% 1350px, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.40) 60%, transparent 90%),
+        radial-gradient(circle 800px at 85% 1950px, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.35) 55%, transparent 85%),
+        radial-gradient(circle 1000px at 50% 2450px, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.40) 60%, transparent 90%),
+        radial-gradient(circle 850px at 30% 3100px, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.35) 60%, transparent 88%);
+    -webkit-mask-image:
+        radial-gradient(circle 950px at 50% 320px, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.40) 60%, transparent 90%),
+        radial-gradient(circle 750px at 15% 750px, rgba(0, 0, 0, 0.90) 0%, rgba(0, 0, 0, 0.30) 55%, transparent 85%),
+        radial-gradient(circle 950px at 50% 1350px, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.40) 60%, transparent 90%),
+        radial-gradient(circle 800px at 85% 1950px, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.35) 55%, transparent 85%),
+        radial-gradient(circle 1000px at 50% 2450px, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.40) 60%, transparent 90%),
+        radial-gradient(circle 850px at 30% 3100px, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.35) 60%, transparent 88%);
 }
 
-/* Atmospheric Top Ambient Slate Glow Spotlight — Hero Center Light */
+/* Luminous Top Ambient White Spotlight Glow — Aerium signature illumination on darkness */
 .bg-ambient-glow {
     position: absolute;
-    top: -120px;
+    top: -100px;
     left: 50%;
     transform: translateX(-50%);
-    width: 1100px;
-    height: 850px;
-    background: radial-gradient(ellipse 65% 50% at 50% 30%,
-            rgba(160, 172, 192, 0.22) 0%,
-            rgba(80, 92, 110, 0.08) 45%,
-            transparent 80%);
-    filter: blur(35px);
+    width: 1300px;
+    height: 950px;
+    background: radial-gradient(ellipse 70% 55% at 50% 30%,
+            rgba(255, 255, 255, 0.16) 0%,
+            rgba(180, 195, 215, 0.05) 50%,
+            transparent 82%);
+    filter: blur(40px);
     pointer-events: none;
 }
 
@@ -168,21 +182,29 @@ code {
         ────────────────────────────────────────── */
 .nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 500;
-    background: rgba(13, 13, 13, 0.82);
-    backdrop-filter: blur(20px) saturate(140%);
-    -webkit-backdrop-filter: blur(20px) saturate(140%);
-    border-bottom: 1px solid var(--border);
+    width: calc(100% - 48px);
+    max-width: 1080px;
+    background: rgba(16, 17, 21, 0.78);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 100px;
+    box-shadow:
+        0 12px 36px rgba(0, 0, 0, 0.65),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transition: all 0.3s var(--ease-out);
 }
 
 .nav-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 68px;
+    height: 54px;
+    padding: 0 8px 0 22px;
 }
 
 .nav-brand {
@@ -194,14 +216,14 @@ code {
 }
 
 .nav-brand-img {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: var(--radius-md);
     object-fit: contain;
 }
 
 .nav-brand-name {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     font-weight: 600;
     letter-spacing: -0.02em;
 }
@@ -228,7 +250,7 @@ code {
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 /* ──────────────────────────────────────────
@@ -747,6 +769,27 @@ code {
 
 .footer-links a:hover {
     color: var(--text);
+}
+
+/* Giant Aerium-style Watermark Typography at bottom of footer (exact sample.png match) */
+.footer-huge-brand {
+    margin-top: 48px;
+    padding-top: 24px;
+    text-align: center;
+    font-family: var(--f-serif);
+    font-style: italic;
+    font-size: clamp(3.5rem, 11.5vw, 10rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    opacity: 0.92;
+    text-transform: uppercase;
+    user-select: none;
+    pointer-events: none;
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.45) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* ──────────────────────────────────────────
