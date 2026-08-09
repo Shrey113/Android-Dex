@@ -5,7 +5,7 @@
 # Android DEX
 
 **Transform your Android device into a desktop experience.**
-Mirror apps, control your phone, stream audio, manage media, launch multiple Android apps, and connect over USB or Wi-Fi — all from Windows or Linux.
+Mirror apps, control your phone, stream audio, manage media, launch multiple Android apps, and connect over USB or Wi-Fi — all from Windows, macOS, or Linux.
 
 
 </div>
@@ -17,8 +17,9 @@ Mirror apps, control your phone, stream audio, manage media, launch multiple And
 | Platform | Download Link |
 | :--- | :--- |
 | **ADB Device Manager** | [Main System Project](https://github.com/Shrey113/Adb-Device-Manager-2) |
-| **Windows** | [android_dex_win.zip](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Windows.zip) |
-| **Linux** | ⌛ under development |
+| **Windows** | [Android_Dex_Windows.zip](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Windows.zip) |
+| **macOS** | [Android_Dex_macOS.zip](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_macOS.zip) |
+| **Linux** | [Android_Dex_Linux.zip](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Linux.zip) |
 
 ---
 
@@ -74,6 +75,14 @@ Check out these detailed guides to understand exactly how Android DEX works unde
 | `android_dex_win.exe 192.168.1.100` | Connect via **IP address** |
 | `android_dex_win.exe 192.168.1.100:5555` | Connect via **IP & custom port** |
 
+### 🍎 macOS
+
+| Step | Command | Description |
+| :---: | :--- | :--- |
+| 1 | `cd android_dex_macos/` | Enter the extracted folder |
+| 2 | `chmod +x run_android_dex.sh` | Make the script executable |
+| 3 | `./run_android_dex.sh` | Launch Android DEX |
+
 ### 🐧 Linux
 
 | Step | Command | Description |
@@ -82,7 +91,7 @@ Check out these detailed guides to understand exactly how Android DEX works unde
 | 2 | `chmod +x run_android_dex.sh` | Make the script executable |
 | 3 | `./run_android_dex.sh` | Launch Android DEX |
 
-> The script auto-checks Linux compatibility — drivers, graphics, and dependencies — before starting.
+> The scripts auto-check OS compatibility — drivers, graphics, and dependencies — before starting.
 
 ---
 
@@ -120,7 +129,7 @@ sequenceDiagram
 
 ### Prerequisites
 
-- **OS**: Windows 10+ or Modern Linux (Ubuntu, Fedora, etc.)
+- **OS**: Windows 10+, macOS 11+, or Modern Linux (Ubuntu, Fedora, etc.)
 - **Device**: Android device running Android 8.0+
 - **Drivers**: ADB is bundled — no separate installation needed
 
