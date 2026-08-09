@@ -990,27 +990,6 @@ code {
     color: var(--text);
 }
 
-/* Giant Aerium-style Watermark Typography at bottom of footer (exact sample.png match) */
-.footer-huge-brand {
-    margin-top: 48px;
-    padding-top: 24px;
-    text-align: center;
-    font-family: var(--f-serif);
-    font-style: italic;
-    font-size: clamp(3.5rem, 11.5vw, 10rem);
-    font-weight: 700;
-    line-height: 0.9;
-    letter-spacing: -0.04em;
-    color: #ffffff;
-    opacity: 0.92;
-    text-transform: uppercase;
-    user-select: none;
-    pointer-events: none;
-    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.45) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
 /* ──────────────────────────────────────────
            RESPONSIVE
         ────────────────────────────────────────── */
