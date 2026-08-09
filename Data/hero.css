@@ -115,8 +115,8 @@
 
 /* Layer 1: Outer Light Metallic Grey / Titanium Silver Rim */
 .phone-frame {
-    width: 230px;
-    border-radius: 32px;
+    width: 215px;
+    border-radius: 31px;
     padding: 4px;
     background: linear-gradient(145deg, #a8b2c1 0%, #727c8b 50%, #4f5765 100%);
     box-shadow:
@@ -131,9 +131,9 @@
 .phone-black-bezel {
     width: 100%;
     height: 100%;
-    border-radius: 28px;
+    border-radius: 27px;
     background: #000000;
-    padding: 5px;
+    padding: 4.5px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -142,7 +142,7 @@
 /* Layer 3: Display Screen Container */
 .phone-screen-container {
     flex: 1;
-    border-radius: 23px;
+    border-radius: 22.5px;
     overflow: hidden;
     background: #f8fafc;
     display: flex;
@@ -152,19 +152,19 @@
 
 /* Top Status Header */
 .phone-header {
-    height: 34px;
+    height: 31px;
     background: #f8fafc;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 14px;
+    padding: 0 13px;
     position: relative;
     flex-shrink: 0;
     z-index: 5;
 }
 
 .phone-time {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-weight: 700;
     color: #0f172a;
     font-family: var(--f-sans);
@@ -173,11 +173,11 @@
 
 /* iPhone Notch Cutout */
 .phone-notch {
-    width: 64px;
-    height: 18px;
+    width: 60px;
+    height: 17px;
     background: #000000;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 9px;
+    border-bottom-right-radius: 9px;
     position: absolute;
     top: 0;
     left: 50%;
@@ -185,20 +185,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 5px;
     z-index: 10;
 }
 
 .notch-speaker {
-    width: 22px;
+    width: 21px;
     height: 3px;
     background: #1c1d22;
     border-radius: 2px;
 }
 
 .notch-cam {
-    width: 6px;
-    height: 6px;
+    width: 5.5px;
+    height: 5.5px;
     background: #090a0d;
     border: 1px solid #1a1c23;
     border-radius: 50%;
@@ -230,7 +230,7 @@
 
 /* Bottom Home Bar Indicator */
 .phone-home-bar {
-    height: 18px;
+    height: 17px;
     background: #f8fafc;
     display: flex;
     align-items: center;
@@ -240,8 +240,8 @@
 
 .phone-home-bar::after {
     content: '';
-    width: 68px;
-    height: 4px;
+    width: 63px;
+    height: 3.5px;
     border-radius: 2px;
     background: rgba(0, 0, 0, 0.35);
 }
@@ -249,7 +249,7 @@
 /* ── 1. Pro Laptop Workspace Frame (Behind) ────────────────── */
 .laptop-wrap {
     position: relative;
-    width: 680px;
+    width: 635px;
     max-width: 88%;
     margin: 0 auto;
     z-index: 5;
@@ -353,13 +353,13 @@
 .hero-phone-front {
     position: absolute;
     bottom: 0;
-    left: 6%;
+    left: 6.5%;
     z-index: 10;
     transform: rotate(-5deg);
 }
 
 .hero-phone-front .phone-frame {
-    width: 230px;
+    width: 215px;
     box-shadow:
         0 0 0 1.5px rgba(0, 0, 0, 0.75),
         -20px 22px 60px rgba(0, 0, 0, 0.92),
