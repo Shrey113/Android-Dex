@@ -83,31 +83,33 @@ body::after {
     overflow: hidden;
 }
 
-/* Precise 50px Square Grid Lines — Seamless continuous background grid */
+/* Precise 56px Square Grid Lines — ONLY visible where light shines, 100% invisible on dark! */
 .bg-grid-lines {
     position: absolute;
     inset: 0;
     background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 50px 50px;
+        linear-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+    background-size: 56px 56px;
     background-position: center top;
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0.3) 100%);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0.3) 100%);
+    /* RADIAL LIGHT MASK: Grid is intensely visible inside illuminated light spot and completely disappears into dark black! */
+    mask-image: radial-gradient(ellipse 75% 60% at 50% 280px, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.45) 50%, rgba(0, 0, 0, 0) 82%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 280px, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.45) 50%, rgba(0, 0, 0, 0) 82%);
 }
 
-/* Atmospheric Top Ambient Glow Spotlight — Smooth continuous background */
+/* Atmospheric Top Ambient Slate Glow Spotlight — Matches Aerium reference 100% */
 .bg-ambient-glow {
     position: absolute;
-    top: -150px;
+    top: -120px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100vw;
-    height: 1000px;
-    background: radial-gradient(ellipse 70% 60% at 50% 30%,
-            rgba(100, 95, 84, 0.16) 0%,
-            rgba(50, 47, 40, 0.05) 55%,
-            transparent 90%);
+    width: 1100px;
+    height: 800px;
+    background: radial-gradient(ellipse 65% 50% at 50% 30%,
+            rgba(160, 168, 185, 0.22) 0%,
+            rgba(80, 88, 105, 0.08) 45%,
+            transparent 80%);
+    filter: blur(30px);
     pointer-events: none;
 }
 
