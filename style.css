@@ -58,6 +58,7 @@ body {
     font-family: var(--f-sans);
     line-height: 1.65;
     overflow-x: hidden;
+    position: relative; /* Spans 100% full height of document from top to end */
 }
 
 /* Grain texture overlay — key detail in sample.png */
@@ -73,43 +74,41 @@ body::after {
 
 /* ── Global Seamless Page Ambient Grid & Lighting System ── */
 .page-bg-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    height: 100%;
     pointer-events: none;
     z-index: 0;
     overflow: hidden;
 }
 
-/* Precise 56px Square Grid Lines — ONLY visible where light shines, 100% invisible on dark! */
+/* Precise 56px Square Grid Lines — Scrollable top to end of full page */
 .bg-grid-lines {
     position: absolute;
     inset: 0;
     background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
     background-size: 56px 56px;
     background-position: center top;
-    /* RADIAL LIGHT MASK: Grid is intensely visible inside illuminated light spot and completely disappears into dark black! */
-    mask-image: radial-gradient(ellipse 75% 60% at 50% 280px, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.45) 50%, rgba(0, 0, 0, 0) 82%);
-    -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 280px, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.45) 50%, rgba(0, 0, 0, 0) 82%);
 }
 
-/* Atmospheric Top Ambient Slate Glow Spotlight — Matches Aerium reference 100% */
+/* Atmospheric Top Ambient Slate Glow Spotlight — Hero Center Light */
 .bg-ambient-glow {
     position: absolute;
     top: -120px;
     left: 50%;
     transform: translateX(-50%);
     width: 1100px;
-    height: 800px;
+    height: 850px;
     background: radial-gradient(ellipse 65% 50% at 50% 30%,
-            rgba(160, 168, 185, 0.22) 0%,
-            rgba(80, 88, 105, 0.08) 45%,
+            rgba(160, 172, 192, 0.22) 0%,
+            rgba(80, 92, 110, 0.08) 45%,
             transparent 80%);
-    filter: blur(30px);
+    filter: blur(35px);
     pointer-events: none;
 }
 
