@@ -530,62 +530,274 @@ code {
 }
 
 /* ──────────────────────────────────────────
-           GALLERY — full-bleed panel like sample.png
+           UPDATES & SHOWCASE — Laptop Frame & Radar Rings
         ────────────────────────────────────────── */
-.gallery-panel {
-    background: var(--bg-raised);
-    border-radius: var(--radius-xl);
-    border: 1px solid var(--border);
-    overflow: hidden;
-}
-
-.gallery-tabs {
+.updates-showcase-container {
+    position: relative;
+    margin-top: 20px;
+    padding: 70px 0;
     display: flex;
-    gap: 2px;
-    padding: 14px 14px 0;
-    overflow-x: auto;
-    scrollbar-width: none;
+    align-items: center;
+    justify-content: center;
 }
 
-.gallery-tabs::-webkit-scrollbar {
-    display: none;
+/* Background Concentric Radar Rings — Bright, Luminous Waves */
+.radar-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1150px;
+    height: 1150px;
+    pointer-events: none;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.g-tab {
+.radar-rings .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.04), inset 0 0 20px rgba(255, 255, 255, 0.02);
+    animation: wavePulse 6s ease-in-out infinite alternate;
+}
+
+.radar-rings .ring-1 {
+    width: 420px;
+    height: 420px;
+    border-color: rgba(255, 255, 255, 0.22);
+    animation-delay: 0s;
+}
+
+.radar-rings .ring-2 {
+    width: 600px;
+    height: 600px;
+    border-color: rgba(255, 255, 255, 0.16);
+    animation-delay: 1.2s;
+}
+
+.radar-rings .ring-3 {
+    width: 780px;
+    height: 780px;
+    border-color: rgba(255, 255, 255, 0.12);
+    animation-delay: 2.4s;
+}
+
+.radar-rings .ring-4 {
+    width: 960px;
+    height: 960px;
+    border-color: rgba(255, 255, 255, 0.08);
+    animation-delay: 3.6s;
+}
+
+.radar-rings .ring-5 {
+    width: 1140px;
+    height: 1140px;
+    border-color: rgba(255, 255, 255, 0.04);
+    animation-delay: 4.8s;
+}
+
+@keyframes wavePulse {
+    0% {
+        opacity: 0.65;
+        transform: scale(0.985);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.015);
+    }
+}
+
+/* Updates Layout */
+.updates-layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) minmax(500px, 680px) minmax(180px, 1fr);
+    align-items: center;
+    gap: 28px;
+    width: 100%;
+}
+
+.updates-col {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.updates-col-left {
+    align-items: flex-end;
+}
+
+.updates-col-right {
+    align-items: flex-start;
+}
+
+/* Compact Floating Node Pill */
+.update-node {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: rgba(18, 19, 23, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: transform 0.25s var(--ease-out), border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    white-space: nowrap;
+}
+
+.update-node:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(28, 30, 38, 0.95);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.update-icon {
     flex-shrink: 0;
-    padding: 8px 18px;
-    border-radius: var(--radius-md) var(--radius-md) 0 0;
-    background: transparent;
-    border: 1px solid transparent;
-    border-bottom: none;
-    color: var(--text-muted);
-    font-family: var(--f-sans);
-    font-size: 0.84rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.g-tab.active,
-.g-tab:hover {
-    background: var(--bg-card);
-    border-color: var(--border);
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--text);
 }
 
-.gallery-view {
-    padding: 0;
-    background: var(--bg);
+.update-title {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.95);
 }
 
-.g-img {
+/* Central Laptop Frame Mockup — Increased Size */
+.laptop-wrap {
+    position: relative;
     width: 100%;
-    height: auto;
-    display: none;
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.g-img.active {
+.laptop-frame {
+    width: 100%;
+    background: linear-gradient(145deg, #2b2d35 0%, #15161b 100%);
+    border: 1.5px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px 16px 3px 3px;
+    padding: 10px 10px 12px 10px;
+    position: relative;
+    box-shadow:
+        0 30px 80px -10px rgba(0, 0, 0, 0.95),
+        0 15px 30px -5px rgba(0, 0, 0, 0.65),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+.laptop-camera {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background: #090a0c;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.laptop-screen {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000000;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.laptop-img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
     display: block;
+}
+
+.screen-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.01) 40%, transparent 65%);
+    pointer-events: none;
+}
+
+.laptop-base {
+    width: 108%;
+    height: 17px;
+    background: linear-gradient(180deg, #3a3d47 0%, #1a1b20 70%, #111216 100%);
+    border-radius: 2px 2px 16px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: none;
+    position: relative;
+    margin-top: -1px;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.65);
+}
+
+.laptop-notch {
+    width: 72px;
+    height: 6px;
+    background: #0b0c0e;
+    border-radius: 0 0 5px 5px;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: none;
+}
+
+.laptop-shadow {
+    width: 100%;
+    height: 24px;
+    background: radial-gradient(ellipse 65% 50% at 50% 20%, rgba(0, 0, 0, 0.9) 0%, transparent 80%);
+    margin-top: 2px;
+}
+
+/* Responsive Updates Layout */
+@media (max-width: 992px) {
+    .updates-layout {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+
+    .laptop-wrap {
+        max-width: 580px;
+        order: -1;
+    }
+
+    .updates-col {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .updates-col-left,
+    .updates-col-right {
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .radar-rings {
+        transform: translate(-50%, -50%) scale(0.60);
+    }
 }
 
 /* ──────────────────────────────────────────

@@ -36,7 +36,7 @@
             <ul class="nav-links">
                 <li><a href="#overview">Overview</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#updates">Updates</a></li>
                 <li><a href="#download">Download</a></li>
                 <li><a href="#setup">Setup</a></li>
             </ul>
@@ -260,32 +260,90 @@
     <div class="hr"></div>
 
     <!-- ═══════════════════════════════════════
-     GALLERY
+     UPDATES
 ═══════════════════════════════════════ -->
-    <section class="section" id="gallery">
+    <section class="section" id="updates">
         <div class="container">
             <div class="section-head-center reveal">
-                <span class="section-label">Visual Showcase</span>
-                <h2 class="section-h2">Every Detail,<br><em>Precisely Controlled</em></h2>
-                <p class="section-p">Explore every interface component designed for true desktop multi-tasking.</p>
+                <span class="section-label">System Updates</span>
+                <h2 class="section-h2">Engineered for Performance,<br><em>Constantly Evolving</em></h2>
+                <p class="section-p">Explore the latest system enhancements and core DEX features built for high-speed
+                    multitasking.</p>
             </div>
 
-            <div class="gallery-panel reveal">
-                <div class="gallery-tabs">
-                    <button class="g-tab active" onclick="showGallery(0,this)">Desktop Home</button>
-                    <button class="g-tab" onclick="showGallery(1,this)">App Dashboard</button>
-                    <button class="g-tab" onclick="showGallery(2,this)">Multi-App Mode</button>
-                    <button class="g-tab" onclick="showGallery(3,this)">Media Control</button>
-                    <button class="g-tab" onclick="showGallery(4,this)">Controller</button>
-                    <button class="g-tab" onclick="showGallery(5,this)">Audio &amp; System</button>
+            <div class="updates-showcase-container reveal">
+                <!-- Background Radar / Concentric Rings -->
+                <div class="radar-rings">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                    <div class="ring ring-4"></div>
+                    <div class="ring ring-5"></div>
                 </div>
-                <div class="gallery-view">
-                    <img src="Data/home_screen.png" alt="Desktop Home" class="g-img active">
-                    <img src="Data/App_list.png" alt="App Dashboard" class="g-img">
-                    <img src="Data/multiple_apps_running.png" alt="Multi-App Mode" class="g-img">
-                    <img src="Data/media_control.png" alt="Media Control" class="g-img">
-                    <img src="Data/controller_1.png" alt="Controller" class="g-img">
-                    <img src="Data/controller_2.png" alt="Audio &amp; System" class="g-img">
+
+                <div class="updates-layout">
+                    <!-- Left Column (3 Compact Nodes) -->
+                    <div class="updates-col updates-col-left">
+                        <div class="update-node">
+                            <div class="update-icon">
+                                <i data-lucide="cpu" style="width:16px;height:16px;"></i>
+                            </div>
+                            <span class="update-title">Intelligent Automation</span>
+                        </div>
+
+                        <div class="update-node">
+                            <div class="update-icon">
+                                <i data-lucide="gauge" style="width:16px;height:16px;"></i>
+                            </div>
+                            <span class="update-title">Adaptive Climate Control</span>
+                        </div>
+
+                        <div class="update-node">
+                            <div class="update-icon">
+                                <i data-lucide="clock" style="width:16px;height:16px;"></i>
+                            </div>
+                            <span class="update-title">Smart Scheduling</span>
+                        </div>
+                    </div>
+
+                    <!-- Center Laptop Device Frame -->
+                    <div class="laptop-wrap">
+                        <div class="laptop-frame">
+                            <div class="laptop-camera"></div>
+                            <div class="laptop-screen">
+                                <img src="Data/home_screen.png" alt="Android DEX Laptop Mode" class="laptop-img">
+                                <div class="screen-shine"></div>
+                            </div>
+                        </div>
+                        <div class="laptop-base">
+                            <div class="laptop-notch"></div>
+                        </div>
+                        <div class="laptop-shadow"></div>
+                    </div>
+
+                    <!-- Right Column (3 Compact Nodes) -->
+                    <div class="updates-col updates-col-right">
+                        <div class="update-node">
+                            <div class="update-icon">
+                                <i data-lucide="zap" style="width:16px;height:16px;"></i>
+                            </div>
+                            <span class="update-title">Energy Optimization</span>
+                        </div>
+
+                        <div class="update-node">
+                            <div class="update-icon">
+                                <i data-lucide="layers" style="width:16px;height:16px;"></i>
+                            </div>
+                            <span class="update-title">Unified Device Control</span>
+                        </div>
+
+                        <div class="update-node">
+                            <div class="update-icon">
+                                <i data-lucide="layout-grid" style="width:16px;height:16px;"></i>
+                            </div>
+                            <span class="update-title">Minimal Interface</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -447,14 +505,6 @@
             });
         }, { threshold: 0.10 });
         revEls.forEach(el => obs.observe(el));
-
-        /* Gallery tab switcher */
-        function showGallery(idx, btn) {
-            document.querySelectorAll('.g-tab').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.g-img').forEach(img => img.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.g-img')[idx].classList.add('active');
-        }
     </script>
 
 </body>
