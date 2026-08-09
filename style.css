@@ -308,62 +308,6 @@ code {
 
 /* (Hero styles are scoped in Data/hero.css) */
 
-/* ──────────────────────────────────────────
-           STATS BAR  — as seen in sample.png
-        ────────────────────────────────────────── */
-.stats-bar {
-    padding: 100px 0 90px;
-    position: relative;
-    border-bottom: 1px solid var(--border);
-}
-
-.stats-inner {
-    text-align: center;
-    margin-bottom: 48px;
-}
-
-.stats-heading {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    margin-bottom: 6px;
-}
-
-.stats-heading em {
-    font-family: var(--f-serif);
-    font-style: italic;
-    font-weight: 400;
-    color: var(--text-soft);
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-}
-
-.stat-item {
-    background: var(--bg-raised);
-    padding: 32px 24px;
-    text-align: center;
-}
-
-.stat-value {
-    font-family: var(--f-sans);
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    margin-bottom: 4px;
-}
-
-.stat-label {
-    color: var(--text-muted);
-    font-size: 0.82rem;
-}
 
 /* ──────────────────────────────────────────
            SECTION SCAFFOLD
