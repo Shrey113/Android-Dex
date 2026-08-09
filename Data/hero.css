@@ -8,8 +8,10 @@
 /* ── Hero Wrapper ─────────────────────────────────────── */
 .hero {
     position: relative;
-    padding-top: 110px;         /* Clears fixed navbar cleanly with zero overlap */
-    padding-bottom: 40px;       /* Room below stage before stats section */
+    padding-top: 110px;
+    /* Clears fixed navbar cleanly with zero overlap */
+    padding-bottom: 40px;
+    /* Room below stage before stats section */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -99,7 +101,8 @@
 /* Layer 1: Outer Light Metallic Grey / Titanium Silver Rim */
 .phone-frame {
     width: 230px;
-    border-radius: 32px;        /* Reduced outer corner radius */
+    border-radius: 32px;
+    /* Reduced outer corner radius */
     padding: 4px;
     background: linear-gradient(145deg, #a8b2c1 0%, #727c8b 50%, #4f5765 100%);
     box-shadow:
@@ -114,7 +117,8 @@
 .phone-black-bezel {
     width: 100%;
     height: 100%;
-    border-radius: 28px;        /* Reduced inner bezel curve (32px - 4px = 28px) */
+    border-radius: 28px;
+    /* Reduced inner bezel curve (32px - 4px = 28px) */
     background: #000000;
     padding: 5px;
     overflow: hidden;
@@ -125,7 +129,8 @@
 /* Layer 3: Display Screen Container */
 .phone-screen-container {
     flex: 1;
-    border-radius: 23px;        /* Reduced screen curve (28px - 5px = 23px) */
+    border-radius: 23px;
+    /* Reduced screen curve (28px - 5px = 23px) */
     overflow: hidden;
     background: #f8fafc;
     display: flex;
@@ -235,7 +240,8 @@
     width: 680px;
     max-width: 88%;
     margin: 0 auto;
-    z-index: 5;                 /* Behind phone (z:10), above chips (z:2) */
+    z-index: 5;
+    /* Behind phone (z:10), above chips (z:2) */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -335,17 +341,17 @@
 .hero-phone-front {
     position: absolute;
     bottom: 0;
-    left: 4%;
+    left: 6%;
     z-index: 10;
     transform: rotate(-5deg);
 }
 
 .hero-phone-front .phone-frame {
-    width: 270px;
+    width: 230px;
     box-shadow:
         0 0 0 1.5px rgba(0, 0, 0, 0.75),
-        -22px 25px 70px rgba(0, 0, 0, 0.95),
-        0 40px 90px rgba(0, 0, 0, 0.98);
+        -20px 22px 60px rgba(0, 0, 0, 0.92),
+        0 35px 80px rgba(0, 0, 0, 0.95);
 }
 
 
@@ -376,7 +382,8 @@
     white-space: nowrap;
     pointer-events: auto;
     transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-    z-index: 2;                  /* BEHIND the laptop (z:5) and mobile phone (z:10) */
+    z-index: 2;
+    /* BEHIND the laptop (z:5) and mobile phone (z:10) */
 }
 
 .hero-chip:hover {
@@ -432,6 +439,7 @@
 }
 
 @keyframes chipFloat {
+
     0%,
     100% {
         transform: translateY(0px);
