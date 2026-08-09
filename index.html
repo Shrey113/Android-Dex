@@ -4,192 +4,456 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Android DEX | Integrated Technical Documentation</title>
-    <!-- Combined Typography & System Fonts -->
+    <title>Android DEX — Your Phone, Reimagined as a Desktop</title>
+    <meta name="description"
+        content="Mirror Android apps in floating windows, stream audio, manage media, and control your phone from Windows, macOS, or Linux.">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&family=JetBrains+Mono&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="web/style.css">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Data/hero.css">
 </head>
 
 <body>
-    <aside class="sidebar">
-        <div class="logo-container">
-            <div class="logo-icon">📱</div>
-            <span class="logo-text">Android<span>DEX</span></span>
-        </div>
 
-        <nav class="nav-menu">
-            <div class="nav-group">
-                <div class="nav-group-title">Getting Started</div>
-                <div class="nav-item">
-                    <a href="index.html" class="nav-link active">Introduction</a>
-                </div>
-            </div>
-
-            <div class="nav-group">
-                <div class="nav-group-title">Deep Dive</div>
-                <div class="nav-item">
-                    <a href="web/architecture.html" class="nav-link">Architectural Design</a>
-                </div>
-                <div class="nav-item">
-                    <a href="web/boot-flow.html" class="nav-link">Boot & Initialization</a>
-                </div>
-                <div class="nav-item">
-                    <a href="web/reconnection.html" class="nav-link">Reconnection System</a>
-                </div>
-                <div class="nav-item">
-                    <a href="web/data-model.html" class="nav-link">Real-Time Data Model</a>
-                </div>
-                <div class="nav-item">
-                    <a href="web/error-handling.html" class="nav-link">Error Handling</a>
-                </div>
-                <div class="nav-item">
-                    <a href="web/modules.html" class="nav-link">System Modules</a>
-                </div>
-                <div class="nav-item">
-                    <a href="web/device-manager.html" class="nav-link">Device Manager</a>
-                </div>
-            </div>
-        </nav>
-
-        <div class="sidebar-footer">
-            <span class="version-badge">DEX-STABLE-104-SINGLE</span>
-        </div>
-    </aside>
-
-    <main class="main-content">
-        <header class="page-header">
-            <div class="breadcrumb">Documentation / Overview</div>
-            <h1>Your Phone, Reimagined as a Desktop</h1>
-            <p class="description">Architectural deep-dive into the synchronization between Windows NT and Android Linux
-                environments. Reimagining Android as a high-performance desktop experience.</p>
-        </header>
-
-        <section class="doc-section">
-            <h2>Quick Start</h2>
-            <p>Connect your device via USB or Wi-Fi to begin. The system auto-detects your device and initiates the
-                secure handshake protocol.</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Mode</th>
-                        <th>Setup</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>USB</strong></td>
-                        <td>Plug in your phone · Enable **USB Debugging**</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Wi-Fi</strong></td>
-                        <td>Same network · Enable **Wireless Debugging**</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Launch Options</h3>
-            <pre><code># Auto-detect — recommended for first use
-android_dex_win.exe
-
-# Force USB connection
-android_dex_win.exe --usb
-
-# Connect to a specific IP address
-android_dex_win.exe 192.168.1.100
-
-# Connect with explicit port
-android_dex_win.exe 192.168.1.100:5555</code></pre>
-            <blockquote>
-                <p><strong>Smart Auto-Detection:</strong> With no arguments, the app scans for available devices. One
-                    device found → connects automatically. Zero or multiple → the ADB Manager dialog opens to let you
-                    choose — no restart needed.</p>
-            </blockquote>
-        </section>
-
-        <section class="doc-section">
-            <h2>The Handshake Protocol</h2>
-            <p>A three-layer cryptographic-style handshake ensures all components are ready before the desktop UI
-                unlocks.</p>
-
-            <div id="mermaid-protocol" class="mermaid">
-                sequenceDiagram
-                participant PC as Windows Side (Flutter/ADB)
-                participant JAR as Android Logic Engine (Java JAR)
-                participant APK as Android App Hub (Kotlin APK)
-
-                Note over PC: 1. ADB Initialization (startAdbBlocking)
-                PC->>PC: 2. Local Server Setup (JarServer & ApkServer .start)
-
-                Note over PC,JAR: Phase 1: Engine Deployment (Bridge)
-                PC->>JAR: Push JAR to Device (via ADB Pipe)
-                PC->>JAR: Launch JAR Runtime (adb.startJarRuntime)
-                JAR-->>PC: Handshake Response: "jar.hello" (Logic Engine Ready)
-
-                Note over PC,APK: Phase 2: Feature Manager Startup (Hub)
-                PC->>APK: Check Install & Install if Missing
-                PC->>APK: Trigger Service startup (ServerStartService)
-                APK-->>PC: WebSocket Handshake: "apk.hello" (App Hub Ready)
-
-                PC->>APK: 3. Start Extended Notification & Media Services
-                Note over PC,APK: System Synchronized: Desktop UI Unlocked
-            </div>
-        </section>
-
-        <section class="doc-section">
-            <h2>Key Features</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Multi-Window Apps</strong></td>
-                        <td>Each Android app runs in its own resizable, movable Windows window</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Live Telemetry</strong></td>
-                        <td>Real-time Battery, Volume, Wi-Fi, BT, Data & more</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Notifications</strong></td>
-                        <td>Android notifications pushed instantly to Windows desktop</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Media Control</strong></td>
-                        <td>Artwork, metadata & playback controls</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Low Latency</strong></td>
-                        <td>Shell-level commands bypass UI overhead</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Auto-Healing</strong></td>
-                        <td>Multi-stage recovery restores connection seamlessly</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <footer class="page-footer">
-            <div></div> <!-- Spacer -->
-            <a href="web/architecture.html" class="footer-link">
-                <span>Next Section</span>
-                <strong>Architectural Design →</strong>
+    <!-- ═══════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════ -->
+    <nav class="nav" id="nav">
+        <div class="container nav-inner">
+            <a href="#" class="nav-brand">
+                <img src="Data/app_png.png" alt="Android DEX" class="nav-brand-img">
+                <span class="nav-brand-name">Android DEX</span>
             </a>
-        </footer>
-    </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="#setup">Setup</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="https://github.com/Shrey113/Android-Dex" target="_blank" class="btn btn-outline btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                    </svg>
+                    GitHub
+                </a>
+                <a href="#download" class="btn btn-solid btn-sm">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Global Page Seamless Ambient Glow & Light Grid Pattern -->
+    <div class="page-bg-overlay">
+        <div class="bg-grid-lines"></div>
+        <div class="bg-ambient-glow"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         HERO  (styles in Data/hero.css)
+    ═══════════════════════════════════════ -->
+    <section class="hero" id="overview">
+        <div class="container">
+
+            <h1 class="hero-h1 reveal">
+                Your Android Phone,
+                <em>Reimagined for Desktop</em>
+            </h1>
+
+            <!-- Hero Stage — Laptop (Behind) + Mobile Companion (In Front) -->
+            <div class="hero-stage reveal">
+
+                <!-- ── 1. Pro Laptop Workspace Frame (Behind) ── -->
+                <div class="laptop-wrap">
+                    <!-- Lid & Display -->
+                    <div class="laptop-lid">
+                        <div class="laptop-black-bezel">
+                            <div class="laptop-screen">
+                                <img src="Data/home_screen.png" alt="Android DEX Desktop Workspace">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Anodized Base & Hinge Notch -->
+                    <div class="laptop-base">
+                        <div class="laptop-notch"></div>
+                    </div>
+                </div>
+
+                <!-- ── 2. Mobile Companion Phone Frame (In Front) ── -->
+                <div class="phone-wrap hero-phone-front">
+                    <div class="phone-btn btn-vol-up"></div>
+                    <div class="phone-btn btn-vol-down"></div>
+
+                    <!-- Outer Metallic Rim -->
+                    <div class="phone-frame">
+                        <!-- Inner Black Screen Bezel -->
+                        <div class="phone-black-bezel">
+                            <!-- Display Screen Container -->
+                            <div class="phone-screen-container">
+                                <div class="phone-header">
+                                    <span class="phone-time">9:41</span>
+                                    <div class="phone-notch">
+                                        <span class="notch-speaker"></span>
+                                        <span class="notch-cam"></span>
+                                    </div>
+                                    <div class="phone-icons">
+                                        <i data-lucide="signal" style="width:10px;height:10px;"></i>
+                                        <i data-lucide="wifi" style="width:10px;height:10px;"></i>
+                                        <i data-lucide="battery" style="width:11px;height:11px;"></i>
+                                    </div>
+                                </div>
+                                <div class="phone-screen">
+                                    <img src="Data/Android_app_1.png" alt="Android DEX Companion Engine">
+                                </div>
+                                <div class="phone-home-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Glass Chips -->
+                <div class="hero-chip hero-chip-tl">
+                    <span class="hero-chip-icon">
+                        <i data-lucide="volume-2" style="width:13px;height:13px;"></i>
+                    </span>
+                    Low-Latency Audio
+                </div>
+
+                <div class="hero-chip hero-chip-bl">
+                    <span class="hero-chip-icon">
+                        <i data-lucide="mouse-pointer" style="width:13px;height:13px;"></i>
+                    </span>
+                    Keyboard &amp; Mouse
+                </div>
+
+                <div class="hero-chip hero-chip-tr">
+                    <span class="hero-chip-icon">
+                        <i data-lucide="wifi" style="width:13px;height:13px;"></i>
+                    </span>
+                    USB &amp; Wi-Fi Sync
+                </div>
+
+                <div class="hero-chip hero-chip-br">
+                    <span class="hero-chip-icon">
+                        <i data-lucide="layout-panel-left" style="width:13px;height:13px;"></i>
+                    </span>
+                    Multi-Window Engine
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     STATS BAR  — "Designed for Scale"
+═══════════════════════════════════════ -->
+    <div class="stats-bar">
+        <div class="container">
+            <div class="stats-inner reveal">
+                <h2 class="stats-heading">Designed for Scale.<br><em>Trusted in Real Spaces.</em></h2>
+            </div>
+            <div class="stats-grid reveal reveal-delay-1">
+                <div class="stat-item">
+                    <div class="stat-value">USB</div>
+                    <div class="stat-label">Direct Wired Connection</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">Wi-Fi</div>
+                    <div class="stat-label">Wireless Over Local Network</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Platforms Supported</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+     FEATURES — Bento Grid
+═══════════════════════════════════════ -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="section-head-center reveal">
+                <span class="section-label">Core Capabilities</span>
+                <h2 class="section-h2">Powerful Features,<br><em>Thoughtfully Designed</em></h2>
+                <p class="section-p">A 3-layer architecture built for fast sync, real-time telemetry, and desktop-grade
+                    ergonomics.</p>
+            </div>
+
+            <div class="bento reveal">
+
+                <!-- Large card with big metric -->
+                <div class="bento-card bc-1">
+                    <div class="bc-icon">
+                        <i data-lucide="layout-panel-left" style="width:20px;height:20px;"></i>
+                    </div>
+                    <h3 class="bc-title">Multi-Window Mirroring</h3>
+                    <p class="bc-text">Run multiple Android apps simultaneously in individual, resizable floating
+                        windows on your desktop screen — just like native desktop apps.</p>
+                    <div style="margin-top:24px;">
+                        <img src="Data/multiple_apps_running.png" alt="Multi-Window"
+                            style="width:100%;border-radius:10px;border:1px solid var(--border);opacity:0.85;">
+                    </div>
+                </div>
+
+                <div class="bento-card bc-2">
+                    <div class="bc-icon">
+                        <i data-lucide="zap" style="width:20px;height:20px;"></i>
+                    </div>
+                    <h3 class="bc-title">Ultra-Low Latency</h3>
+                    <p class="bc-text">ADB pipe communications bypass UI overhead — smooth interaction, instant input
+                        response.</p>
+                </div>
+
+                <div class="bento-card bc-3">
+                    <div style="margin-bottom:12px;">
+                        <div class="bc-big-num">0.8ms</div>
+                        <div class="bc-big-label">Average Input Lag</div>
+                    </div>
+                </div>
+
+                <div class="bento-card bc-4">
+                    <div class="bc-icon">
+                        <i data-lucide="volume-2" style="width:20px;height:20px;"></i>
+                    </div>
+                    <h3 class="bc-title">Audio &amp; Media Stream</h3>
+                    <p class="bc-text">Route high-fidelity Android audio to desktop with full playback, volume, and
+                        track controls.</p>
+                </div>
+
+                <div class="bento-card bc-5">
+                    <div class="bc-icon">
+                        <i data-lucide="wifi" style="width:20px;height:20px;"></i>
+                    </div>
+                    <h3 class="bc-title">USB &amp; Wireless</h3>
+                    <p class="bc-text">Smart IP auto-detection over local Wi-Fi or direct USB debugging.</p>
+                </div>
+
+                <div class="bento-card bc-6">
+                    <div class="bc-icon">
+                        <i data-lucide="refresh-cw" style="width:20px;height:20px;"></i>
+                    </div>
+                    <h3 class="bc-title">Smart Reconnection</h3>
+                    <p class="bc-text">Built-in auto-healing protocol recovers dropped connections and restores sessions
+                        automatically — no manual restart required. The system watches, recovers, and continues.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <!-- ═══════════════════════════════════════
+     GALLERY
+═══════════════════════════════════════ -->
+    <section class="section" id="gallery">
+        <div class="container">
+            <div class="section-head-center reveal">
+                <span class="section-label">Visual Showcase</span>
+                <h2 class="section-h2">Every Detail,<br><em>Precisely Controlled</em></h2>
+                <p class="section-p">Explore every interface component designed for true desktop multi-tasking.</p>
+            </div>
+
+            <div class="gallery-panel reveal">
+                <div class="gallery-tabs">
+                    <button class="g-tab active" onclick="showGallery(0,this)">Desktop Home</button>
+                    <button class="g-tab" onclick="showGallery(1,this)">App Dashboard</button>
+                    <button class="g-tab" onclick="showGallery(2,this)">Multi-App Mode</button>
+                    <button class="g-tab" onclick="showGallery(3,this)">Media Control</button>
+                    <button class="g-tab" onclick="showGallery(4,this)">Controller</button>
+                    <button class="g-tab" onclick="showGallery(5,this)">Audio &amp; System</button>
+                </div>
+                <div class="gallery-view">
+                    <img src="Data/home_screen.png" alt="Desktop Home" class="g-img active">
+                    <img src="Data/App_list.png" alt="App Dashboard" class="g-img">
+                    <img src="Data/multiple_apps_running.png" alt="Multi-App Mode" class="g-img">
+                    <img src="Data/media_control.png" alt="Media Control" class="g-img">
+                    <img src="Data/controller_1.png" alt="Controller" class="g-img">
+                    <img src="Data/controller_2.png" alt="Audio &amp; System" class="g-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <!-- ═══════════════════════════════════════
+     DOWNLOAD
+═══════════════════════════════════════ -->
+    <section class="section" id="download">
+        <div class="container">
+            <div class="section-head-center reveal">
+                <span class="section-label">Get It Now</span>
+                <h2 class="section-h2">See Your Air.<br><em>Control Your Comfort.</em></h2>
+                <p class="section-p">All packages ship with pre-compiled binaries and bundled ADB. No extra setup
+                    required.</p>
+            </div>
+
+            <div class="dl-grid reveal">
+
+                <div class="dl-card">
+                    <div class="dl-icon">
+                        <i data-lucide="monitor" style="width:20px;height:20px;"></i>
+                    </div>
+                    <h3 class="dl-name">Windows</h3>
+                    <p class="dl-sub">Windows 10 / 11 · 64-bit</p>
+                    <a href="https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Windows.zip"
+                        class="btn btn-solid btn-full btn-sm">
+                        <i data-lucide="download" style="width:14px;height:14px;"></i>
+                        Download .zip
+                    </a>
+                </div>
+
+                <div class="dl-card">
+                    <div class="dl-icon">
+                        <i data-lucide="apple" style="width:20px;height:20px;"></i>
+                    </div>
+                    <h3 class="dl-name">macOS</h3>
+                    <p class="dl-sub">macOS 11+ · Intel &amp; Apple Silicon</p>
+                    <a href="https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_macOS.zip"
+                        class="btn btn-solid btn-full btn-sm">
+                        <i data-lucide="download" style="width:14px;height:14px;"></i>
+                        Download .zip
+                    </a>
+                </div>
+
+                <div class="dl-card">
+                    <div class="dl-icon">
+                        <i data-lucide="terminal" style="width:20px;height:20px;"></i>
+                    </div>
+                    <h3 class="dl-name">Linux</h3>
+                    <p class="dl-sub">Ubuntu, Fedora, Arch &amp; more</p>
+                    <a href="https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Linux.zip"
+                        class="btn btn-solid btn-full btn-sm">
+                        <i data-lucide="download" style="width:14px;height:14px;"></i>
+                        Download .zip
+                    </a>
+                </div>
+
+                <div class="dl-card">
+                    <div class="dl-icon">
+                        <i data-lucide="link-2" style="width:20px;height:20px;"></i>
+                    </div>
+                    <h3 class="dl-name">ADB Manager</h3>
+                    <p class="dl-sub">Main device connection subsystem</p>
+                    <a href="https://github.com/Shrey113/Adb-Device-Manager-2" target="_blank"
+                        class="btn btn-outline btn-full btn-sm">
+                        <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+                        View Project
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <!-- ═══════════════════════════════════════
+     SETUP
+═══════════════════════════════════════ -->
+    <section class="section" id="setup">
+        <div class="container">
+            <div class="section-head-center reveal">
+                <span class="section-label">Quick Start</span>
+                <h2 class="section-h2">Up &amp; Running<br><em>in Minutes</em></h2>
+                <p class="section-p">No complex drivers. No additional installs. ADB is bundled and ready.</p>
+            </div>
+
+            <div class="steps-row reveal">
+                <div class="step-box">
+                    <span class="step-n">STEP 01</span>
+                    <h3 class="step-title">Enable Developer Options</h3>
+                    <p class="step-desc">Open <code>Settings → About Phone</code> on your Android and tap <strong>Build
+                            Number</strong> seven times until Developer Options unlock.</p>
+                </div>
+                <div class="step-box">
+                    <span class="step-n">STEP 02</span>
+                    <h3 class="step-title">Turn On USB Debugging</h3>
+                    <p class="step-desc">Navigate to <code>Settings → Developer Options</code> and toggle <strong>USB
+                            Debugging</strong> or <strong>Wireless Debugging</strong> to ON.</p>
+                </div>
+                <div class="step-box">
+                    <span class="step-n">STEP 03</span>
+                    <h3 class="step-title">Launch Android DEX</h3>
+                    <p class="step-desc">Extract the downloaded zip and run the app. It auto-detects your device and
+                        boots the full desktop experience automatically.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <img src="Data/app_png.png" alt="Android DEX">
+                <span class="footer-copy">
+                    &copy; 2026 Android DEX &mdash; by <a href="https://github.com/shrey113"
+                        target="_blank">@shrey113</a>
+                </span>
+            </div>
+            <nav class="footer-links">
+                <a href="#overview">Overview</a>
+                <a href="#features">Features</a>
+                <a href="#download">Downloads</a>
+                <a href="https://github.com/Shrey113/Android-Dex" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════ -->
     <script>
-        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+        /* Init Lucide icons */
+        lucide.createIcons();
+
+        /* Navbar scroll effect */
+        window.addEventListener('scroll', () => {
+            document.getElementById('nav').style.borderBottomColor =
+                window.scrollY > 20 ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.07)';
+        });
+
+        /* Scroll reveal */
+        const revEls = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('in'), (i % 4) * 70);
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.10 });
+        revEls.forEach(el => obs.observe(el));
+
+        /* Gallery tab switcher */
+        function showGallery(idx, btn) {
+            document.querySelectorAll('.g-tab').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.g-img').forEach(img => img.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.g-img')[idx].classList.add('active');
+        }
     </script>
+
 </body>
 
 </html>
