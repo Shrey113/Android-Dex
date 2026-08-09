@@ -335,17 +335,17 @@
 .hero-phone-front {
     position: absolute;
     bottom: 0;
-    left: 6%;
+    left: 4%;
     z-index: 10;
     transform: rotate(-5deg);
 }
 
 .hero-phone-front .phone-frame {
-    width: 215px;
+    width: 270px;
     box-shadow:
         0 0 0 1.5px rgba(0, 0, 0, 0.75),
-        -20px 22px 60px rgba(0, 0, 0, 0.92),
-        0 35px 80px rgba(0, 0, 0, 0.95);
+        -22px 25px 70px rgba(0, 0, 0, 0.95),
+        0 40px 90px rgba(0, 0, 0, 0.98);
 }
 
 
@@ -402,7 +402,7 @@
 /* Chip: top-left (Low-Latency Audio — peeking from behind left of phone) */
 .hero-chip-tl {
     top: 25px;
-    left: -25px;
+    left: -40px;
     animation: chipFloat 6s ease-in-out infinite;
     animation-delay: 0s;
 }
@@ -410,7 +410,7 @@
 /* Chip: bottom-left (Keyboard & Mouse — peeking from behind left of phone) */
 .hero-chip-bl {
     bottom: 75px;
-    left: -20px;
+    left: -35px;
     animation: chipFloat 6s ease-in-out infinite;
     animation-delay: 3s;
 }
