@@ -42,16 +42,37 @@
             </ul>
 
             <div class="nav-actions">
-                <a href="https://github.com/Shrey113/Android-Dex" target="_blank" class="btn btn-outline btn-sm">
+                <a href="https://github.com/Shrey113/Android-Dex" target="_blank"
+                    class="btn btn-outline btn-sm nav-gh-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
                         fill="currentColor">
                         <path
                             d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
                     </svg>
-                    GitHub
+                    <span class="nav-gh-text">GitHub</span>
                 </a>
-                <a href="#download" class="btn btn-solid btn-sm">Get Started</a>
+                <a href="#download" class="btn btn-solid btn-sm nav-cta-btn">Get Started</a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" type="button">
+                    <i data-lucide="menu" class="nav-toggle-icon-menu" style="width:16px;height:16px;"></i>
+                    <i data-lucide="x" class="nav-toggle-icon-close" style="width:16px;height:16px;display:none;"></i>
+                </button>
             </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="nav-mobile-drawer" id="navMobileDrawer">
+            <ul class="nav-mobile-links">
+                <li><a href="#overview" class="nav-mobile-link"><i data-lucide="compass"
+                            style="width:15px;height:15px;"></i> Overview</a></li>
+                <li><a href="#features" class="nav-mobile-link"><i data-lucide="layers"
+                            style="width:15px;height:15px;"></i> Features</a></li>
+                <li><a href="#updates" class="nav-mobile-link"><i data-lucide="sparkles"
+                            style="width:15px;height:15px;"></i> Updates</a></li>
+                <li><a href="#download" class="nav-mobile-link"><i data-lucide="download"
+                            style="width:15px;height:15px;"></i> Download</a></li>
+                <li><a href="#setup" class="nav-mobile-link"><i data-lucide="settings"
+                            style="width:15px;height:15px;"></i> Setup</a></li>
+            </ul>
         </div>
     </nav>
 
@@ -465,10 +486,55 @@
         lucide.createIcons();
 
         /* Navbar scroll effect */
+        const navEl = document.getElementById('nav');
         window.addEventListener('scroll', () => {
-            document.getElementById('nav').style.borderBottomColor =
-                window.scrollY > 20 ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.07)';
-        });
+            if (navEl) {
+                navEl.style.borderBottomColor =
+                    window.scrollY > 20 ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.08)';
+            }
+        }, { passive: true });
+
+        /* Mobile menu toggle */
+        const navToggle = document.getElementById('navToggle');
+        const navMobileDrawer = document.getElementById('navMobileDrawer');
+        const menuIcon = document.querySelector('.nav-toggle-icon-menu');
+        const closeIcon = document.querySelector('.nav-toggle-icon-close');
+
+        if (navToggle && navMobileDrawer) {
+            navToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = navMobileDrawer.classList.toggle('open');
+                navToggle.classList.toggle('active', isOpen);
+                if (menuIcon && closeIcon) {
+                    menuIcon.style.display = isOpen ? 'none' : 'block';
+                    closeIcon.style.display = isOpen ? 'block' : 'none';
+                }
+            });
+
+            // Close on nav link click
+            document.querySelectorAll('.nav-mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMobileDrawer.classList.remove('open');
+                    navToggle.classList.remove('active');
+                    if (menuIcon && closeIcon) {
+                        menuIcon.style.display = 'block';
+                        closeIcon.style.display = 'none';
+                    }
+                });
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', (e) => {
+                if (navMobileDrawer.classList.contains('open') && !navEl.contains(e.target)) {
+                    navMobileDrawer.classList.remove('open');
+                    navToggle.classList.remove('active');
+                    if (menuIcon && closeIcon) {
+                        menuIcon.style.display = 'block';
+                        closeIcon.style.display = 'none';
+                    }
+                }
+            });
+        }
 
         /* Scroll reveal */
         const revEls = document.querySelectorAll('.reveal');
@@ -479,7 +545,7 @@
                     obs.unobserve(e.target);
                 }
             });
-        }, { threshold: 0.10 });
+        }, { threshold: 0.08 });
         revEls.forEach(el => obs.observe(el));
     </script>
 
