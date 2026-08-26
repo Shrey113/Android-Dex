@@ -20,7 +20,7 @@ Android DEX is a free, closed-source desktop application for **Windows, Linux, a
 | Platform | Download |
 | :--- | :--- |
 | Windows | [Download](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Windows.zip) |
-| Linux | [Download](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Linux.AppImage) |
+| Linux | [Download](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Linux.zip) |
 | macOS | [Download](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_macOS.zip) |
 
 ---
