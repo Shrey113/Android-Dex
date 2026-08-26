@@ -1,14 +1,14 @@
-<img src="Data/app_png.png" align="right" width="130" alt="Android DEX" />
-
 # Android DEX
 
-*Transform your Android device into a complete desktop experience.*
+<img src="Data/app_png.png" width="128" height="128" alt="Android DEX" align="right" />
+
+_Transform your Android device into a complete desktop experience._
 
 Android DEX is a free, closed-source desktop application for **Windows, Linux, and macOS** that lets you run Android apps in resizable desktop-style windows, mirror screens, stream per-app audio, manage notifications, control media playback, and game with native keyboard and mouse input — all using high-performance ADB and companion services over USB or Wi-Fi.
 
-[![Windows](https://img.shields.io/badge/Windows-Download-007ec6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Windows.zip)
-[![Linux](https://img.shields.io/badge/Linux-Download-e05d44?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Linux.AppImage)
-[![macOS](https://img.shields.io/badge/macOS-Download-4c1?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_macOS.zip)
+[![Linux](https://img.shields.io/badge/Linux-download-orange?style=for-the-badge&logo=linux)](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Linux.AppImage)&nbsp;
+[![Windows](https://img.shields.io/badge/Windows-download-blue?style=for-the-badge&logo=windows)](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Windows.zip)&nbsp;
+[![macOS](https://img.shields.io/badge/macOS-download-brightgreen?style=for-the-badge&logo=apple)](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_macOS.zip)&nbsp;
 
 <p>
   <img src="https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=fff" alt="Flutter" />
