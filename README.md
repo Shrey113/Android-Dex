@@ -1,47 +1,21 @@
-<div align="center">
-
-<img src="Data/app_png.png" width="130" alt="Android DEX" />
+<img src="Data/app_png.png" align="right" width="130" alt="Android DEX" />
 
 # Android DEX
 
-**Transform your Android device into a complete desktop experience.**
+*Transform your Android device into a complete desktop experience.*
 
 Android DEX is a free, closed-source desktop application for **Windows, Linux, and macOS** that lets you run Android apps in resizable desktop-style windows, mirror screens, stream per-app audio, manage notifications, control media playback, and game with native keyboard and mouse input — all using high-performance ADB and companion services over USB or Wi-Fi.
 
-<br>
+[![Windows](https://img.shields.io/badge/Windows-Download-007ec6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Windows.zip)
+[![Linux](https://img.shields.io/badge/Linux-Download-e05d44?style=for-the-badge&logo=linux&logoColor=white)](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Linux.AppImage)
+[![macOS](https://img.shields.io/badge/macOS-Download-4c1?style=for-the-badge&logo=apple&logoColor=white)](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_macOS.zip)
 
 <p>
-  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=fff" alt="Flutter" />
-  <img src="https://img.shields.io/badge/Kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin" />
-  <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android" />
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=fff" alt="Python" />
-  <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows11&logoColor=white" alt="Windows" />
-  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" />
-</p>
-
-<p>
-  <a href="https://github.com/Shrey113/Android-Dex/releases">
-    <img src="https://img.shields.io/github/v/release/Shrey113/Android-Dex?style=flat-square&color=33CA56" />
-  </a>
-  <a href="https://github.com/Shrey113/Android-Dex/stargazers">
-    <img src="https://img.shields.io/github/stars/Shrey113/Android-Dex?style=flat-square&logo=github" />
-  </a>
-  <a href="https://github.com/Shrey113/Android-Dex/issues">
-    <img src="https://img.shields.io/github/issues/Shrey113/Android-Dex?style=flat-square&color=red" />
-  </a>
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=fff" alt="Flutter" />
+  <img src="https://img.shields.io/badge/Kotlin-%237F52FF.svg?style=flat-square&logo=kotlin&logoColor=white" alt="Kotlin" />
+  <img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Android" />
   <img src="https://img.shields.io/badge/License-Closed%20Source-blue?style=flat-square" alt="Closed Source" />
 </p>
-</div>
-
----
-
-### Download Android DEX
-
-| Platform | Download |
-| :--- | :--- |
-| Windows | [Download](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Windows.zip) |
-| Linux | [Download](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Linux.AppImage) |
-| macOS | [Download](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_macOS.zip) |
 
 ---
 
