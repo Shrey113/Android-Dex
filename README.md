@@ -6,7 +6,7 @@
 
 **Transform your Android device into a complete desktop experience.**
 
-Android DEX is a free desktop application for **Windows, Linux, and macOS** that lets you run Android apps in resizable desktop-style windows, mirror screens, stream per-app audio, manage notifications, control media playback, and game with native keyboard and mouse input — all using high-performance ADB and companion services over USB or Wi-Fi.
+Android DEX is a free, closed-source desktop application for **Windows, Linux, and macOS** that lets you run Android apps in resizable desktop-style windows, mirror screens, stream per-app audio, manage notifications, control media playback, and game with native keyboard and mouse input — all using high-performance ADB and companion services over USB or Wi-Fi.
 
 <br>
 
@@ -29,9 +29,7 @@ Android DEX is a free desktop application for **Windows, Linux, and macOS** that
   <a href="https://github.com/Shrey113/Android-Dex/issues">
     <img src="https://img.shields.io/github/issues/Shrey113/Android-Dex?style=flat-square&color=red" />
   </a>
-  <a href="https://github.com/Shrey113/Android-Dex/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/Shrey113/Android-Dex?style=flat-square&color=blue" />
-  </a>
+  <img src="https://img.shields.io/badge/License-Closed%20Source-blue?style=flat-square" alt="Closed Source" />
 </p>
 </div>
 
@@ -102,9 +100,9 @@ Experience true desktop-grade gaming with zero emulator detection. Because games
 
 ---
 
-### Technologies & Open-Source Dependencies
+### Technologies & Dependencies
 
-Android DEX is built on top of industry-standard open-source libraries and native platform frameworks:
+Android DEX is a closed-source application built on top of industry-standard open-source libraries and native platform frameworks:
 
 * **[ADB — Android Debug Bridge](https://developer.android.com/tools/releases/platform-tools)** – Core protocol for device communication, wireless pairing, and ADB command execution.
 * **[scrcpy](https://github.com/Genymobile/scrcpy)** – High-performance, low-latency screen mirroring and remote input control for Android devices.
