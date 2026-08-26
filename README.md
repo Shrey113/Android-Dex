@@ -6,16 +6,22 @@ _Transform your Android device into a complete desktop experience._
 
 Android DEX is a free, closed-source desktop application for **Windows, Linux, and macOS** that lets you run Android apps in resizable desktop-style windows, mirror screens, stream per-app audio, manage notifications, control media playback, and game with native keyboard and mouse input — all using high-performance ADB and companion services over USB or Wi-Fi.
 
-[![Linux](https://img.shields.io/badge/Linux-download-orange?style=for-the-badge&logo=linux)](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Linux.AppImage)&nbsp;
-[![Windows](https://img.shields.io/badge/Windows-download-blue?style=for-the-badge&logo=windows)](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Windows.zip)&nbsp;
-[![macOS](https://img.shields.io/badge/macOS-download-brightgreen?style=for-the-badge&logo=apple)](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_macOS.zip)&nbsp;
-
 <p>
   <img src="https://img.shields.io/badge/Flutter-02569B?style=flat-square&logo=flutter&logoColor=fff" alt="Flutter" />
   <img src="https://img.shields.io/badge/Kotlin-%237F52FF.svg?style=flat-square&logo=kotlin&logoColor=white" alt="Kotlin" />
   <img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Android" />
   <img src="https://img.shields.io/badge/License-Closed%20Source-blue?style=flat-square" alt="Closed Source" />
 </p>
+
+---
+
+### Download Android DEX
+
+| Platform | Download |
+| :--- | :--- |
+| Windows | [Download](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Windows.zip) |
+| Linux | [Download](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Linux.AppImage) |
+| macOS | [Download](https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_macOS.zip) |
 
 ---
 
