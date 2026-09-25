@@ -1,0 +1,18 @@
+Android-Dex
+Copyright (c) 2026 Shrey Patel
+
+THIRD-PARTY SOFTWARE
+
+This project includes components from:
+
+scrcpy
+Copyright (c) Genymobile and contributors
+Licensed under the Apache License, Version 2.0.
+
+https://github.com/Genymobile/scrcpy
+
+The applicable Apache License, Version 2.0 is included with
+the distributed third-party components.
+
+The Android-Dex project is not affiliated with or endorsed by
+Genymobile.

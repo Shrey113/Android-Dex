@@ -1,3 +1,6 @@
+> [!WARNING]
+> **Official Distribution Only:** This GitHub repository (<https://github.com/Shrey113/Android-Dex>) is the **only official and authorized source** for Android DEX. Creating websites, mirrors, or download portals to distribute, repackage, or monetize Android DEX (via ads, popups, paywalls, or paid links) is **strictly prohibited**. Do not download releases from unauthorized third-party websites.
+
 # Android DEX
 
 <img src="Data/app_png.png" width="128" height="128" alt="Android DEX" align="right" />
@@ -104,6 +107,26 @@ Android DEX is a closed-source application built on top of industry-standard ope
 | Error & Fallback Handling | [View Error Handling & Diagnostic Reference](doc/ERROR_HANDLING.md) |
 | System Modules | [View System Module Directory](doc/MODULES.md) |
 | Device Manager | [View Device Manager Reference](doc/DEVICE_MANAGER.md) |
+
+---
+
+### License
+
+Android DEX is proprietary, closed-source software.
+
+Users may use Android DEX for personal, educational, research, and testing purposes.
+
+Users may create, publish, and share non-commercial videos, tutorials, reviews, demonstrations, screenshots, and other content featuring Android DEX. Such content must not be monetized or used to generate advertising revenue, sponsorship income, affiliate commissions, paid promotions, memberships, donations, or other commercial income.
+
+> [!CAUTION]
+> **Strict Prohibition on Monetized Websites & Mirrors:**
+> Creating websites, download portals, landing pages, or mirror services to distribute or promote Android DEX for commercial gain (including ad revenue via Google AdSense, banners, popups, paywalls, link shorteners, or paid download gateways) is **strictly prohibited**. Bundling or wrapping Android DEX with third-party installers, download managers, adware, toolbars, or commercial software suites is strictly forbidden.
+
+Redistribution, modification, repackaging, commercial use, commercial distribution, and unauthorized mirroring of Android DEX are prohibited.
+
+Third-party open-source components, including scrcpy, remain subject to their respective licenses.
+
+See [LICENSE](LICENSE) and [NOTICE](NOTICE) for complete details.
 
 ---
 

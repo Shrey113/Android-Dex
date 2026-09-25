@@ -1,0 +1,124 @@
+ANDROID-DEX
+PROPRIETARY SOFTWARE LICENSE
+
+Copyright (c) 2026 Shrey Patel
+All rights reserved.
+
+1. OWNERSHIP
+
+Android-Dex and its original source code, artwork, documentation,
+branding, and other original materials are proprietary software
+owned by the copyright holder.
+
+Except for rights expressly granted by this license or by
+applicable third-party licenses, all rights are reserved.
+
+2. PERMITTED USE
+
+Users may download and use the official Android-Dex software
+for personal, educational, research, and testing purposes.
+
+No commercial use of Android-Dex is permitted.
+
+3. PROHIBITED USE
+
+You may NOT:
+
+- sell Android-Dex or access to Android-Dex;
+- commercially distribute Android-Dex;
+- redistribute Android-Dex as your own software;
+- upload or mirror Android-Dex on third-party download websites;
+- create a commercial download service for Android-Dex;
+- modify, repackage, or create derivative versions of
+  Android-Dex;
+- sublicense Android-Dex;
+- use Android-Dex to provide a paid service;
+- use Android-Dex for commercial advertising or promotion;
+- remove copyright, attribution, or license notices;
+- commercially exploit Android-Dex or its original components.
+
+4. CONTENT CREATION AND SHARING
+
+Users MAY create and publish videos, tutorials, reviews,
+demonstrations, screenshots, or other content showing or
+discussing Android-Dex.
+
+Users MAY share such content with other people through
+platforms such as YouTube, social media, forums, websites,
+messaging services, or other platforms.
+
+However, such content must NOT be monetized.
+
+Users may NOT generate advertising revenue, sponsorship
+income, affiliate commissions, membership revenue, donations,
+paid promotions, or any other form of commercial income from
+content primarily featuring or promoting Android-Dex.
+
+Sharing Android-Dex-related content for educational,
+informational, personal, or non-commercial purposes is
+permitted.
+
+This permission does NOT allow users to redistribute,
+repackage, modify, sell, or commercially distribute the
+Android-Dex software itself.
+
+5. WEBSITES AND PROHIBITED MONETIZATION
+
+Users may mention Android-Dex or provide direct links to the
+official Android-Dex repository (https://github.com/Shrey113/Android-Dex)
+from informational websites or blogs.
+
+You are STRICTLY PROHIBITED from:
+
+- creating, operating, or hosting any website, webpage, landing page,
+  or mirror service for the purpose of distributing, re-hosting, or
+  providing downloads of Android-Dex;
+- monetizing any website or webpage by featuring, hosting, or linking
+  to Android-Dex through advertising (including display ads, pop-ups,
+  redirects, banner ads, Google AdSense), paywalls, link-shorteners,
+  subscription tiers, affiliate links, or paid download gateways;
+- bundling, wrapping, or packaging Android-Dex with third-party installers,
+  download managers, toolbars, adware, or commercial software suites;
+- misrepresenting any website as an official, certified, or authorized
+  download source of Android-Dex.
+
+6. REDISTRIBUTION
+
+Redistribution of Android-Dex is not permitted except through
+official distribution channels designated by the copyright holder.
+
+Users must obtain Android-Dex from an official distribution
+source.
+
+7. THIRD-PARTY SOFTWARE
+
+Android-Dex contains third-party software that is licensed
+separately under its respective licenses.
+
+In particular, Android-Dex includes and/or distributes
+components from scrcpy by Genymobile, which are licensed under
+the Apache License, Version 2.0.
+
+The restrictions of this proprietary license do not apply to
+third-party components to the extent that their respective
+licenses grant rights to recipients.
+
+Applicable third-party license and attribution information is
+provided with the distribution.
+
+8. NO TRADEMARK RIGHTS
+
+This license does not grant permission to use Android-Dex
+trademarks, logos, branding, or other identifying materials
+without written permission from the copyright holder.
+
+9. DISCLAIMER
+
+Android-Dex is provided "AS IS", without warranty of any kind,
+to the maximum extent permitted by applicable law.
+
+10. RESERVATION OF RIGHTS
+
+All rights not expressly granted by this license or by an
+applicable third-party license are reserved by the copyright
+holder.
