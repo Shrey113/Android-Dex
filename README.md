@@ -107,6 +107,20 @@ Android DEX is a closed-source application built on top of industry-standard ope
 | Error & Fallback Handling | [View Error Handling & Diagnostic Reference](doc/ERROR_HANDLING.md) |
 | System Modules | [View System Module Directory](doc/MODULES.md) |
 | Device Manager | [View Device Manager Reference](doc/DEVICE_MANAGER.md) |
+| Security & Privacy Policy | [View Security & Privacy Policy](SECURITY.md) |
+
+---
+
+### Security & Privacy
+
+Your privacy and security are foundational:
+
+* **100% Local Processing:** All screen mirroring, audio streaming, touch/keyboard input, and notification management occur strictly locally between your desktop and your Android device.
+* **Zero Data Collection:** Android DEX does **not** collect, track, monitor, or harvest any personal data, keystrokes, device IDs, screen content, or telemetry.
+* **No Cloud / Completely Offline:** Android DEX does not communicate with external servers or cloud endpoints. It functions entirely without an internet connection.
+* **Direct Local Connection:** All device communication is handled directly through standard ADB over your local USB cable or local Wi-Fi network with zero third-party intermediaries.
+
+See [SECURITY.md](SECURITY.md) for the full Security & Privacy Policy.
 
 ---
 
@@ -126,7 +140,7 @@ Redistribution, modification, repackaging, commercial use, commercial distributi
 
 Third-party open-source components, including scrcpy, remain subject to their respective licenses.
 
-See [LICENSE](LICENSE) and [NOTICE](NOTICE) for complete details.
+See [LICENSE](LICENSE), [NOTICE](NOTICE), and [SECURITY.md](SECURITY.md) for complete details.
 
 ---
 
