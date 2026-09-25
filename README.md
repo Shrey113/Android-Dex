@@ -136,7 +136,9 @@ Users may create, publish, and share non-commercial videos, tutorials, reviews, 
 > **Strict Prohibition on Monetized Websites & Mirrors:**
 > Creating websites, download portals, landing pages, or mirror services to distribute or promote Android DEX for commercial gain (including ad revenue via Google AdSense, banners, popups, paywalls, link shorteners, or paid download gateways) is **strictly prohibited**. Bundling or wrapping Android DEX with third-party installers, download managers, adware, toolbars, or commercial software suites is strictly forbidden.
 
-Redistribution, modification, repackaging, commercial use, commercial distribution, and unauthorized mirroring of Android DEX are prohibited.
+Redistribution, modification, repackaging, commercial use, commercial distribution, and unauthorized mirroring of Android DEX are prohibited unless explicitly authorized in writing by the copyright holder.
+
+For commercial licensing inquiries or written monetization permissions, please contact [@Shrey113](https://github.com/Shrey113).
 
 Third-party open-source components, including scrcpy, remain subject to their respective licenses.
 

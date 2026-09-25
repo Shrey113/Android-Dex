@@ -82,7 +82,20 @@ You are STRICTLY PROHIBITED from:
 - misrepresenting any website as an official, certified, or authorized
   download source of Android-Dex.
 
-6. REDISTRIBUTION
+6. COMMERCIAL AND MONETIZATION EXCEPTION
+
+Commercial use and monetization of Android-Dex are prohibited
+unless explicitly authorized in writing by the copyright holder.
+
+The copyright holder may, at their sole discretion, grant a
+commercial license or monetization permission subject to separate
+terms, conditions, and fees agreed upon with the requesting party.
+
+No right to commercialize, monetize, advertise, sell, or
+redistribute Android-Dex proprietary components is granted
+unless such written authorization has been provided.
+
+7. REDISTRIBUTION
 
 Redistribution of Android-Dex is not permitted except through
 official distribution channels designated by the copyright holder.
@@ -90,7 +103,7 @@ official distribution channels designated by the copyright holder.
 Users must obtain Android-Dex from an official distribution
 source.
 
-7. THIRD-PARTY SOFTWARE
+8. THIRD-PARTY SOFTWARE
 
 Android-Dex contains third-party software that is licensed
 separately under its respective licenses.
@@ -106,18 +119,18 @@ licenses grant rights to recipients.
 Applicable third-party license and attribution information is
 provided with the distribution.
 
-8. NO TRADEMARK RIGHTS
+9. NO TRADEMARK RIGHTS
 
 This license does not grant permission to use Android-Dex
 trademarks, logos, branding, or other identifying materials
 without written permission from the copyright holder.
 
-9. DISCLAIMER
+10. DISCLAIMER
 
 Android-Dex is provided "AS IS", without warranty of any kind,
 to the maximum extent permitted by applicable law.
 
-10. RESERVATION OF RIGHTS
+11. RESERVATION OF RIGHTS
 
 All rights not expressly granted by this license or by an
 applicable third-party license are reserved by the copyright
