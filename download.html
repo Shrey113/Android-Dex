@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Android DEX — Native Desktop Apps &amp; Setup</title>
+    <meta name="description"
+        content="Download Android DEX for Windows 10/11, macOS Universal (Apple Silicon &amp; Intel), and Linux. Clean, compact installation guide and Android phone companion setup.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════════
+         NAVBAR
+    ═══════════════════════════════════════ -->
+    <nav class="nav" id="nav">
+        <div class="container nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="Data/app_png.png" alt="Android DEX" class="nav-brand-img">
+                <span class="nav-brand-name">Android DEX</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html#overview">Overview</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="#downloads-hub">Downloads</a></li>
+                <li><a href="#specs">Specs</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="https://github.com/Shrey113/Android-Dex" target="_blank"
+                    class="btn btn-outline btn-sm nav-gh-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                    </svg>
+                    <span class="nav-gh-text">GitHub</span>
+                </a>
+                <a href="#downloads-hub" class="btn btn-solid btn-sm nav-cta-btn">
+                    <i data-lucide="download" style="width:13px;height:13px;"></i>
+                    <span>Download</span>
+                </a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" type="button">
+                    <i data-lucide="menu" class="nav-toggle-icon-menu" style="width:15px;height:15px;"></i>
+                    <i data-lucide="x" class="nav-toggle-icon-close" style="width:15px;height:15px;display:none;"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="nav-mobile-drawer" id="navMobileDrawer">
+            <ul class="nav-mobile-links">
+                <li><a href="index.html" class="nav-mobile-link"><i data-lucide="home" style="width:14px;height:14px;"></i> Home</a></li>
+                <li><a href="#downloads-hub" class="nav-mobile-link"><i data-lucide="download" style="width:14px;height:14px;"></i> Downloads</a></li>
+                <li><a href="#specs" class="nav-mobile-link"><i data-lucide="cpu" style="width:14px;height:14px;"></i> Specifications</a></li>
+                <li><a href="#faq" class="nav-mobile-link"><i data-lucide="help-circle" style="width:14px;height:14px;"></i> FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Global Page Seamless Ambient Glow & Light Grid Pattern -->
+    <div class="page-bg-overlay">
+        <div class="bg-grid-lines"></div>
+        <div class="bg-ambient-glow"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         HERO SECTION (COMPACT & CLEAN)
+    ═══════════════════════════════════════ -->
+    <header class="dl-compact-hero" id="overview">
+        <div class="container">
+            <div class="dl-badge-compact reveal" id="osBadge">
+                <span class="dl-badge-dot"></span>
+                <span id="osBadgeText">Your System</span>
+            </div>
+
+            <h1 class="dl-title-compact reveal">
+                Download Android DEX
+            </h1>
+
+            <p class="dl-desc-compact reveal">
+                Select your OS on the left to download the portable bundle and follow the clean setup instructions on the right.
+            </p>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════
+         2-COLUMN SPLIT HUB: DOWNLOADS & SETUP
+    ═══════════════════════════════════════ -->
+    <section class="section" id="downloads-hub" style="padding-top:10px;padding-bottom:50px;">
+        <div class="container">
+
+            <div class="dl-split-grid reveal">
+
+                <!-- ── LEFT: COMPACT OS SELECTOR ── -->
+                <div class="os-menu-list" id="osMenuList">
+
+                    <!-- Windows Item -->
+                    <div class="os-menu-item active" id="menu-windows" onclick="selectOS('windows')">
+                        <div class="os-menu-identity">
+                            <div class="os-menu-icon">
+                                <i data-lucide="monitor" style="width:18px;height:18px;"></i>
+                            </div>
+                            <div>
+                                <div class="os-menu-title">
+                                    <span>Windows</span>
+                                    <span class="badge-tag-mini" id="badge-current-windows" style="display:none;">Current System</span>
+                                </div>
+                                <span class="os-menu-meta">64-bit · 68 MB · Portable</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Windows.zip"
+                            class="os-dl-btn-mini" onclick="event.stopPropagation();">
+                            <i data-lucide="download" style="width:11px;height:11px;"></i>
+                            <span>.zip</span>
+                        </a>
+                    </div>
+
+                    <!-- macOS Item -->
+                    <div class="os-menu-item" id="menu-macos" onclick="selectOS('macos')">
+                        <div class="os-menu-identity">
+                            <div class="os-menu-icon">
+                                <i data-lucide="apple" style="width:18px;height:18px;"></i>
+                            </div>
+                            <div>
+                                <div class="os-menu-title">
+                                    <span>macOS</span>
+                                    <span class="badge-tag-mini" id="badge-current-macos" style="display:none;">Current System</span>
+                                </div>
+                                <span class="os-menu-meta">M1–M4 &amp; Intel · 74 MB</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_macOS.zip"
+                            class="os-dl-btn-mini" onclick="event.stopPropagation();">
+                            <i data-lucide="download" style="width:11px;height:11px;"></i>
+                            <span>.dmg</span>
+                        </a>
+                    </div>
+
+                    <!-- Linux Item -->
+                    <div class="os-menu-item" id="menu-linux" onclick="selectOS('linux')">
+                        <div class="os-menu-identity">
+                            <div class="os-menu-icon">
+                                <i data-lucide="terminal" style="width:18px;height:18px;"></i>
+                            </div>
+                            <div>
+                                <div class="os-menu-title">
+                                    <span>Linux</span>
+                                    <span class="badge-tag-mini" id="badge-current-linux" style="display:none;">Current System</span>
+                                </div>
+                                <span class="os-menu-meta">64-bit · 65 MB · Standalone</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/Shrey113/Android-Dex/releases/latest/download/Android_Dex_Linux.zip"
+                            class="os-dl-btn-mini" onclick="event.stopPropagation();">
+                            <i data-lucide="download" style="width:11px;height:11px;"></i>
+                            <span>.tar.gz</span>
+                        </a>
+                    </div>
+
+                    <!-- Android Phone Item -->
+                    <div class="os-menu-item" id="menu-android" onclick="selectOS('android')">
+                        <div class="os-menu-identity">
+                            <div class="os-menu-icon">
+                                <i data-lucide="smartphone" style="width:18px;height:18px;"></i>
+                            </div>
+                            <div>
+                                <div class="os-menu-title">
+                                    <span>Android Phone</span>
+                                    <span class="badge-tag-mini" id="badge-current-android" style="display:none;">Mobile</span>
+                                </div>
+                                <span class="os-menu-meta">Android 9.0+ · No Root</span>
+                            </div>
+                        </div>
+                        <button type="button" class="os-dl-btn-mini" style="background:transparent;cursor:pointer;">
+                            <i data-lucide="settings" style="width:11px;height:11px;"></i>
+                            <span>Guide</span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- ── RIGHT: COMPACT INSTRUCTIONS PANE ── -->
+                <div class="pane-wrapper">
+
+                    <!-- 1. WINDOWS PANE -->
+                    <div class="os-pane active" id="pane-windows">
+                        <div class="pane-top-row">
+                            <h3 class="pane-main-title">
+                                <i data-lucide="monitor" style="width:17px;height:17px;"></i>
+                                Windows 10 / 11 Setup
+                            </h3>
+                            <button type="button" class="pane-hash-toggle" onclick="toggleHash('hash-win')">
+                                <i data-lucide="shield-check" style="width:11px;height:11px;"></i>
+                                <span>SHA-256</span>
+                            </button>
+                        </div>
+
+                        <div class="checksum-box" id="hash-win" style="margin-bottom:12px;">
+                            <span class="checksum-code">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span>
+                            <button type="button" class="copy-btn-mini"
+                                onclick="copyText('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', this)">
+                                <i data-lucide="copy" style="width:10px;height:10px;"></i>
+                                <span>Copy Hash</span>
+                            </button>
+                        </div>
+
+                        <div class="step-compact-list">
+                            <div class="step-card-compact">
+                                <span class="step-badge">01</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Extract the ZIP Archive</div>
+                                    <p class="step-text-compact">
+                                        Download <code>Android_Dex_Windows_x64.zip</code> and extract to any folder. Portable binary — zero installation or registry changes.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="step-card-compact">
+                                <span class="step-badge">02</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Launch Android_Dex.exe</div>
+                                    <p class="step-text-compact">
+                                        Open the extracted folder and double-click <strong><code>Android_Dex.exe</code></strong>. (If Windows SmartScreen prompts on first run, click <em>More info &rarr; Run anyway</em>).
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="step-card-compact">
+                                <span class="step-badge">03</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Troubleshooting (MSVCP DLL Error)</div>
+                                    <p class="step-text-compact">
+                                        On a fresh Windows install, if an MSVCP140 error occurs, download the standard
+                                        <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe" target="_blank">Visual C++ 2015–2022 x64 Runtime</a>.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. MACOS PANE -->
+                    <div class="os-pane" id="pane-macos">
+                        <div class="pane-top-row">
+                            <h3 class="pane-main-title">
+                                <i data-lucide="apple" style="width:17px;height:17px;"></i>
+                                macOS Universal Setup
+                            </h3>
+                            <button type="button" class="pane-hash-toggle" onclick="toggleHash('hash-mac')">
+                                <i data-lucide="shield-check" style="width:11px;height:11px;"></i>
+                                <span>SHA-256</span>
+                            </button>
+                        </div>
+
+                        <div class="checksum-box" id="hash-mac" style="margin-bottom:12px;">
+                            <span class="checksum-code">ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb</span>
+                            <button type="button" class="copy-btn-mini"
+                                onclick="copyText('ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', this)">
+                                <i data-lucide="copy" style="width:10px;height:10px;"></i>
+                                <span>Copy Hash</span>
+                            </button>
+                        </div>
+
+                        <div class="step-compact-list">
+                            <div class="step-card-compact">
+                                <span class="step-badge">01</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Open DMG &amp; Move to Applications</div>
+                                    <p class="step-text-compact">
+                                        Open <code>Android_Dex_macOS.dmg</code> and drag <strong>Android Dex.app</strong> into <code>/Applications</code>.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="step-card-compact">
+                                <span class="step-badge">02</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Gatekeeper Fix (If "App is damaged" appears)</div>
+                                    <p class="step-text-compact">
+                                        Run this command in Terminal to clear the unsigned quarantine flag:
+                                    </p>
+                                    <div class="code-box-mini">
+                                        <span class="code-text-mini">xattr -cr /Applications/Android\ Dex.app</span>
+                                        <button type="button" class="copy-btn-mini"
+                                            onclick="copyText('xattr -cr /Applications/Android\\ Dex.app', this)">
+                                            <i data-lucide="copy" style="width:10px;height:10px;"></i>
+                                            <span>Copy</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step-card-compact">
+                                <span class="step-badge">03</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Launch Application</div>
+                                    <p class="step-text-compact">
+                                        Open from Launchpad or Spotlight. When prompted, allow <em>Input Monitoring</em> for keyboard &amp; mouse control.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. LINUX PANE -->
+                    <div class="os-pane" id="pane-linux">
+                        <div class="pane-top-row">
+                            <h3 class="pane-main-title">
+                                <i data-lucide="terminal" style="width:17px;height:17px;"></i>
+                                Linux 64-bit Setup
+                            </h3>
+                            <button type="button" class="pane-hash-toggle" onclick="toggleHash('hash-linux')">
+                                <i data-lucide="shield-check" style="width:11px;height:11px;"></i>
+                                <span>SHA-256</span>
+                            </button>
+                        </div>
+
+                        <div class="checksum-box" id="hash-linux" style="margin-bottom:12px;">
+                            <span class="checksum-code">ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad</span>
+                            <button type="button" class="copy-btn-mini"
+                                onclick="copyText('ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad', this)">
+                                <i data-lucide="copy" style="width:10px;height:10px;"></i>
+                                <span>Copy Hash</span>
+                            </button>
+                        </div>
+
+                        <div class="step-compact-list">
+                            <div class="step-card-compact">
+                                <span class="step-badge">01</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Extract &amp; Permission</div>
+                                    <div class="code-box-mini">
+                                        <span class="code-text-mini">tar -xzf Android_Dex_Linux_x64.tar.gz &amp;&amp; chmod +x Android_Dex</span>
+                                        <button type="button" class="copy-btn-mini"
+                                            onclick="copyText('tar -xzf Android_Dex_Linux_x64.tar.gz && chmod +x Android_Dex', this)">
+                                            <i data-lucide="copy" style="width:10px;height:10px;"></i>
+                                            <span>Copy</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step-card-compact">
+                                <span class="step-badge">02</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Install Dependencies</div>
+                                    <div class="distro-row-mini">
+                                        <button type="button" class="distro-btn-mini active" id="btn-deb" onclick="setDistro('deb')">Ubuntu / Debian</button>
+                                        <button type="button" class="distro-btn-mini" id="btn-arch" onclick="setDistro('arch')">Arch Linux</button>
+                                        <button type="button" class="distro-btn-mini" id="btn-fedora" onclick="setDistro('fedora')">Fedora</button>
+                                    </div>
+
+                                    <div class="code-box-mini" id="box-deb">
+                                        <span class="code-text-mini">sudo apt install adb libavcodec58 libpulse0 -y</span>
+                                        <button type="button" class="copy-btn-mini"
+                                            onclick="copyText('sudo apt install adb libavcodec58 libpulse0 -y', this)">
+                                            <i data-lucide="copy" style="width:10px;height:10px;"></i>
+                                            <span>Copy</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="code-box-mini" id="box-arch" style="display:none;">
+                                        <span class="code-text-mini">sudo pacman -S android-tools ffmpeg libpulse</span>
+                                        <button type="button" class="copy-btn-mini"
+                                            onclick="copyText('sudo pacman -S android-tools ffmpeg libpulse', this)">
+                                            <i data-lucide="copy" style="width:10px;height:10px;"></i>
+                                            <span>Copy</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="code-box-mini" id="box-fedora" style="display:none;">
+                                        <span class="code-text-mini">sudo dnf install android-tools ffmpeg-libs pulseaudio-libs</span>
+                                        <button type="button" class="copy-btn-mini"
+                                            onclick="copyText('sudo dnf install android-tools ffmpeg-libs pulseaudio-libs', this)">
+                                            <i data-lucide="copy" style="width:10px;height:10px;"></i>
+                                            <span>Copy</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step-card-compact">
+                                <span class="step-badge">03</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Run DEX</div>
+                                    <div class="code-box-mini">
+                                        <span class="code-text-mini">./Android_Dex</span>
+                                        <button type="button" class="copy-btn-mini"
+                                            onclick="copyText('./Android_Dex', this)">
+                                            <i data-lucide="copy" style="width:10px;height:10px;"></i>
+                                            <span>Copy</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. ANDROID PANE -->
+                    <div class="os-pane" id="pane-android">
+                        <div class="pane-top-row">
+                            <h3 class="pane-main-title">
+                                <i data-lucide="smartphone" style="width:17px;height:17px;"></i>
+                                Android Phone Setup (Android 9.0 – 15+)
+                            </h3>
+                        </div>
+
+                        <div class="step-compact-list">
+                            <div class="step-card-compact">
+                                <span class="step-badge">01</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Unlock Developer Options</div>
+                                    <p class="step-text-compact">
+                                        Go to <strong>Settings &rarr; About Phone</strong> and tap <strong>Build Number</strong> 7 times rapidly.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="step-card-compact">
+                                <span class="step-badge">02</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Enable USB Debugging</div>
+                                    <p class="step-text-compact">
+                                        In <strong>Settings &rarr; Developer Options</strong>, toggle <strong>USB Debugging</strong> ON.
+                                        <em>(Xiaomi/MIUI: also toggle "USB debugging (Security settings)" ON)</em>.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="step-card-compact">
+                                <span class="step-badge">03</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Connect Cable &amp; Allow RSA Prompt</div>
+                                    <p class="step-text-compact">
+                                        Connect your phone via USB cable (File Transfer / MTP mode). When the prompt <em>"Allow USB debugging?"</em> appears on your phone, check <strong>Always allow</strong> and tap <strong>Allow</strong>.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="step-card-compact">
+                                <span class="step-badge">04</span>
+                                <div class="step-body-compact">
+                                    <div class="step-title-compact">Automatic Desktop Connection</div>
+                                    <p class="step-text-compact">
+                                        Launch Android DEX on your computer. It connects in less than a second and streams your apps in resizable floating windows!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <!-- ═══════════════════════════════════════
+         SPECIFICATIONS TABLE (COMPACT)
+    ═══════════════════════════════════════ -->
+    <section class="section" id="specs" style="padding:40px 0;">
+        <div class="container">
+            <div class="section-head-center reveal" style="margin-bottom:24px;">
+                <span class="section-label">Specs</span>
+                <h2 class="section-h2" style="font-size:1.6rem;margin-bottom:6px;">System Requirements</h2>
+            </div>
+
+            <div class="table-wrap reveal" style="margin:0 auto;max-width:820px;">
+                <table class="matrix-table" style="font-size:0.82rem;">
+                    <thead>
+                        <tr>
+                            <th style="padding:10px 14px;">Platform</th>
+                            <th style="padding:10px 14px;">Minimum OS</th>
+                            <th style="padding:10px 14px;">Architecture</th>
+                            <th style="padding:10px 14px;">Video Acceleration</th>
+                            <th style="padding:10px 14px;">RAM / Disk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:10px 14px;"><strong style="color:#fff;">Windows</strong></td>
+                            <td style="padding:10px 14px;">Windows 10 / 11</td>
+                            <td style="padding:10px 14px;">64-bit x86_64</td>
+                            <td style="padding:10px 14px;">Direct3D 11, NVDEC</td>
+                            <td style="padding:10px 14px;">2 GB / 150 MB</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px 14px;"><strong style="color:#fff;">macOS</strong></td>
+                            <td style="padding:10px 14px;">macOS 12+</td>
+                            <td style="padding:10px 14px;">Universal (M1–M4 &amp; Intel)</td>
+                            <td style="padding:10px 14px;">Metal 2 / VideoToolbox</td>
+                            <td style="padding:10px 14px;">2 GB / 180 MB</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px 14px;"><strong style="color:#fff;">Linux</strong></td>
+                            <td style="padding:10px 14px;">Ubuntu 20.04+, Arch</td>
+                            <td style="padding:10px 14px;">64-bit (GLIBC 2.31+)</td>
+                            <td style="padding:10px 14px;">VA-API, PipeWire/Pulse</td>
+                            <td style="padding:10px 14px;">2 GB / 140 MB</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px 14px;"><strong style="color:#fff;">Android</strong></td>
+                            <td style="padding:10px 14px;">Android 9.0 to 15+</td>
+                            <td style="padding:10px 14px;">ARMv7, ARM64, x86</td>
+                            <td style="padding:10px 14px;">MediaCodec Encoder</td>
+                            <td style="padding:10px 14px;">USB or 5GHz Wi-Fi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <!-- ═══════════════════════════════════════
+         FAQ ACCORDION (COMPACT)
+    ═══════════════════════════════════════ -->
+    <section class="section" id="faq" style="padding:40px 0;">
+        <div class="container">
+            <div class="section-head-center reveal" style="margin-bottom:24px;">
+                <span class="section-label">Questions</span>
+                <h2 class="section-h2" style="font-size:1.6rem;margin-bottom:6px;">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="faq-grid reveal">
+                <div class="faq-item">
+                    <div class="faq-question" style="padding:14px 18px;font-size:0.92rem;" onclick="toggleFaq(this)">
+                        <span>Does Android DEX require root or bootloader unlock?</span>
+                        <i data-lucide="chevron-down" class="faq-icon-chevron" style="width:16px;height:16px;"></i>
+                    </div>
+                    <div class="faq-answer" style="padding:0 18px 16px;font-size:0.84rem;">
+                        No root is required. Android DEX operates completely through standard official Android Debug Bridge (ADB) protocols. It does not void your warranty or trip Knox/SafetyNet.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" style="padding:14px 18px;font-size:0.92rem;" onclick="toggleFaq(this)">
+                        <span>Will mobile games detect this as an emulator?</span>
+                        <i data-lucide="chevron-down" class="faq-icon-chevron" style="width:16px;height:16px;"></i>
+                    </div>
+                    <div class="faq-answer" style="padding:0 18px 16px;font-size:0.84rem;">
+                        No. The game runs 100% on your physical phone hardware. Input is sent as native touch events. Anti-cheat systems recognize your genuine physical smartphone without emulator bans.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" style="padding:14px 18px;font-size:0.92rem;" onclick="toggleFaq(this)">
+                        <span>Why does macOS say "Android Dex is damaged"?</span>
+                        <i data-lucide="chevron-down" class="faq-icon-chevron" style="width:16px;height:16px;"></i>
+                    </div>
+                    <div class="faq-answer" style="padding:0 18px 16px;font-size:0.84rem;">
+                        macOS Gatekeeper attaches a quarantine flag to unsigned binaries. Run <code>xattr -cr /Applications/Android\ Dex.app</code> in Terminal to remove the attribute instantly.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" style="padding:14px 18px;font-size:0.92rem;" onclick="toggleFaq(this)">
+                        <span>Is my data private and offline?</span>
+                        <i data-lucide="chevron-down" class="faq-icon-chevron" style="width:16px;height:16px;"></i>
+                    </div>
+                    <div class="faq-answer" style="padding:0 18px 16px;font-size:0.84rem;">
+                        100% offline and local. Zero servers, zero telemetry pings, and zero analytics. Everything stays strictly between your PC and phone.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════ -->
+    <footer class="footer" style="padding:28px 0;">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <img src="Data/app_png.png" alt="Android DEX">
+                <span class="footer-copy">
+                    &copy; 2026 Android DEX &mdash; by <a href="https://github.com/shrey113" target="_blank">@shrey113</a>
+                </span>
+            </div>
+            <nav class="footer-links">
+                <a href="index.html#overview">Overview</a>
+                <a href="index.html#features">Features</a>
+                <a href="#downloads-hub">Downloads</a>
+                <a href="#specs">Specs</a>
+                <a href="https://github.com/Shrey113/Android-Dex" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════
+         SCRIPTS
+    ═══════════════════════════════════════ -->
+    <script>
+        lucide.createIcons();
+
+        /* Navbar scroll */
+        const navEl = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (navEl) {
+                navEl.style.borderBottomColor =
+                    window.scrollY > 20 ? 'rgba(255,255,255,0.16)' : 'rgba(255,255,255,0.08)';
+            }
+        }, { passive: true });
+
+        /* Mobile nav toggle */
+        const navToggle = document.getElementById('navToggle');
+        const navMobileDrawer = document.getElementById('navMobileDrawer');
+        const menuIcon = document.querySelector('.nav-toggle-icon-menu');
+        const closeIcon = document.querySelector('.nav-toggle-icon-close');
+
+        if (navToggle && navMobileDrawer) {
+            navToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = navMobileDrawer.classList.toggle('open');
+                navToggle.classList.toggle('active', isOpen);
+                if (menuIcon && closeIcon) {
+                    menuIcon.style.display = isOpen ? 'none' : 'block';
+                    closeIcon.style.display = isOpen ? 'block' : 'none';
+                }
+            });
+
+            document.querySelectorAll('.nav-mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMobileDrawer.classList.remove('open');
+                    navToggle.classList.remove('active');
+                    if (menuIcon && closeIcon) {
+                        menuIcon.style.display = 'block';
+                        closeIcon.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        /* ── Auto OS Detection ── */
+        function detectVisitorOS() {
+            let os = 'windows';
+            const ua = window.navigator.userAgent.toLowerCase();
+            const platform = (window.navigator.userAgentData?.platform || window.navigator.platform || '').toLowerCase();
+
+            if (platform.includes('mac') || ua.includes('macintosh') || ua.includes('mac os')) {
+                os = 'macos';
+            } else if (platform.includes('linux') || ua.includes('linux') || ua.includes('x11')) {
+                if (ua.includes('android')) {
+                    os = 'android';
+                } else {
+                    os = 'linux';
+                }
+            } else if (platform.includes('win') || ua.includes('windows')) {
+                os = 'windows';
+            }
+            return os;
+        }
+
+        /* ── Switch Selected OS ── */
+        function selectOS(osKey) {
+            document.querySelectorAll('.os-menu-item').forEach(el => el.classList.remove('active'));
+            const activeMenu = document.getElementById(`menu-${osKey}`);
+            if (activeMenu) activeMenu.classList.add('active');
+
+            document.querySelectorAll('.os-pane').forEach(el => el.classList.remove('active'));
+            const activePane = document.getElementById(`pane-${osKey}`);
+            if (activePane) activePane.classList.add('active');
+
+            lucide.createIcons();
+        }
+
+        // On Load
+        const visitorOS = detectVisitorOS();
+        const badgeText = document.getElementById('osBadgeText');
+
+        if (visitorOS === 'windows') {
+            if (badgeText) badgeText.textContent = 'Current System: Windows (64-bit)';
+            const b = document.getElementById('badge-current-windows');
+            if (b) b.style.display = 'inline-block';
+            selectOS('windows');
+        } else if (visitorOS === 'macos') {
+            if (badgeText) badgeText.textContent = 'Current System: macOS';
+            const b = document.getElementById('badge-current-macos');
+            if (b) b.style.display = 'inline-block';
+            selectOS('macos');
+        } else if (visitorOS === 'linux') {
+            if (badgeText) badgeText.textContent = 'Current System: Linux 64-bit';
+            const b = document.getElementById('badge-current-linux');
+            if (b) b.style.display = 'inline-block';
+            selectOS('linux');
+        } else if (visitorOS === 'android') {
+            if (badgeText) badgeText.textContent = 'Current System: Android Mobile';
+            const b = document.getElementById('badge-current-android');
+            if (b) b.style.display = 'inline-block';
+            selectOS('android');
+        }
+
+        /* ── Distro Switcher Mini ── */
+        function setDistro(distroKey) {
+            document.querySelectorAll('.distro-btn-mini').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById(`btn-${distroKey}`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            ['deb', 'arch', 'fedora'].forEach(k => {
+                const box = document.getElementById(`box-${k}`);
+                if (box) box.style.display = (k === distroKey) ? 'flex' : 'none';
+            });
+            lucide.createIcons();
+        }
+
+        /* ── Checksum toggle ── */
+        function toggleHash(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('open');
+        }
+
+        /* ── Copy to Clipboard ── */
+        function copyText(text, btnElement) {
+            if (!navigator.clipboard) {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showCopied(btnElement);
+                return;
+            }
+            navigator.clipboard.writeText(text).then(() => showCopied(btnElement));
+        }
+
+        function showCopied(btn) {
+            const orig = btn.innerHTML;
+            btn.classList.add('copied');
+            btn.innerHTML = '<i data-lucide="check" style="width:10px;height:10px;"></i><span>Copied!</span>';
+            lucide.createIcons();
+            setTimeout(() => {
+                btn.classList.remove('copied');
+                btn.innerHTML = orig;
+                lucide.createIcons();
+            }, 1800);
+        }
+
+        /* ── FAQ toggle ── */
+        function toggleFaq(qEl) {
+            const item = qEl.parentElement;
+            if (item) item.classList.toggle('open');
+        }
+
+        /* ── Reveal ── */
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e) => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('in');
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.05 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+
+</body>
+
+</html>

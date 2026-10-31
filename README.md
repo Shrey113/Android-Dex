@@ -1,5 +1,5 @@
 > [!WARNING]
-> **Official Distribution Only:** This GitHub repository (<https://github.com/Shrey113/Android-Dex>) is the **only official and authorized source** for Android DEX. Creating websites, mirrors, or download portals to distribute, repackage, or monetize Android DEX (via ads, popups, paywalls, or paid links) is **strictly prohibited**. Do not download releases from unauthorized third-party websites.
+> **Official Distribution Only:** This GitHub repository (<https://github.com/Shrey113/Android-Dex>) is the **only official and authorized source** for Android DEX.
 
 # Android DEX
 
@@ -15,6 +15,8 @@ Android DEX is a free, closed-source desktop application for **Windows, Linux, a
   <img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Android" />
   <img src="https://img.shields.io/badge/License-Closed%20Source-blue?style=flat-square" alt="Closed Source" />
 </p>
+
+<a href="https://www.buymeacoffee.com/Shrey113" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ---
 
